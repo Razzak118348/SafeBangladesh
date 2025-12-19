@@ -10,9 +10,11 @@ import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const [openDropdown, setOpenDropdown] = useState(null);
   const { theme, toggleTheme } = useTheme();
-const {user}=useAuth();
+const {user,LogOut}=useAuth();
   console.log(user);
 
   const navItems = [
@@ -146,18 +148,49 @@ const {user}=useAuth();
             {theme === "light" ? <FaMoon /> : <FaSun />}
           </button>
 
-          <NavLink
-            to="/login"
-            className="px-3 py-2 bg-[#599261] hover:scale-105 hover:bg-green-700 text-white rounded-md"
-          >
-            Login
-          </NavLink>
-          <NavLink
+          {/* Auth Buttons */}
+  <div className="relative">
+      {user ? (
+        <>
+          {/* User Image */}
+          <img
+            src={user.photoURL}
+            alt="User"
+            onClick={() => setOpen(!open)}
+            className="w-10 h-10 rounded-full cursor-pointer border-2 border-green-600"
+          />
+
+          {/* Dropdown */}
+          {open && (
+            <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md border z-50">
+              <div className="px-4 py-2 border-b text-gray-700 font-medium">
+                {user.displayName}
+              </div>
+
+              <button
+                onClick={LogOut}
+                className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <NavLink
+          to="/login"
+          className="px-3 py-2 bg-[#599261] hover:scale-105 hover:bg-green-700 text-white rounded-md"
+        >
+          Login
+        </NavLink>
+      )}
+    </div>
+          {/* <NavLink
             to="/singup"
             className="p-2 text-[#55835b] border-[#314b35] border-2 hover:scale-105 rounded-md"
           >
-            SignUp
-          </NavLink>
+            Sing Up
+          </NavLink> */}
 
         </div>
 
