@@ -10,8 +10,6 @@ import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [open, setOpen] = useState(false);
-
   const [openDropdown, setOpenDropdown] = useState(null);
   const { theme, toggleTheme } = useTheme();
 const {user,LogOut}=useAuth();
@@ -174,7 +172,7 @@ const {user,LogOut}=useAuth();
                   <li>
                     <button
                       onClick={LogOut}
-                      className="btn btn-sm bg-[#3e5a41] hover:bg-[#2b422d] text-white w-full"
+                      className="btn p-4 btn-sm bg-[#3e5a41] hover:bg-[#2b422d] text-white w-full"
                     >
                       Logout
                     </button>
@@ -184,7 +182,7 @@ const {user,LogOut}=useAuth();
             ) : (
               <Link
                 to="/login"
-                className="btn bg-[#3e5a41] hover:bg-[#2b422d] text-white font-medium transition"
+                className="btn p-4 bg-[#3e5a41] hover:bg-[#2b422d] text-white font-medium transition"
               >
                 Login
               </Link>
@@ -260,7 +258,7 @@ const {user,LogOut}=useAuth();
           LogOut();
           setMenuOpen(false);
         }}
-        className="btn btn-sm bg-[#3e5a41] text-white"
+        className="btn p-4 btn-sm bg-[#3e5a41] text-white"
       >
         Logout
       </button>
@@ -269,7 +267,7 @@ const {user,LogOut}=useAuth();
     <Link
       to="/login"
       onClick={() => setMenuOpen(false)}
-      className="btn bg-[#3e5a41] hover:bg-[#2b422d] text-white w-full"
+      className="btn p-4 bg-[#3e5a41] hover:bg-[#2b422d] text-white w-full"
     >
       Login
     </Link>

@@ -110,7 +110,33 @@ const Routes = createBrowserRouter([
             {
                 path:"/signup",
                 element: <SignUp></SignUp>
-            }
+            },
+            // {
+            //     path: '/admin',
+            //     element: (
+            //         <AdminRoute>
+            //             <Admin />
+            //         </AdminRoute>
+            //     ),
+            //     loader: async () => {
+            //         const [workerRes, bookingRes] = await Promise.all([
+            //             fetch('https://kajbondu-server.vercel.app/worker'),
+            //             fetch('https://kajbondu-server.vercel.app/all-bookings'),
+            //         ]);
+
+            //         if (!workerRes.ok || !bookingRes.ok) {
+            //             throw new Error('Failed to load admin data');
+            //         }
+
+            //         const [workers, bookings] = await Promise.all([
+            //             workerRes.json(),
+            //             bookingRes.json(),
+            //         ]);
+
+            //         return { workers, bookings };
+            //     }
+
+            // }
         ],
 
     }
