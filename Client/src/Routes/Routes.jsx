@@ -108,7 +108,7 @@ const Routes = createBrowserRouter([
                 element:<Login></Login>
             },
             {
-                path:"/singup",
+                path:"/signup",
                 element: <SignUp></SignUp>
             }
         ],

@@ -118,7 +118,7 @@ const {user,LogOut}=useAuth();
                             <li key={i}>
                               <NavLink
                                 to={sub.path}
-                                className="block px-4 py-2 hover:bg-[#e6efe9]"
+                                className="block px-4 py-2 hover:text-[#55835b] hover:bg-gray-100 dark:hover:bg-gray-700"
                               >
                                 {sub.name}
                               </NavLink>
