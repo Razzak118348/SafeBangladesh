@@ -1,6 +1,3 @@
-
-
-
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -186,6 +183,7 @@ const Login = () => {
               whileTap={{ scale: 0.97 }}
               type="submit"
               className="w-full py-3 rounded-xl text-white font-semibold tracking-wide bg-[#55835b] hover:bg-[#466d4c] transition duration-300 shadow-lg"
+
             >
               Login
             </motion.button>

@@ -1,13 +1,23 @@
 import { useState } from "react";
-
+import { motion } from "framer-motion";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import SocialLogin from "../../../Components/SocialMediaLogin/SocialLogin"
 import useAuth from "../../../hooks/useAuth";
+
+const imageFloat = {
+  animate: {
+    y: [0, -15, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
 
 const SignUp = () => {
   const [passwordType, setPasswordType] = useState(false);
@@ -131,10 +141,10 @@ const SignUp = () => {
 
             {/* Terms and Conditions */}
             <div className="flex items-start text-sm mt-3 space-x-2 text-gray-700 dark:text-gray-200">
-              <input type="checkbox" className="checkbox checkbox-sm text-blue-600" />
+              <input type="checkbox" className="checkbox checkbox-sm text-[#3e5a41]" />
               <span>
                 Accept{" "}
-                <Link className="font-medium underline text-blue-600 dark:text-blue-400" to="/terms">
+                <Link className="font-medium underline text-[#3e5a41] dark:text-white" to="/terms">
                   Terms & Conditions
                 </Link>
               </span>
@@ -144,7 +154,7 @@ const SignUp = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="btn w-full bg-blue-500 hover:bg-blue-700 text-white text-lg"
+                className="btn w-full bg-[#3e5a41] hover:bg-[#2b422d] text-white text-lg"
               >
                 Sign Up
               </button>
@@ -153,21 +163,24 @@ const SignUp = () => {
             {/* Login Redirect */}
             <div className="text-center text-sm mt-4 text-gray-700 dark:text-gray-200">
               Already have an account?{" "}
-              <Link to="/login" className="text-blue-600 dark:text-blue-400 underline font-medium">
+              <Link to="/login" className="text-[#3e5a41] dark:text-white underline font-medium">
                 Login
               </Link>
             </div>
           </form>
         </div>
 
-        {/* Right Image Side */}
-        {/* <div className="hidden md:flex items-center justify-center bg-gray-50 dark:bg-gray-900 h-full">
+        <motion.div
+          variants={imageFloat}
+          animate="animate"
+          className="hidden md:flex items-center justify-center"
+        >
           <img
-            src="https://github.com/Razzak118348/CraftedCanvas_Image/raw/main/images/register.png"
-            alt="Signup Illustration"
-            className="object-cover w-full h-full"
+            src="/images/signup.png"
+            alt="Login Illustration"
+            className="w-4/5 object-contain drop-shadow-2xl"
           />
-        </div> */}
+        </motion.div>
       </div>
     </div>
   );

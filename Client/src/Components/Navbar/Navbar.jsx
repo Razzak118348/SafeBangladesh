@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenu, HiX } from "react-icons/hi";
 import { FaMoon, FaSun, FaChevronDown } from "react-icons/fa";
@@ -151,46 +151,45 @@ const {user,LogOut}=useAuth();
           {/* Auth Buttons */}
   <div className="relative">
       {user ? (
-        <>
-          {/* User Image */}
-          <img
-            src={user.photoURL}
-            alt="User"
-            onClick={() => setOpen(!open)}
-            className="w-10 h-10 rounded-full cursor-pointer border-2 border-green-600"
-          />
-
-          {/* Dropdown */}
-          {open && (
-            <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md border z-50">
-              <div className="px-4 py-2 border-b text-gray-700 font-medium">
-                {user.displayName}
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div
+                    className="w-10 h-10 rounded-full border-2 border-blue-600 shadow-sm"
+                    title={user?.displayName || "User name not found"}
+                  >
+                    <img
+                      src={user?.photoURL || "https://cdn-icons-png.flaticon.com/512/219/219986.png"}
+                      alt="user"
+                      className="object-cover rounded-full"
+                    />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu dropdown-content mt-3 z-[1000] p-3 shadow-md bg-white dark:bg-gray-800 rounded-box w-48 space-y-2"
+                >
+                  <li className="text-gray-700 dark:text-white font-semibold text-sm">
+                    {user?.displayName || "User name not found"}
+                  </li>
+                  <li>
+                    <button
+                      onClick={LogOut}
+                      className="btn btn-sm bg-[#3e5a41] hover:bg-[#2b422d] text-white w-full"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
-
-              <button
-                onClick={LogOut}
-                className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+            ) : (
+              <Link
+                to="/login"
+                className="btn bg-[#3e5a41] hover:bg-[#2b422d] text-white font-medium transition"
               >
-                Logout
-              </button>
-            </div>
-          )}
-        </>
-      ) : (
-        <NavLink
-          to="/login"
-          className="px-3 py-2 bg-[#599261] hover:scale-105 hover:bg-green-700 text-white rounded-md"
-        >
-          Login
-        </NavLink>
-      )}
+                Login
+              </Link>
+            )}
     </div>
-          {/* <NavLink
-            to="/singup"
-            className="p-2 text-[#55835b] border-[#314b35] border-2 hover:scale-105 rounded-md"
-          >
-            Sing Up
-          </NavLink> */}
 
         </div>
 
@@ -246,6 +245,36 @@ const {user,LogOut}=useAuth();
                   )}
                 </li>
               ))}
+
+              {/* Mobile Auth Section */}
+<li className="pt-3 border-t">
+  {user ? (
+    <div className="flex items-center gap-3">
+      <img
+        src={user?.photoURL || "https://cdn-icons-png.flaticon.com/512/219/219986.png"}
+        alt="user"
+        className="w-10 h-10 rounded-full border"
+      />
+      <button
+        onClick={() => {
+          LogOut();
+          setMenuOpen(false);
+        }}
+        className="btn btn-sm bg-[#3e5a41] text-white"
+      >
+        Logout
+      </button>
+    </div>
+  ) : (
+    <Link
+      to="/login"
+      onClick={() => setMenuOpen(false)}
+      className="btn bg-[#3e5a41] hover:bg-[#2b422d] text-white w-full"
+    >
+      Login
+    </Link>
+  )}
+</li>
             </ul>
           </motion.div>
         )}
