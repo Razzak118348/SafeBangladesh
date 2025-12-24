@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
 import { useEffect } from 'react';
 import Navbar from '../Components/Navbar/Navbar';
+import Footer from '../Components/Footer/Footer';
 // import Footer from '../Components/Footer/Footer';
 
 const Layout = () => {
@@ -27,6 +28,7 @@ const Layout = () => {
      <main className="pt-16">
   <Outlet />
 </main>
+<Footer></Footer>
     </div>
     </>
 

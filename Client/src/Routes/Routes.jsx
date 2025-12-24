@@ -21,6 +21,8 @@ import News from "../Pages/BlogAndReport/News/News";
 import Contact from "../Pages/Contact/Contact";
 import Login from "../Pages/Auth/Login/Login";
 import SignUp from "../Pages/Auth/SignUp/SingUp";
+import LatestWork from "../Pages/Home/LatestWork";
+import SingleWork from "../Pages/SingleWork/SingleWork";
 
 const Routes = createBrowserRouter([
     {
@@ -80,10 +82,10 @@ const Routes = createBrowserRouter([
                 path: "/aboutus/goals-vision",
                 element: <GoalsVision></GoalsVision>,
             },
-{
-    path:"/aboutus/supporters",
-    element:<Supporters></Supporters>
-},
+            {
+                path: "/aboutus/supporters",
+                element: <Supporters></Supporters>
+            },
 
             // Blog & News
             {
@@ -104,12 +106,26 @@ const Routes = createBrowserRouter([
                 element: <Contact></Contact>,
             },
             {
-                path:"/login",
-                element:<Login></Login>
+                path: "/login",
+                element: <Login></Login>
             },
             {
-                path:"/signup",
+                path: "/signup",
                 element: <SignUp></SignUp>
+            },
+            {
+                path: "/singlework/:id",
+                element: <SingleWork/>,
+                // The loader receives 'params' automatically from the URL
+                loader: async ({ params }) => {
+                    const res = await fetch("/latestWork.json");
+                    const data = await res.json();
+
+                    // We use .find() to get the specific object matching the ID from the URL
+                    const singleData = data.find(work => work.id === params.id);
+
+                    return singleData;
+                }
             },
             // {
             //     path: '/admin',

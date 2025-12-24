@@ -2,6 +2,7 @@ import { motion, useAnimation, useInView } from "framer-motion";
 import Slider from "../../Components/Slider/Slider";
 import { useEffect, useRef } from "react";
 import HomeContent from "./HomeContainer";
+import LatestWork from "./LatestWork";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -39,6 +40,7 @@ const Home = () => {
       {/* content Section */}
 <div className="container mx-auto max-w-7xl">
 <HomeContent></HomeContent>
+<LatestWork></LatestWork>
 </div>
 
     </div>
