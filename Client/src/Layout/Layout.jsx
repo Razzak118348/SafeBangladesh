@@ -25,7 +25,7 @@ const Layout = () => {
    <Navbar></Navbar>
 
       {/* Page Content */}
-     <main className="pt-16">
+     <main className="pt-16 container mx-auto max-w-7xl">
   <Outlet />
 </main>
 <Footer></Footer>

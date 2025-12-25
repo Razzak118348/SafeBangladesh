@@ -6,11 +6,22 @@ const SingleWork = () => {
 const singlework =useLoaderData();
 console.log(singlework);
     return (
-        <MotionDiv className='max-w-7xl mx-auto p-4'>
-            <MotionH2 text={singlework.title}></MotionH2>
-            <img className='' src={singlework.image} alt={singlework.title} />
-            <MotionP>{singlework.description}</MotionP>
-        </MotionDiv>
+        <>
+        <MotionDiv className="hero min-h-screen">
+  <div className="hero-content flex-col lg:flex-row">
+    <img
+      src={singlework.image}
+      className="max-w-lg rounded-lg shadow-2xl"
+    />
+    <div>
+      <MotionH2 className="text-xl font-bold text-green-900" text={singlework.title}></MotionH2>
+      <MotionP className="py-6">
+        {singlework.description}
+      </MotionP>
+    </div>
+  </div>
+</MotionDiv>
+        </>
     );
 };
 

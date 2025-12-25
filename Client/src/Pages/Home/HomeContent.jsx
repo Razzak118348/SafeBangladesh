@@ -24,7 +24,7 @@ const cards = [
 const HomeContent = () => {
     return (
         <div>
-            
+
 <section className="py-24 px-4 text-black dark:text-white">
   <div className="">
 
@@ -35,7 +35,7 @@ const HomeContent = () => {
     />
 
     {/* Paragraph */}
-    <MotionDiv className="space-y-6 text-center max-w-3xl mx-auto">
+    <MotionDiv className="space-y-6 text-center max-w-3xl mx-auto text-justify">
       <MotionP className="text-gray-700 dark:text-gray-300">
         SAFE Bangladesh is a non-government organization dedicated to helping vulnerable communities build safer homes and stronger futures.
         We promote <b><i> safe, affordable, and locally appropriate housing solutions</i></b> by strengthening traditional building practices.

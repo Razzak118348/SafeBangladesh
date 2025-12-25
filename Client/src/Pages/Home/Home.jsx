@@ -1,8 +1,9 @@
 import { motion, useAnimation, useInView } from "framer-motion";
 import Slider from "../../Components/Slider/Slider";
 import { useEffect, useRef } from "react";
-import HomeContent from "./HomeContainer";
+
 import LatestWork from "./LatestWork";
+import HomeContent from "./HomeContent";
 
 const containerVariants = {
   hidden: { opacity: 0 },
