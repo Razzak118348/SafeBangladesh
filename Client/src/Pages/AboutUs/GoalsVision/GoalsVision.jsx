@@ -21,7 +21,7 @@ const GoalsVision = () => {
         {/* Goal */}
         <MotionDiv className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-lg transition">
           <Target className="text-green-700 w-10 h-10 mb-4" />
-          <h3 className="text-lg font-semibold text-green-900 mb-3">
+          <h3 className="text-lg font-semibold text-green-600 mb-3">
             Project Goal
           </h3>
           <MotionP className="text-sm leading-relaxed">
@@ -34,10 +34,10 @@ const GoalsVision = () => {
 
         {/* Mission */}
         <MotionDiv className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-lg transition">
-          <Users className="text-green-700 w-10 h-10 mb-4" />
-          <MotionH2 className="text-lg font-semibold text-green-900 mb-3">
+          <Target className="text-green-700 w-10 h-10 mb-4" />
+          <h3 className="text-lg font-semibold text-green-600 mb-3">
             Mission
-          </MotionH2>
+          </h3>
           <MotionP className="text-sm leading-relaxed">
             To empower rural communities—especially women—by strengthening local
             knowledge, skills, and confidence to build, maintain, and improve healthy,
@@ -48,9 +48,9 @@ const GoalsVision = () => {
         {/* Vision */}
         <MotionDiv className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-lg transition">
           <Leaf className="text-green-700 w-10 h-10 mb-4" />
-          <MotionH2 className="text-lg font-semibold text-green-900 mb-3">
+          <h3 className="text-lg font-semibold text-green-600 mb-3">
             Vision
-          </MotionH2>
+          </h3>
           <MotionP className=" text-sm leading-relaxed">
             A future where rural communities in Bangladesh live in climate-adaptive,
             culturally rooted homes, guided by women leaders and sustained through
