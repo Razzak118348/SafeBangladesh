@@ -1,10 +1,10 @@
 
 import { MotionDiv, MotionH2 } from '../../utils/MotionElements';
 
-const Galary = () => {
+const Gallery = () => {
     return (
         <MotionDiv>
-<MotionH2 className="text-xl font-bold underline text-center text-green-900 dark:text-white my-8" text="Galary section"></MotionH2>
+<MotionH2 className="text-xl font-bold underline text-center text-green-900 dark:text-white my-8" text="Gallery section"></MotionH2>
             <MotionDiv className="py-8 bg-gray-50 dark:bg-gray-100 dark:text-gray-900">
   <MotionDiv className="container mx-auto grid grid-cols-2 gap-4 p-4 md:grid-cols-4">
 
@@ -57,4 +57,4 @@ const Galary = () => {
     );
 };
 
-export default Galary;
+export default Gallery;
