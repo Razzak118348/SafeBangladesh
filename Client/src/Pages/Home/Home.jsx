@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 
 import LatestWork from "./LatestWork";
 import HomeContent from "./HomeContent";
+import Galary from "./Galary";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -42,6 +43,7 @@ const Home = () => {
 <div className="container mx-auto max-w-7xl">
 <HomeContent></HomeContent>
 <LatestWork></LatestWork>
+<Galary></Galary>
 </div>
 
     </div>
