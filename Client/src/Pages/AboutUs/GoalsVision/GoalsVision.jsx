@@ -63,7 +63,7 @@ const GoalsVision = () => {
       <MotionDiv className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Outcomes */}
         <MotionDiv>
-          <h3 className="text-xl font-semibold text-green-900 mb-4 flex items-center gap-2">
+          <h3 className="text-xl font-semibold text-green-600 mb-4 flex items-center gap-2">
             <Home className="w-6 h-6" />
             Major Outcomes & Outputs
           </h3>
@@ -78,7 +78,7 @@ const GoalsVision = () => {
 
         {/* Success Indicators */}
         <MotionDiv>
-          <h3 className="text-xl font-semibold text-green-900 mb-4 flex items-center gap-2">
+          <h3 className="text-xl font-semibold text-green-600 mb-4 flex items-center gap-2">
             <CheckCircle className="w-6 h-6" />
             How We Measure Success
           </h3>
