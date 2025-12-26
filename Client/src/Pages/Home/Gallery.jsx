@@ -8,7 +8,7 @@ const Gallery = () => {
         text="Gallery section"
       />
 
-      <MotionDiv className="py-8 bg-gray-50 dark:bg-gray-100 dark:text-gray-900">
+      <MotionDiv className="py-8">
         <MotionDiv className="container mx-auto grid grid-cols-2 gap-4 p-4 md:grid-cols-4">
 
           {/* Large Image */}
