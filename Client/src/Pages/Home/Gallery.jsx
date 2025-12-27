@@ -9,7 +9,7 @@ const Gallery = () => {
       />
 
       <MotionDiv className="py-8">
-        <MotionDiv className="container mx-auto grid grid-cols-2 gap-4 p-4 md:grid-cols-4">
+        <MotionDiv className="container mx-auto grid grid-cols-2 gap-6 md:gap-10 p-4 md:grid-cols-4">
 
           {/* Large Image */}
           <img
