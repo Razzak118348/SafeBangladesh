@@ -35,7 +35,7 @@ const Slider = () => {
   const { title, desc, img } = slides[currentIndex];
 
   return (
-    <section className="relative w-full h-[360px] md:h-[520px] overflow-hidden">
+    <section className="relative w-full h-[360px] md:h-[520px] overflow-hidden mt-0 md:mt-3 rounded-lg">
       {/* Image */}
       <img
         src={img}

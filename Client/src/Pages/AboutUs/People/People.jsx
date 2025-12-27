@@ -11,7 +11,7 @@ const People = () => {
   ];
 
   return (
-    <MotionDiv className="w-full mt-16">
+    <MotionDiv className="w-full mt-3">
       {/* Banner Section */}
       <MotionDiv className="w-full h-[300px] md:h-[450px] overflow-hidden">
         <img
