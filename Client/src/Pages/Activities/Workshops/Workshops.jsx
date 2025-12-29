@@ -6,7 +6,7 @@ const Workshops = () => {
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-111.jpg",
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-116.jpg",
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-110.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-118.jpg",
+        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-111.jpg",
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-122.jpg",
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-124.jpg",
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-126.jpg",
@@ -30,7 +30,7 @@ const Workshops = () => {
                 />
 
                 <Banner
-                    imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-111.jpg"
+                    imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-118.jpg"
                     altText="Building-for-Safety Workshop"
                 />
 
@@ -50,7 +50,6 @@ const Workshops = () => {
                     Our workshops are designed to teach participants about the link between hazards and disasters.
                     We demonstrate clearly the long term financial benefit of investing a little extra money and thought from the outset.
                 </MotionP>
-
                 <MotionP className="text-gray-700 dark:text-gray-300 text-justify my-6 leading-relaxed">
                     The best way of learning: learning by doing. Our workshops involve a strong practical focus that give participants
                     the chance to practice the improved building techniques that we promote. All the workshops include the use of traditional song
