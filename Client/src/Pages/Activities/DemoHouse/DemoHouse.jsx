@@ -11,7 +11,7 @@ const DemoHouse = () => {
     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0127.JPG",
     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0498.JPG",
     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/JAAGOSchoolSide.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/P1030657.JPG",
+    // "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/P1030657.JPG",
   ];
 
   return (
@@ -23,12 +23,12 @@ const DemoHouse = () => {
       />
 
       {/* Content Section */}
-      <MotionDiv className="max-w-5xl mx-auto px-4 py-12 text-gray-800 dark:text-gray-200">
+      <MotionDiv className="mx-auto px-4 pt-6 underline text-gray-800 dark:text-gray-200">
          <MotionH2
       text="Demonstration House Project"
       className="font-bold md:text-xl lg:text-2xl mb-16  text-green-800 dark:text-white"
     />
-        <MotionDiv className="space-y-6 text-lg leading-relaxed">
+        <MotionDiv className="space-y-4 text-lg leading-relaxed">
           <MotionP><strong>Bamboo frame prior to mud wall construction of 'wattle and daub'</strong></MotionP>
           <MotionP><strong>Rammed earth wall under construction</strong></MotionP>
           <MotionP>
@@ -51,9 +51,9 @@ const DemoHouse = () => {
       </MotionDiv>
 
       {/* Images Section */}
-      <MotionDiv className="max-w-7xl mx-auto px-4 py-12">
-        <MotionH2 className="text-3xl font-bold text-center mb-10">
-          Demonstration House Gallery
+      <MotionDiv className="mx-auto px-4 py-12">
+        <MotionH2 className="text-lg md:text-xl underline mb-10 text-green-700 text-center font-bold dark:text-white" text="Gallery of Demo Houses">
+
         </MotionH2>
 
         <MotionDiv className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">

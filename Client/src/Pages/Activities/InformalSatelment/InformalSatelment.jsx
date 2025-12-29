@@ -13,15 +13,13 @@ const InformalSettlement = () => {
     <>
       {/* Content Section */}
       <MotionDiv className="">
-        <Banner imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05571.JPG"
-            altText="Informal settlement housing project">
-
-</Banner>
-        <MotionH2
-          className="text-xl font-bold underline text-center text-green-700 dark:text-white my-8"
+            <MotionH2
+          className="text-lg md:text-xl font-bold underline text-center text-green-700 dark:text-white my-8"
           text="Improving Housing in Informal Settlements"
         />
-
+        <Banner imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05571.JPG"
+            altText="Informal settlement housing project">
+</Banner>
         {/* Description */}
         <MotionP className="text-gray-700 dark:text-gray-300 text-justify my-6 leading-relaxed">
           We have recently undertaken a pilot to demonstrate our approach to

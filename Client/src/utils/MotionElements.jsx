@@ -7,7 +7,7 @@ export const MotionH2 = ({ text, className = "", duration = 0.8, ...props }) => 
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration }}
     {...props}
-    className={`text-center font-bold mb-6 ${className}`}
+    className={`text-center font-bold ${className}`}
   >
     {text}
   </motion.h2>
