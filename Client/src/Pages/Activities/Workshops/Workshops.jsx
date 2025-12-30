@@ -28,12 +28,10 @@ const Workshops = () => {
                     className="text-xl font-bold underline text-center text-green-700 dark:text-white my-8"
                     text="‘Building-for-Safety’ Workshops"
                 />
-
                 <Banner
                     imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-118.jpg"
                     altText="Building-for-Safety Workshop"
                 />
-
                 <MotionP className="text-gray-700 dark:text-gray-300 text-justify my-6 leading-relaxed">
                     Workshop participants working in teams to complete house budget exercise.
                 </MotionP>

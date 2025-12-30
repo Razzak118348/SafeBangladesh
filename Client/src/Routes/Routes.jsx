@@ -136,8 +136,8 @@ const Routes = createBrowserRouter([
             //     ),
             //     loader: async () => {
             //         const [workerRes, bookingRes] = await Promise.all([
-            //             fetch('https://kajbondu-server.vercel.app/worker'),
-            //             fetch('https://kajbondu-server.vercel.app/all-bookings'),
+            //             fetch(''),
+            //             fetch(''),
             //         ]);
 
             //         if (!workerRes.ok || !bookingRes.ok) {
