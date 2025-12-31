@@ -15,6 +15,7 @@ const Navbar = () => {
 const {user,LogOut}=useAuth();
   console.log(user);
 console.log(user?.photoURL);
+
   const navItems = [
     { name: "Home", path: "/" },
     {
