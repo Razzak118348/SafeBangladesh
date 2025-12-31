@@ -69,7 +69,7 @@ const Team = () => {
       {/* Team Section */}
       <MotionDiv className="max-w-7xl mx-auto px-4">
         <MotionH2
-          className="text-xl font-bold underline text-center text-green-700 dark:text-green-400 my-10"
+          className="underline text-green-700 dark:text-green-400 my-10"
           text="Our Team"
         />
 

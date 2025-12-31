@@ -14,7 +14,7 @@ console.log(singlework);
       className="max-w-lg rounded-lg shadow-2xl"
     />
     <div>
-      <MotionH2 className="text-xl font-bold text-green-900" text={singlework.title}></MotionH2>
+      <MotionH2 className=" text-green-900" text={singlework.title}></MotionH2>
       <MotionP className="py-6">
         {singlework.description}
       </MotionP>

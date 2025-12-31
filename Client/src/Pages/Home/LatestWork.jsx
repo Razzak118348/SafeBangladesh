@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MotionDiv, MotionH2 } from '../../utils/MotionElements';
+import { MotionDiv} from '../../utils/MotionElements';
 
 const LatestWork = () => {
     const [latesWork, setLatestWork] = useState([])

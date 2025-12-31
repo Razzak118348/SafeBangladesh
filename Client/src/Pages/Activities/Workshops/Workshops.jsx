@@ -25,7 +25,7 @@ const Workshops = () => {
             {/* Content Section */}
             <MotionDiv className="">
                 <MotionH2
-                    className="text-xl font-bold underline text-center text-green-700 dark:text-white my-8"
+                    className="underline text-green-700 dark:text-white my-8"
                     text="‘Building-for-Safety’ Workshops"
                 />
                 <Banner

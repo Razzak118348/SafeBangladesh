@@ -31,7 +31,7 @@ const HomeContent = () => {
     {/* Heading */}
     <MotionH2
       text="Building Safer Homes, Stronger Communities"
-      className="font-bold md:text-xl lg:text-2xl mb-16"
+      className="mb-16"
     />
 
     {/* Paragraph */}

@@ -7,7 +7,7 @@ const GoalsVision = () => {
     <section className="px-6 md:px-16 py-16 dark:text-white">
       {/* Heading */}
       <MotionDiv className="text-center mb-14">
-        <MotionH2 text="Goal, Mission & Vision" className="text-lg underline md:text-2xl font-bold text-green-900 dark:text-white">
+        <MotionH2 text="Goal, Mission & Vision" className="underline font-bold text-green-900 dark:text-white">
 
         </MotionH2>
         <MotionP className="mt-4 text-gray-600 dark:text-white max-w-3xl mx-auto">

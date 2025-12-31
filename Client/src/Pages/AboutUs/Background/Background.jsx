@@ -32,7 +32,7 @@ const Background = () => {
     >
       {/* Title */}
       <MotionH2
-        className="text-xl font-bold underline text-green-900 dark:text-white"
+        className="font-bold underline text-green-900 dark:text-white"
         text="Background of Nirapod Bangladesh Songstha"
       />
 

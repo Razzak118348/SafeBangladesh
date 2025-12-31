@@ -29,7 +29,7 @@ const Gallery = () => {
     <MotionDiv>
       {/* Title */}
       <MotionH2
-        className="text-xl font-bold underline text-center text-green-900 dark:text-white my-8"
+        className="underline text-green-900 dark:text-white my-8"
         text="Gallery"
       />
 

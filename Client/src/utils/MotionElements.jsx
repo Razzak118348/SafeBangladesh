@@ -7,11 +7,24 @@ export const MotionH2 = ({ text, className = "", duration = 0.8, ...props }) => 
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration }}
     {...props}
-    className={`text-center font-bold ${className}`}
+    className={`text-center text-lg md:text-2xl font-bold ${className}`}
   >
     {text}
   </motion.h2>
 );
+// Motion H1 Component
+export const MotionH1 = ({ text, className = "", duration = 0.8, ...props }) => (
+  <motion.h1
+    initial={{ opacity: 0, y: -40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration }}
+    {...props}
+    className={`text-center text-lg md:text-2xl font-bold ${className}`}
+  >
+    {text}
+  </motion.h1>
+);
+
 
 // Motion Paragraph Component
 export const MotionP = ({ children, className = "", duration = 0.8, delay = 0, ...props }) => (
