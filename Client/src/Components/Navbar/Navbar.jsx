@@ -14,7 +14,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
 const {user,LogOut}=useAuth();
   console.log(user);
-
+console.log(user?.photoURL);
   const navItems = [
     { name: "Home", path: "/" },
     {
@@ -146,48 +146,70 @@ const {user,LogOut}=useAuth();
             {theme === "light" ? <FaMoon /> : <FaSun />}
           </button>
 
-          {/* Auth Buttons */}
-  <div className="relative">
-      {user ? (
-              <div className="dropdown dropdown-end">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div
-                    className="w-10 h-10 rounded-full border-2 border-blue-600 shadow-sm"
-                    title={user?.displayName || "User name not found"}
-                  >
-                    <img
-                      src={user?.photoURL || "https://cdn-icons-png.flaticon.com/512/219/219986.png"}
-                      alt="user"
-                      className="object-cover rounded-full"
-                    />
-                  </div>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="menu dropdown-content mt-3 z-[1000] p-3 shadow-md bg-white dark:bg-gray-800 rounded-box w-48 space-y-2"
-                >
-                  <li className="text-gray-700 dark:text-white font-semibold text-sm">
-                    {user?.displayName || "User name not found"}
-                  </li>
-                  <li>
-                    <button
-                      onClick={LogOut}
-                      className="btn p-4 btn-sm bg-[#3e5a41] hover:bg-[#2b422d] text-white w-full"
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <Link
-                to="/login"
-                className="btn p-4 bg-[#3e5a41] hover:bg-[#2b422d] text-white font-medium transition"
-              >
-                Login
-              </Link>
-            )}
+        {/* Auth Buttons */}
+<div className="relative group">
+  {user ? (
+    <div className="relative">
+      {/* Avatar */}
+      <div
+        className="w-10 h-10 rounded-full border-2 border-green-700 cursor-pointer overflow-hidden"
+        title={user?.displayName || "User"}
+      >
+        <img
+        src={user?.photoURL || "https://cdn-icons-png.flaticon.com/512/219/219986.png"}
+        alt="user"
+        className="w-10 h-10 rounded-full border"
+      />
+      </div>
+
+      {/* Hover Card */}
+      <div
+        className="
+          absolute right-0 mt-3 w-52
+          bg-white dark:bg-gray-800
+          rounded-xl shadow-lg
+          border dark:border-gray-700
+          opacity-0 invisible
+          group-hover:opacity-100 group-hover:visible
+          transition-all duration-300
+          z-50
+        "
+      >
+        <div className="px-4 py-3 border-b dark:border-gray-700">
+          <p className="text-sm font-semibold text-gray-800 dark:text-white">
+            {user?.displayName || "User"}
+          </p>
+          <p className="text-xs text-gray-500 truncate">
+            {user?.email}
+          </p>
+        </div>
+
+        <div className="p-3">
+          <button
+            onClick={LogOut}
+            className="
+              w-full py-2 text-sm font-medium
+              rounded-lg
+              bg-[#3e5a41] hover:bg-[#2b422d]
+              text-white
+              transition
+            "
+          >
+            Logout
+          </button>
+        </div>
+      </div>
     </div>
+  ) : (
+    <Link
+      to="/login"
+      className="px-4 py-2 rounded-lg bg-[#3e5a41] hover:bg-[#2b422d] text-white font-medium transition"
+    >
+      Login
+    </Link>
+  )}
+</div>
+
 
         </div>
 
@@ -244,7 +266,7 @@ const {user,LogOut}=useAuth();
                 </li>
               ))}
 
-              {/* Mobile Auth Section */}
+              {/*mobile Auth Section */}
 <li className="pt-3 border-t">
   {user ? (
     <div className="flex items-center gap-3">
