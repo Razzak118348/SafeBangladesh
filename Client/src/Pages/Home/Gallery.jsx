@@ -34,14 +34,14 @@ const Gallery = () => {
     <MotionDiv>
       {/* Title */}
       <MotionH2
-        className="underline text-green-900 dark:text-white my-8"
+        className="underline text-green-900 dark:text-white mt-6"
         text="Gallery"
       />
 
       <MotionDiv className="py-8">
         <MotionDiv className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 p-4">
           {images.map((img, index) => (
-            <div
+            <MotionDiv
               key={index}
               className={`overflow-hidden rounded-xl shadow-md transition-transform duration-500 hover:scale-105
                 ${index == 0 || index ==5 ? "lg:col-span-2 " : ""}
@@ -52,7 +52,7 @@ const Gallery = () => {
                 alt={img.alt}
                 className="h-56 md:h-72 w-full object-cover object-center"
               />
-            </div>
+            </MotionDiv>
           ))}
         </MotionDiv>
       </MotionDiv>
