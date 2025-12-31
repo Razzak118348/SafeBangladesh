@@ -23,6 +23,11 @@ const Gallery = () => {
       src: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05036.JPG",
       alt: "Informal Settlement",
     },
+    {
+      src: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-110.jpg",
+      alt: "Workshop Activity",
+    }
+
   ];
 
   return (
@@ -39,13 +44,13 @@ const Gallery = () => {
             <div
               key={index}
               className={`overflow-hidden rounded-xl shadow-md transition-transform duration-500 hover:scale-105
-                ${img.large ? "col-span-2 row-span-2 md:col-start-3 md:row-start-1 h-96 md:h-full" : "min-h-32"}
+                ${index == 0 || index ==5 ? "lg:col-span-2 " : ""}
               `}
             >
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover"
+                className="h-56 md:h-72 w-full object-cover object-center"
               />
             </div>
           ))}

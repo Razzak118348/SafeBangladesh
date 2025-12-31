@@ -3,7 +3,6 @@ import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
 
 const Workshops = () => {
     const galleryImages = [
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-111.jpg",
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-116.jpg",
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-110.jpg",
         "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-111.jpg",
