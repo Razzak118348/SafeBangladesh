@@ -28,6 +28,7 @@ console.log(user?.photoURL);
         { name: "Technical Support", path: "/activities/technical-support" },
         { name: "Tree Planting", path: "/activities/tree-planting" },
         { name: "Savings Groups", path: "/activities/savings-groups" },
+        {name:"Prototype & Design",path:"/activities/prototype&design"}
       ],
     },
     {

@@ -23,6 +23,7 @@ import Login from "../Pages/Auth/Login/Login";
 import SignUp from "../Pages/Auth/SignUp/SingUp";
 import LatestWork from "../Pages/Home/LatestWork";
 import SingleWork from "../Pages/SingleWork/SingleWork";
+import PrototypeDesign from "../Pages/Activities/PrototypeDesign/PrototypeDesign";
 
 const Routes = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ const Routes = createBrowserRouter([
             {
                 path: "/activities/savings-groups",
                 element: <SavingsGroup></SavingsGroup>,
+            },
+            {
+                path: "/activities/prototype&design",
+                element: <PrototypeDesign></PrototypeDesign>
             },
 
             // About Us
@@ -115,7 +120,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "/singlework/:id",
-                element: <SingleWork/>,
+                element: <SingleWork />,
                 // The loader receives 'params' automatically from the URL
                 loader: async ({ params }) => {
                     const res = await fetch("/latestWork.json");

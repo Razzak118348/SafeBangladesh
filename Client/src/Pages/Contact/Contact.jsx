@@ -1,4 +1,3 @@
-import React from "react";
 import { Phone, Mail, MapPin, User } from "lucide-react";
 import { MotionDiv, MotionH2, MotionP } from "../../utils/MotionElements";
 
