@@ -36,10 +36,10 @@ const Supporters = () => {
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Title */}
-        <MotionH2 className="text-green-900 mb-4" text="Our Supporters">
+        <MotionH2 className="text-green-600 mb-4" text="Our Supporters">
 
         </MotionH2>
-        <MotionP className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+        <MotionP className="text-center text-gray-600 dark:text-white max-w-2xl mx-auto mb-12">
           With heartfelt thanks to our partners and supporters who contribute
           to strengthening communities and building a safer future.
         </MotionP>
