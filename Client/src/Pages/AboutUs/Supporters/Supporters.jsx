@@ -59,7 +59,7 @@ const Supporters = () => {
               <img
                 src={supporter.logo}
                 alt={supporter.name}
-                className="h-16 object-contain mb-4  group-hover:grayscale-0 transition"
+                className="h-16 object-contain mb-4 group-hover:grayscale-0 transition"
               />
 
               {/* Name */}

@@ -25,13 +25,13 @@ const HomeContent = () => {
     return (
         <div>
 
-<section className="py-24 px-4 text-black dark:text-white">
+<section className="pt-10 lg:pt-24 px-4 text-black dark:text-white">
   <div className="">
 
     {/* Heading */}
     <MotionH2
       text="Building Safer Homes, Stronger Communities"
-      className="mb-16"
+      className="mb-4 pt-8 md:pt-4 md:mb-8 text-green-600 hover:text-green-700 "
     />
 
     {/* Paragraph */}
