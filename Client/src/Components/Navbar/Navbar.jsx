@@ -37,7 +37,7 @@ console.log(user?.photoURL);
         { name: "People", path: "/aboutus/people" },
         { name: "Team", path: "/aboutus/team" },
         { name: "Goals & Vision", path: "/aboutus/goals-vision" },
-        { name: "Reports", path: "/aboutus/reports" },
+        { name: "Supporters", path: "/aboutus/supporters" },
       ],
     },
     {
@@ -45,6 +45,7 @@ console.log(user?.photoURL);
       subItems: [
         { name: "Blog", path: "/blog" },
         { name: "News", path: "/news" },
+        {name : "Reports", path:"/reports"},
       ],
     },
     { name: "Contact", path: "/contact" },
