@@ -25,7 +25,9 @@ import LatestWork from "../Pages/Home/LatestWork";
 import SingleWork from "../Pages/SingleWork/SingleWork";
 import PrototypeDesign from "../Pages/Activities/PrototypeDesign/PrototypeDesign";
 import BlogDetails from "../Pages/BlogAndReport/Blog/BlogDetails";
-import useAuth from "../hooks/useAuth";
+import AdminRoute from "./AdminRoute";
+import Admin from "../Pages/Admin/Admin";
+
 
 /* Load all blogs */
 const blogsLoader = async () => {
@@ -94,6 +96,24 @@ const Routes = createBrowserRouter([
                 path: "/activities/prototype&design",
                 element: <PrototypeDesign></PrototypeDesign>
             },
+            {
+    path:"/activities/latestwork",
+    element:<AdminRoute><LatestWork></LatestWork></AdminRoute>
+},
+            {
+                path: "/latestwork/:id",
+                element: <SingleWork />,
+                // The loader receives 'params' automatically from the URL
+                loader: async ({ params }) => {
+                    const res = await fetch("/latestWork.json");
+                    const data = await res.json();
+
+                    // We use .find() to get the specific object matching the ID from the URL
+                    const singleData = data.find(work => work.id === params.id);
+
+                    return singleData;
+                }
+            },
 
             // About Us
             {
@@ -149,46 +169,34 @@ const Routes = createBrowserRouter([
                 path: "/signup",
                 element: <SignUp></SignUp>
             },
+
+
             {
-                path: "/latestwork/:id",
-                element: <SingleWork />,
-                // The loader receives 'params' automatically from the URL
-                loader: async ({ params }) => {
-                    const res = await fetch("/latestWork.json");
-                    const data = await res.json();
+                path: '/admin',
+                element: (
+                   <AdminRoute>
+                    <Admin></Admin>
+                   </AdminRoute>
+                ),
+                // loader: async () => {
+                //     const [workerRes, bookingRes] = await Promise.all([
+                //         fetch(''),
+                //         fetch(''),
+                //     ]);
 
-                    // We use .find() to get the specific object matching the ID from the URL
-                    const singleData = data.find(work => work.id === params.id);
+                //     if (!workerRes.ok || !bookingRes.ok) {
+                //         throw new Error('Failed to load admin data');
+                //     }
 
-                    return singleData;
-                }
-            },
-            // {
-            //     path: '/admin',
-            //     element: (
-            //         <AdminRoute>
-            //             <Admin />
-            //         </AdminRoute>
-            //     ),
-            //     loader: async () => {
-            //         const [workerRes, bookingRes] = await Promise.all([
-            //             fetch(''),
-            //             fetch(''),
-            //         ]);
+                //     const [workers, bookings] = await Promise.all([
+                //         workerRes.json(),
+                //         bookingRes.json(),
+                //     ]);
 
-            //         if (!workerRes.ok || !bookingRes.ok) {
-            //             throw new Error('Failed to load admin data');
-            //         }
+                //     return { workers, bookings };
+                // }
 
-            //         const [workers, bookings] = await Promise.all([
-            //             workerRes.json(),
-            //             bookingRes.json(),
-            //         ]);
-
-            //         return { workers, bookings };
-            //     }
-
-            // }
+            }
         ],
 
     }

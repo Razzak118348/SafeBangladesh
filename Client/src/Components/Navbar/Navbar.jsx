@@ -13,8 +13,8 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const { theme, toggleTheme } = useTheme();
 const {user,LogOut}=useAuth();
-  console.log(user);
-console.log(user?.photoURL);
+//   console.log(user);
+// console.log(user?.photoURL);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -28,7 +28,12 @@ console.log(user?.photoURL);
         { name: "Technical Support", path: "/activities/technical-support" },
         { name: "Tree Planting", path: "/activities/tree-planting" },
         { name: "Savings Groups", path: "/activities/savings-groups" },
-        {name:"Prototype & Design",path:"/activities/prototype&design"}
+        {name:"Prototype & Design",path:"/activities/prototype&design"},
+
+        ...(user?.email === "abdurrazzak118348@gmail.com" ||
+      user?.email === "alfat422@gmail.com"
+      ? [{ name: "Latest Work", path: "activities/latestwork" }]
+      : []),
       ],
     },
     {
