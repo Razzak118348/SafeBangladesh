@@ -3,29 +3,29 @@ import { Link } from "react-router-dom";
 import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
 
 const supportersData = [
-  {
+{
     name: "Housing and Hazards",
-    logo: "https://housingandhazards.org/wp-content/uploads/2021/02/logo.png",
+    logo: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Support/HH%20Logo.jpeg",
     website: "https://www.housingandhazards.org",
   },
   {
     name: "Architecture Department, BRAC University",
-    logo: "https://upload.wikimedia.org/wikipedia/en/3/3f/BRAC_University_Logo.png",
+    logo: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Support/BRAC%201.png",
     website: "https://www.bracu.ac.bd",
   },
   {
     name: "United Nations Development Programme (UNDP), Bangladesh",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/UNDP_logo.svg",
+    logo: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Support/UNDP%201.png",
     website: "https://www.undp.org/bangladesh",
   },
   {
     name: "Australian High Commission, Bangladesh",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/8/88/Australian_Government_Logo.svg",
+    logo: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Support/Australia_logo-1.jpg",
     website: "https://bangladesh.highcommission.gov.au",
   },
   {
     name: "British Women’s Association, Dhaka",
-    logo: "https://bwadbd.org/wp-content/uploads/2020/03/bwad-logo.png",
+    logo: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Support/BWA%20Logo%202.jpg",
     website: "https://bwadbd.org",
   },
 ];
@@ -53,13 +53,13 @@ const Supporters = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center
-                         transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                        transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               {/* Logo */}
               <img
                 src={supporter.logo}
                 alt={supporter.name}
-                className="h-16 object-contain mb-4 grayscale group-hover:grayscale-0 transition"
+                className="h-16 object-contain mb-4  group-hover:grayscale-0 transition"
               />
 
               {/* Name */}

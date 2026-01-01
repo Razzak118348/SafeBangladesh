@@ -31,24 +31,24 @@ import Admin from "../Pages/Admin/Admin";
 
 /* Load all blogs */
 const blogsLoader = async () => {
-  const res = await fetch("/blog.json");
-  if (!res.ok) {
-    throw new Error("Failed to load blogs");
-  }
-  return res.json();
+    const res = await fetch("/blog.json");
+    if (!res.ok) {
+        throw new Error("Failed to load blogs");
+    }
+    return res.json();
 };
 
 /* Load single blog */
 const blogDetailsLoader = async ({ params }) => {
-  const res = await fetch("/blog.json");
-  const blogs = await res.json();
-  const blog = blogs.find((b) => b.id === params.id);
+    const res = await fetch("/blog.json");
+    const blogs = await res.json();
+    const blog = blogs.find((b) => b.id === params.id);
 
-  if (!blog) {
-    throw new Response("Blog Not Found", { status: 404 });
-  }
+    if (!blog) {
+        throw new Response("Blog Not Found", { status: 404 });
+    }
 
-  return blog;
+    return blog;
 };
 
 
@@ -97,9 +97,9 @@ const Routes = createBrowserRouter([
                 element: <PrototypeDesign></PrototypeDesign>
             },
             {
-    path:"/activities/latestwork",
-    element:<AdminRoute><LatestWork></LatestWork></AdminRoute>
-},
+                path: "/activities/latestwork",
+                element: <AdminRoute><LatestWork></LatestWork></AdminRoute>
+            },
             {
                 path: "/latestwork/:id",
                 element: <SingleWork />,
@@ -138,16 +138,16 @@ const Routes = createBrowserRouter([
             },
 
             // Blog & News
-           {
-    path: "/blog",
-    element: <Blog />,
-    loader: blogsLoader,
-  },
-  {
-    path: "/blog/:id",
-    element: <BlogDetails />,
-    loader: blogDetailsLoader,
-  },
+            {
+                path: "/blog",
+                element: <Blog />,
+                loader: blogsLoader,
+            },
+            {
+                path: "/blog/:id",
+                element: <BlogDetails />,
+                loader: blogDetailsLoader,
+            },
             {
                 path: "/news",
                 element: <News></News>,
@@ -170,13 +170,12 @@ const Routes = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
 
-
             {
                 path: '/admin',
                 element: (
-                   <AdminRoute>
-                    <Admin></Admin>
-                   </AdminRoute>
+                    <AdminRoute>
+                        <Admin></Admin>
+                    </AdminRoute>
                 ),
                 // loader: async () => {
                 //     const [workerRes, bookingRes] = await Promise.all([
