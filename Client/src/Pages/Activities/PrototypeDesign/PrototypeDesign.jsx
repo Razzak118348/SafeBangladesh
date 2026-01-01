@@ -18,7 +18,7 @@ const PrototypeDesign = () => {
  <div className="relative w-full overflow-hidden">
         <Banner
           imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_237.jpg"
-          altText="Informal settlement housing project"
+          altText="prototype and design"
         />
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center ">
         <MotionH1

@@ -51,11 +51,6 @@ const ContextApi = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  // const gitHubLogin = () => {
-  //   setLoading(true);
-  //   return signInWithPopup(auth, githubProvider);
-  // };
-
   const LogOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -66,16 +61,16 @@ const ContextApi = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
 
-      if(currentUser?.email){
-        const userData={email:currentUser.email}
-        //give backend link
-        axios.post("https//:localhost backend ",userData)
-        .then(res=>{
-          console.log('token after jwt',res.data)
+      // if(currentUser?.email){
+      //   const userData={email:currentUser.email}
+      //   //give backend link
+      //   axios.post("https//:localhost backend ",userData)
+      //   .then(res=>{
+      //     console.log('token after jwt',res.data)
 
-        })
-        .catch(err=>console.error(err))
-      }
+      //   })
+      //   .catch(err=>console.error(err))
+      // }
       setLoading(false);
     });
     return () => unSubscribe();
@@ -88,6 +83,7 @@ const ContextApi = ({ children }) => {
     SignInUser,
     LogOut,
     loading,
+    setLoading,
     googleLogin,
     // gitHubLogin,
     allService

@@ -24,6 +24,31 @@ import SignUp from "../Pages/Auth/SignUp/SingUp";
 import LatestWork from "../Pages/Home/LatestWork";
 import SingleWork from "../Pages/SingleWork/SingleWork";
 import PrototypeDesign from "../Pages/Activities/PrototypeDesign/PrototypeDesign";
+import BlogDetails from "../Pages/BlogAndReport/Blog/BlogDetails";
+import useAuth from "../hooks/useAuth";
+
+/* Load all blogs */
+const blogsLoader = async () => {
+  const res = await fetch("/blog.json");
+  if (!res.ok) {
+    throw new Error("Failed to load blogs");
+  }
+  return res.json();
+};
+
+/* Load single blog */
+const blogDetailsLoader = async ({ params }) => {
+  const res = await fetch("/blog.json");
+  const blogs = await res.json();
+  const blog = blogs.find((b) => b.id === params.id);
+
+  if (!blog) {
+    throw new Response("Blog Not Found", { status: 404 });
+  }
+
+  return blog;
+};
+
 
 const Routes = createBrowserRouter([
     {
@@ -93,10 +118,16 @@ const Routes = createBrowserRouter([
             },
 
             // Blog & News
-            {
-                path: "/blog",
-                element: <Blog></Blog>,
-            },
+           {
+    path: "/blog",
+    element: <Blog />,
+    loader: blogsLoader,
+  },
+  {
+    path: "/blog/:id",
+    element: <BlogDetails />,
+    loader: blogDetailsLoader,
+  },
             {
                 path: "/news",
                 element: <News></News>,
@@ -119,7 +150,7 @@ const Routes = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
             {
-                path: "/singlework/:id",
+                path: "/latestwork/:id",
                 element: <SingleWork />,
                 // The loader receives 'params' automatically from the URL
                 loader: async ({ params }) => {

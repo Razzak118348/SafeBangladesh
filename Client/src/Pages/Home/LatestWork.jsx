@@ -26,7 +26,7 @@ const LatestWork = () => {
                     </figure>
                     <div className="card-body">
 
-                        <h2 className="text-[#3e8846] dark:text-green-700 dark:hover:text-green-500 hover:text-[#2bd73d] underline"><Link to={`/singlework/${work.id}`}> {work.title}</Link></h2>
+                        <h2 className="text-[#3e8846] dark:text-green-700 dark:hover:text-green-500 hover:text-[#2bd73d] underline"><Link to={`/latestwork/${work.id}`}> {work.title}</Link></h2>
                     </div>
 
                 </MotionDiv>
