@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-
+import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../../../Components/SocialMediaLogin/SocialLogin";
@@ -46,13 +46,38 @@ const imageFloat = {
 };
 
 const Login = () => {
-  const { SignInUser } = useAuth();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { SignInUser, forgatePassword } = useAuth();
+  const { register, watch, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
   const destination = location?.state || "/";
+
+  //live email for need to forgate password
+  const email = watch("email");
+  const forgatePass = () => {
+    if (!email) {
+     Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Please Fill up the email First!",
+});
+      return;
+    }
+
+    forgatePassword(email)
+      .then(() => {
+Swal.fire({
+  title: "Good job!",
+  text: "Please Check your Email inbox or Spam page",
+  icon: "success"
+});
+      })
+      .catch(() => {
+        toast.error("Failed to send reset email");
+      });
+  };
 
   const onSubmit = ({ email, password }) => {
     SignInUser(email, password)
@@ -70,6 +95,9 @@ const Login = () => {
         });
       });
   };
+
+
+
 
   return (
     <motion.div
@@ -168,12 +196,13 @@ const Login = () => {
                 <input type="checkbox" className="accent-[#55835b]" />
                 Remember me
               </label>
-              <Link
-                to="/forgot-password"
+              <button
+                type="button"
+                onClick={forgatePass}
                 className="text-[#55835b] hover:underline font-medium"
               >
                 Forgot password?
-              </Link>
+              </button>
             </motion.div>
 
             {/* Button */}

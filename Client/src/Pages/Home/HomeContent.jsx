@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+
 import { Home as HomeIcon, Users, Leaf } from "lucide-react";
 import Tilt from "react-parallax-tilt";
 import Slider from "../../Components/Slider/Slider";

@@ -4,6 +4,7 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut
@@ -39,6 +40,19 @@ const ContextApi = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
+  //forgate password
+  const forgatePassword=(email)=>{
+  return sendPasswordResetEmail(auth,email).then(()=>{
+      // password reset email sent
+    })
+   .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  })
+
+  }
 
   // sign in
   const SignInUser = (email, password) => {
@@ -81,11 +95,11 @@ const ContextApi = ({ children }) => {
     user,
     creatUser,
     SignInUser,
+    forgatePassword,
     LogOut,
     loading,
     setLoading,
     googleLogin,
-    // gitHubLogin,
     allService
   };
 
