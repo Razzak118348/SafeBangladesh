@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin, User } from "lucide-react";
 import { MotionDiv, MotionH2, MotionP } from "../../utils/MotionElements";
+import SafeBangladeshMap from "../../Components/SafeBangladeshMap/SafeBangladeshMap";
 
 const Contact = () => {
   return (
@@ -18,7 +19,8 @@ const Contact = () => {
         </MotionDiv>
 
         {/* Organization Info */}
-        <MotionDiv className="bg-white p-4 rounded-2xl shadow-lg MotionP-8 mb-12">
+       <MotionDiv className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-10">
+         <MotionDiv className="bg-white p-4 rounded-2xl shadow-lg MotionP-8 mb-12">
           <MotionH2 className=" text-green-800 mb-4 text-start" text="Simple Action For the Environment (SAFE)">
 
           </MotionH2>
@@ -37,6 +39,10 @@ const Contact = () => {
             </MotionP>
           </MotionDiv>
         </MotionDiv>
+        <MotionDiv>
+          <SafeBangladeshMap></SafeBangladeshMap>
+        </MotionDiv>
+       </MotionDiv>
 
         {/* Contact Grid */}
         <MotionDiv className="grid md:grid-cols-2 gap-10">
