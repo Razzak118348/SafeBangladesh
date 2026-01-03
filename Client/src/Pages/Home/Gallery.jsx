@@ -39,7 +39,7 @@ const Gallery = () => {
       />
 
       <MotionDiv className="py-8">
-        <MotionDiv className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 p-4">
+        <MotionDiv className="container mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10 p-4">
           {images.map((img, index) => (
             <MotionDiv
               key={index}

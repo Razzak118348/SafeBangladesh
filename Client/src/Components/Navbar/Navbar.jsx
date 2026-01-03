@@ -30,10 +30,10 @@ const {user,LogOut}=useAuth();
         { name: "Savings Groups", path: "/activities/savings-groups" },
         {name:"Prototype & Design",path:"/activities/prototype&design"},
 
-        ...(user?.email === "abdurrazzak118348@gmail.com" ||
-      user?.email === "alfat422@gmail.com"
-      ? [{ name: "Latest Work", path: "activities/latestwork" }]
-      : []),
+      //   ...(user?.email === "abdurrazzak118348@gmail.com" ||
+      // user?.email === "alfat422@gmail.com"
+      // ? [{ name: "Latest Work", path: "activities/latestwork" }]
+      // : []),
       ],
     },
     {

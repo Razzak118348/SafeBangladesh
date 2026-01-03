@@ -34,17 +34,13 @@ import axios from "axios";
 export const blogsLoader = async ({ params }) => {
   // We pass page via params or default to 1
   const page = params?.page || 1;
-
-  const response = await axios.get(
-    `http://localhost:5000/blogs?page=${page}&limit=9`
-  );
-
+  const response = await axios.get(`http://localhost:5000/blogs?page=${page}&limit=9`);
   return response.data;
 };
 
 
 /* Load single blog */
-const blogDetailsLoader = async ({ params }) => {
+export const blogDetailsLoader = async ({ params }) => {
     try {
         const singleBlog = await axios.get(`http://localhost:5000/blogs/${params.id}`)
         return singleBlog.data;
@@ -54,6 +50,31 @@ const blogDetailsLoader = async ({ params }) => {
     }
 };
 
+//all latest work
+export const latestWorkLoader = async()=>{
+    try{
+        const response=await axios.get("http://localhost:5000/latestwork")
+        return response.data;
+    }
+    catch (error) {
+        console.error("somthing is wrong", error);
+    }
+}
+
+//single work
+export const singleLatestWorkLoader = async ({ params }) => {
+  const { id } = params;
+
+  try {
+    const response = await axios.get(`http://localhost:5000/latestwork/${id}`);
+    return response.data; // returns the single work object
+  } catch (error) {
+    console.error("Error fetching single work:", error);
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch single work"
+    );
+  }
+};
 
 const Routes = createBrowserRouter([
     {
@@ -99,23 +120,14 @@ const Routes = createBrowserRouter([
                 path: "/activities/prototype&design",
                 element: <PrototypeDesign></PrototypeDesign>
             },
-            {
-                path: "/activities/latestwork",
-                element: <AdminRoute><LatestWork></LatestWork></AdminRoute>
-            },
+            // {
+            //     path: "/activities/latestwork",
+            //     element: <AdminRoute><LatestWork></LatestWork></AdminRoute>
+            // },
             {
                 path: "/latestwork/:id",
                 element: <SingleWork />,
-                // The loader receives 'params' automatically from the URL
-                loader: async ({ params }) => {
-                    const res = await fetch("/latestWork.json");
-                    const data = await res.json();
-
-                    // We use .find() to get the specific object matching the ID from the URL
-                    const singleData = data.find(work => work.id === params.id);
-
-                    return singleData;
-                }
+                loader: singleLatestWorkLoader,
             },
 
             // About Us
