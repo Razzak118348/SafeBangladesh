@@ -1,61 +1,73 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const express = require("express");
+const cors = require("cors");
+const { MongoClient, ObjectId } = require("mongodb");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// middleware
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://safe-bangladesh-org.web.app'
-  ],
+  origin: ['http://localhost:5173', 'https://safe-bangladesh-org.web.app'],
   credentials: true
 }));
 app.use(express.json());
 
-// MongoDB URI (with DB name)
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.rtselns.mongodb.net/${process.env.DB_NAME}?appName=Cluster0`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.rtselns.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+const client = new MongoClient(uri);
 
 async function run() {
   try {
     await client.connect();
-
     const db = client.db(process.env.DB_NAME);
-const blogCollections = db.collection("blog");
+    const blogCollection = db.collection("blog");
 
-app.get('/blogs',async(req,res)=>{
- try {
-        const cursor = blogCollections.find();
-        const blogs = await cursor.toArray();
-        res.send(blogs);
-      } catch (error) {
-        res.status(500).send({ message: "Failed to retrieve worker applications", error: error.message });
+    // GET blogs with pagination
+  app.get("/blogs", async (req, res) => {
+  try {
+    // Get page and limit from query params, default values
+    const { page = 1, limit = 9 } = req.query;
+
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+    const totalBlogs = await blogCollection.countDocuments(); // count all blogs
+
+    const blogs = await blogCollection
+      .find()
+      .sort({ _id: -1 }) // latest blog first
+      .skip(skip)
+      .limit(parseInt(limit))
+      .toArray();
+
+    res.send({
+      blogs,
+      totalBlogs,
+      totalPages: Math.ceil(totalBlogs / limit),
+      currentPage: parseInt(page),
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Error fetching blogs", error: err.message });
+  }
+});
+
+
+    // GET single blog
+    app.get("/blogs/:id", async (req, res) => {
+      try {
+        const blog = await blogCollection.findOne({ _id: new ObjectId(req.params.id) });
+        if (!blog) return res.status(404).send({ message: "Blog not found" });
+        res.send(blog);
+      } catch (err) {
+        res.status(400).send({ message: "Invalid blog ID", error: err.message });
       }
-})
+    });
 
     console.log("MongoDB connected successfully");
-  } catch (error) {
-    console.error("MongoDB connection failed:", error);
+  } catch (err) {
+    console.error("MongoDB connection failed:", err);
   }
 }
+
 run();
 
-// test route
-app.get('/', (req, res) => {
-  res.send('This is Safe Bangladesh Organization server is running!');
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on Port ${port}`);
-});
+app.listen(port, () => console.log(`Server running on port ${port}`));
