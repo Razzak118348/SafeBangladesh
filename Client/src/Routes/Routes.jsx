@@ -51,15 +51,15 @@ export const blogDetailsLoader = async ({ params }) => {
 };
 
 //all latest work
-export const latestWorkLoader = async()=>{
-    try{
-        const response=await axios.get("http://localhost:5000/latestwork")
-        return response.data;
-    }
-    catch (error) {
-        console.error("somthing is wrong", error);
-    }
-}
+export const latestWorkLoader = async () => {
+  try {
+    const response = await axios.get("http://localhost:5000/latestwork");
+    return response.data;
+  } catch (error) {
+    console.error("something is wrong", error);
+    return []; // <-- fallback to empty array
+  }
+};
 
 //single work
 export const singleLatestWorkLoader = async ({ params }) => {
