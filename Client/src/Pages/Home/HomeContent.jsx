@@ -45,7 +45,7 @@ const HomeContent = () => {
     </MotionDiv>
 
     {/* Cards */}
-    <MotionDiv className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
+    <MotionDiv className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
       {cards.map((card, i) => (
         <MotionDiv key={i} className="" delay={i * 0.2} y={50}>
           <Tilt
@@ -55,7 +55,7 @@ const HomeContent = () => {
             glarePosition="all"
             className="p-6 rounded-2xl border border-emerald-500/30 hover:border-[#55835b] hover:shadow-xl transition-all"
           >
-            <MotionDiv className="flex items-start gap-4">
+            <MotionDiv className=" flex items-start gap-4">
               <div className="p-3 rounded-full bg-emerald-500/10">{card.icon}</div>
               <div>
                 <h4 className="font-semibold md:text-lg mb-1">{card.title}</h4>

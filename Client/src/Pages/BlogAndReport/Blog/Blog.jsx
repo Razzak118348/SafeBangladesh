@@ -18,9 +18,9 @@ const Blog = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-16">
+    <section className="max-w-7xl mx-auto px-4 py-6 md:10">
       {/* HEADER */}
-      <MotionDiv className="mb-12 text-center">
+      <MotionDiv className="my-4 text-center">
         <MotionH1
           className="text-3xl md:text-4xl font-bold text-green-800"
           text="Our Blogs & Stories"
@@ -53,7 +53,7 @@ const Blog = () => {
                 </MotionP>
                 <Link
                   to={`/blog/${blog._id}`}
-                  className="mt-auto text-green-700 font-medium hover:underline"
+                  className="mt-4 text-green-700 font-medium hover:underline"
                 >
                   Read More →
                 </Link>
@@ -66,26 +66,57 @@ const Blog = () => {
       </motion.div>
 
       {/* PAGINATION */}
-      {totalPages > 1 && (
-        <div className="flex justify-center mt-12 gap-2">
-          {[...Array(totalPages).keys()].map((number) => {
-            const pageNum = number + 1;
-            return (
-              <button
-                key={pageNum}
-                onClick={() => handlePageChange(pageNum)}
-                className={`px-4 py-2 rounded-md border ${
-                  currentPage === pageNum
-                    ? "bg-green-700 text-white"
-                    : "bg-white text-green-700"
-                }`}
-              >
-                {pageNum}
-              </button>
-            );
-          })}
-        </div>
-      )}
+     {/* PAGINATION */}
+{totalPages > 1 && (
+  <div className="flex justify-center mt-12 gap-2 items-center">
+
+    {/* Previous Button */}
+    <button
+      onClick={() => handlePageChange(currentPage - 1)}
+      disabled={currentPage === 1}
+      className={`px-4 py-2 rounded-md border ${
+        currentPage === 1
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-white text-green-700 hover:bg-green-100"
+      }`}
+    >
+      Previous
+    </button>
+
+    {/* Numbered Pages */}
+    {[...Array(totalPages).keys()].map((number) => {
+      const pageNum = number + 1;
+      return (
+        <button
+          key={pageNum}
+          onClick={() => handlePageChange(pageNum)}
+          className={`px-4 py-2 rounded-md border ${
+            currentPage === pageNum
+              ? "bg-green-700 text-white"
+              : "bg-white text-green-700 hover:bg-green-100"
+          }`}
+        >
+          {pageNum}
+        </button>
+      );
+    })}
+
+    {/* Next Button */}
+    <button
+      onClick={() => handlePageChange(currentPage + 1)}
+      disabled={currentPage === totalPages}
+      className={`px-4 py-2 rounded-md border ${
+        currentPage === totalPages
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-white text-green-700 hover:bg-green-100"
+      }`}
+    >
+      Next
+    </button>
+
+  </div>
+)}
+
     </section>
   );
 };
