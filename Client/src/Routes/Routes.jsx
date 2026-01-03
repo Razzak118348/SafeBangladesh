@@ -27,28 +27,31 @@ import PrototypeDesign from "../Pages/Activities/PrototypeDesign/PrototypeDesign
 import BlogDetails from "../Pages/BlogAndReport/Blog/BlogDetails";
 import AdminRoute from "./AdminRoute";
 import Admin from "../Pages/Admin/Admin";
+import axios from "axios";
 
 
 /* Load all blogs */
-const blogsLoader = async () => {
-    const res = await fetch("/blog.json");
-    if (!res.ok) {
-        throw new Error("Failed to load blogs");
-    }
-    return res.json();
+export const blogsLoader = async ({ params }) => {
+  // We pass page via params or default to 1
+  const page = params?.page || 1;
+
+  const response = await axios.get(
+    `http://localhost:5000/blogs?page=${page}&limit=9`
+  );
+
+  return response.data;
 };
+
 
 /* Load single blog */
 const blogDetailsLoader = async ({ params }) => {
-    const res = await fetch("/blog.json");
-    const blogs = await res.json();
-    const blog = blogs.find((b) => b.id === params.id);
-
-    if (!blog) {
-        throw new Response("Blog Not Found", { status: 404 });
+    try {
+        const singleBlog = await axios.get(`http://localhost:5000/blogs/${params.id}`)
+        return singleBlog.data;
     }
-
-    return blog;
+    catch (error) {
+        console.error("somthing is wrong", error);
+    }
 };
 
 

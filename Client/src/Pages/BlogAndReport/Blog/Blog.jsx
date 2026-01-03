@@ -1,70 +1,91 @@
-import { Link, useLoaderData, useNavigation } from "react-router-dom";
-import { MotionDiv, MotionH1 } from "../../../utils/MotionElements";
+// src/pages/Blog/Blog.jsx
+import { useLoaderData, Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import Loading from "../../../Components/Loading/Loading";
+import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionElements";
 
 const Blog = () => {
-  const blogs = useLoaderData();
-  const navigation = useNavigation();
+  const { blogs, totalPages, currentPage, totalBlogs } = useLoaderData();
+  const navigate = useNavigate();
 
-  if (navigation.state === "loading") {
-    return <Loading />;
-  }
+  // Show loading if needed
+  if (!blogs) return <Loading />;
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    // Navigate programmatically without keeping any search param
+    navigate(`/blog/page/${page}`);
+  };
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-16">
-      {/* Page Header */}
-      <div className="mb-12 text-center">
+      {/* HEADER */}
+      <MotionDiv className="mb-12 text-center">
         <MotionH1
           className="text-3xl md:text-4xl font-bold text-green-800"
           text="Our Blogs & Stories"
         />
-        <p className="mt-3 text-gray-600 dark:text-white max-w-2xl mx-auto">
-          Stories, insights, and updates from SAFE Bangladesh’s work with
-          communities and climate resilience initiatives.
-        </p>
-      </div>
+      </MotionDiv>
 
-      {/* Blog Grid */}
-     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-  {blogs.map((blog) => (
-    <MotionDiv
-      key={blog.id}
-      className="group h-full bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden flex flex-col"
-    >
-      {/* Image */}
-      <div className="overflow-hidden">
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
+      {/* BLOG GRID */}
+      <motion.div
+        key={currentPage}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {blogs.length > 0 ? (
+          blogs.map((blog) => (
+            <MotionDiv
+              key={blog._id}
+              className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
+            >
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="h-56 w-full object-cover"
+              />
+              <MotionDiv className="p-6 flex flex-col flex-1">
+                <h1 className="text-lg font-semibold">{blog.title}</h1>
+                <MotionP className="text-sm text-gray-600 line-clamp-3 mt-2">
+                  {blog.description}
+                </MotionP>
+                <Link
+                  to={`/blog/${blog._id}`}
+                  className="mt-auto text-green-700 font-medium hover:underline"
+                >
+                  Read More →
+                </Link>
+              </MotionDiv>
+            </MotionDiv>
+          ))
+        ) : (
+          <p className="text-center col-span-full text-gray-500">No blogs found</p>
+        )}
+      </motion.div>
 
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-1">
-        <h3 className="text-xl font-semibold text-green-800 mb-2 line-clamp-2">
-          {blog.title}
-        </h3>
-
-        <p className="text-gray-600 text-sm mb-6 line-clamp-3">
-          {blog.description}
-        </p>
-
-        {/* Read More */}
-        <Link
-          to={`/blog/${blog.id}`}
-          className="mt-auto inline-flex items-center text-green-700 font-medium hover:text-green-900 transition"
-        >
-          Read More
-          <span className="ml-1 transition-transform group-hover:translate-x-1">
-            →
-          </span>
-        </Link>
-      </div>
-    </MotionDiv>
-  ))}
-</div>
-
+      {/* PAGINATION */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-12 gap-2">
+          {[...Array(totalPages).keys()].map((number) => {
+            const pageNum = number + 1;
+            return (
+              <button
+                key={pageNum}
+                onClick={() => handlePageChange(pageNum)}
+                className={`px-4 py-2 rounded-md border ${
+                  currentPage === pageNum
+                    ? "bg-green-700 text-white"
+                    : "bg-white text-green-700"
+                }`}
+              >
+                {pageNum}
+              </button>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 };
