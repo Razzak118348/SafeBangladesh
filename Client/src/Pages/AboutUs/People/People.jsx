@@ -1,15 +1,21 @@
 import React from "react";
 import { MotionDiv } from "../../../utils/MotionElements";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
+import useGalleryData from "../../../hooks/useGalleryData";
+import Loading from "../../../Components/Loading/Loading";
 
 const People = () => {
-  const peopleImages = [
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/Picture5576568.jpg",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05548.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05468.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05461.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/Picture634816.jpg",
-  ];
+  const {gallery,loading}=useGalleryData("people")
+  // const peopleImages = [
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/Picture5576568.jpg",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05548.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05468.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05461.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/Picture634816.jpg",
+  // ];
+  if(loading){
+    return <Loading></Loading>
+  }
 
   return (
     <MotionDiv className="w-full mt-3">
@@ -23,7 +29,7 @@ const People = () => {
         </h2>
 
         <MotionDiv className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {peopleImages.map((img, index) => (
+          {gallery?.images?.map((img, index) => (
             <MotionDiv
               key={index}
               className="overflow-hidden rounded-xl shadow-md hover:shadow-xl transition"
