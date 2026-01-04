@@ -23,6 +23,7 @@ async function run() {
     const blogCollection = db.collection("blog");
 const latestWorkCollection = db.collection("latestwork");
 const bannerCollection =db.collection("banner")
+const galleryCollection = db.collection("galleries");
 
     // GET blogs with pagination
 app.get("/blogs", async (req, res) => {
@@ -82,7 +83,7 @@ app.get("/latestwork/:id", async (req, res) => {
       }
 });
 
-
+//all banner
 app.get("/banner", async (req, res) => {
   try {
     const { pagePath } = req.query;
@@ -94,6 +95,34 @@ app.get("/banner", async (req, res) => {
     res.status(500).send({ message: "Failed to fetch banner" });
   }
 });
+
+//all gallery data for all page
+app.get("/galleries", async (req, res) => {
+  try {
+    const galleries = await galleryCollection.find().toArray();
+    res.send(galleries);
+  } catch (error) {
+    res.status(500).send({ message: "Failed to fetch galleries" });
+  }
+});
+
+//individual categoris gallery image collection
+app.get("/galleries/:category", async (req, res) => {
+  try {
+    const { category } = req.params;
+// console.log(category)
+    const gallery = await galleryCollection.findOne({ category });
+
+    if (!gallery) {
+      return res.status(404).send({ message: "Gallery not found" });
+    }
+
+    res.send(gallery);
+  } catch (error) {
+    res.status(500).send({ message: "Failed to fetch gallery" });
+  }
+});
+
 
 app.get('/',(req,res)=>{
   res.send("Runnig the server of Safe Bangladesh Organization")
