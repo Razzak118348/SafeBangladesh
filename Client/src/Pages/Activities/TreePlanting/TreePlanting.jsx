@@ -1,7 +1,8 @@
 
 import { Link } from 'react-router-dom';
 import Banner from '../../../Components/Banner/Banner';
-import { MotionDiv,MotionH1,MotionH2,MotionP } from '../../../utils/MotionElements';
+import { MotionDiv, MotionH1, MotionH2, MotionP } from '../../../utils/MotionElements';
+import PageBanner from '../../../Components/PageBanner/PageBanner';
 
 const TreePlanting = () => {
     const treePlantingImage = [
@@ -21,48 +22,38 @@ const TreePlanting = () => {
     return (
         <MotionDiv className="w-full mt-3">
             {/* Reusable Banner */}
-            <div className="relative w-full overflow-hidden">
-                <Banner
-                    imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T88.JPG"
-                    altText="tree plantation"
-                />
-                <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-                    <MotionH1
-                        className="bg-gradient-to-r from-lime-200 to-yellow-400 bg-clip-text text-transparent drop-shadow-lg"
-                        text="Tree Plantation for Give the earth oxyzen"
-                    />
-                </div>
-            </div>
+            <PageBanner>
+            </PageBanner>
 
             <MotionDiv className="max-w-7xl mx-auto mt-10">
 
-            {/* content 1 */}
-<MotionDiv className="max-w-5xl mx-auto mt-8 md:mt-16 p-6 md:p-8 bg-white dark:bg-gray-800 shadow-lg rounded-xl">
-  <MotionH2
-    text="Environmental Awareness & Community Action"
-    className="text-green-700 dark:text-green-400 mb-4"
-  />
+                {/* content 1 */}
+                <MotionDiv className="max-w-5xl mx-auto mt-8 md:mt-16 p-6 md:p-8 bg-white dark:bg-gray-800 shadow-lg rounded-xl">
+                    <MotionH2
+                        text="Environmental Awareness & Community Action"
+                        className="text-green-700 dark:text-green-400 mb-4"
+                    />
 
-  <MotionP className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify space-y-4">
-    Our environmental work focuses on raising awareness about the importance of a
-    diverse and healthy environment, and the vital role it plays in reducing the
-    impact of natural disasters.
-    <br /><br />
-    We conduct workshops and tree-planting initiatives in collaboration with
-    local schools and communities. These initiatives include planting indigenous
-    tree species along rural road banks and verges, creating beautiful and shady
-    green corridors where wildlife can thrive.
-    <br /><br />
-    These plantations also help stabilize soil, reduce erosion, and provide
-    fruits and other natural resources for the enjoyment of local residents and
-    passersby.
-    <br /><br />
-    In partnership with schools, we educate students about local flora and fauna
-    while subsidizing the cost of saplings, empowering young people to plant and
-    care for trees within their own communities and contribute to a greener,
-    more resilient future.
-  </MotionP>
-</MotionDiv>
+                    <MotionP className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify space-y-4">
+                        Our environmental work focuses on raising awareness about the importance of a
+                        diverse and healthy environment, and the vital role it plays in reducing the
+                        impact of natural disasters.
+                        <br /><br />
+                        We conduct workshops and tree-planting initiatives in collaboration with
+                        local schools and communities. These initiatives include planting indigenous
+                        tree species along rural road banks and verges, creating beautiful and shady
+                        green corridors where wildlife can thrive.
+                        <br /><br />
+                        These plantations also help stabilize soil, reduce erosion, and provide
+                        fruits and other natural resources for the enjoyment of local residents and
+                        passersby.
+                        <br /><br />
+                        In partnership with schools, we educate students about local flora and fauna
+                        while subsidizing the cost of saplings, empowering young people to plant and
+                        care for trees within their own communities and contribute to a greener,
+                        more resilient future.
+                    </MotionP>
+                </MotionDiv>
 
                 {/* IMAGE GALLERY */}
                 <MotionDiv className="py-14">

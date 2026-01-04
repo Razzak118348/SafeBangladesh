@@ -2,6 +2,7 @@ import React from "react";
 import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionElements";
 import Banner from "../../../Components/Banner/Banner";
 import { Link } from "react-router-dom";
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 
 const DemoHouse = () => {
   const demoHouseImages = [
@@ -16,18 +17,7 @@ const DemoHouse = () => {
   return (
     <MotionDiv className="w-full mt-3">
       {/* Reusable Banner */}
-      <div className="relative w-full overflow-hidden">
-        <Banner
-          imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/ForidpurClinic3.jpg"
-          altText="Informal settlement housing project"
-        />
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-          <MotionH1
-            className="bg-gradient-to-r from-lime-200 to-green-600 bg-clip-text text-transparent drop-shadow-lg"
-            text="Demonstration House Project"
-          />
-        </div>
-      </div>
+     <PageBanner></PageBanner>
 
       <MotionDiv className="max-w-7xl mx-auto mt-10">
 

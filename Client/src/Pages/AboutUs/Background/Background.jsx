@@ -1,7 +1,11 @@
 
 import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionElements";
 import Banner from "../../../Components/Banner/Banner";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 
 const Background = () => {
 
@@ -15,21 +19,8 @@ const Background = () => {
 
   return (
     <MotionDiv className="w-ful">
-
-
-      <div className="relative w-full overflow-hidden rounded-xl">
-        <Banner
-          imageUrl={backgroundImages[4]}
-          altText="Safe Bangladesh Organization Background"
-        />
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 bg-black/30">
-          <MotionH1
-            text="Safe Bangladesh Organization Background"
-            className="bg-gradient-to-r from-lime-200 to-green-500 bg-clip-text text-transparent drop-shadow-xl"
-          />
-        </div>
-      </div>
-
+      {/* banner  */}
+      <PageBanner></PageBanner>
 
       <MotionDiv className="max-w-5xl mx-auto mt-16 p-8 md:p-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur shadow-xl rounded-2xl border border-green-100 dark:border-gray-700">
         <MotionH2

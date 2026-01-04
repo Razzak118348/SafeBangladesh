@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Banner from "../../../Components/Banner/Banner";
 import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionElements";
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 
 const InformalSettlement = () => {
   const galleryImages = [
@@ -13,27 +14,8 @@ const InformalSettlement = () => {
   return (
     <div className="relative">
       {/* Banner with overlay text */}
-      <div className="relative w-full overflow-hidden">
-        <Banner
-          imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05571.JPG"
-          altText="Informal settlement housing project"
-        />
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-       <MotionH1
-  className="bg-gradient-to-r from-lime-200 to-green-600 bg-clip-text text-transparent drop-shadow-lg"
-  text="Improving Housing in Informal Settlements"
-/>
+      <PageBanner></PageBanner>
 
-          <MotionP
-            className="mt-2 md:mt-4 md:text-xl max-w-3xl bg-gradient-to-r from-yellow-400 via-green-300 to-green-400 bg-clip-text text-transparent"
-          >
-            A community-driven approach to better urban low-cost housing in Dinajpur.
-          </MotionP>
-
-        </div>
-      </div>
-
-      {/* Description Sections with Cards */}
      {/* Content Section */}
 <MotionDiv className="max-w-7xl mx-auto mt-10 px-4 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 

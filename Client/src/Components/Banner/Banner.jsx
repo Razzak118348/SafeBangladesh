@@ -1,7 +1,7 @@
 import { MotionDiv } from "../../utils/MotionElements";
 
 
-const Banner = ({ imageUrl, altText = "Banner", height = "h-[300px] md:h-[450px] lg:h-[500px]" }) => {
+const Banner = ({ imageUrl, altText, height = "h-[256px] md:h-[450px]" }) => {
   return (
     <MotionDiv className={`w-full ${height} overflow-hidden mt-0 md:mt-2`}>
       <img

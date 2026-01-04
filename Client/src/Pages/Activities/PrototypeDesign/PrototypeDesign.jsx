@@ -1,4 +1,5 @@
 import Banner from "../../../Components/Banner/Banner";
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 import { MotionDiv, MotionH1 } from "../../../utils/MotionElements";
 
 const PrototypeDesign = () => {
@@ -15,19 +16,8 @@ const PrototypeDesign = () => {
 
     return (
         <div>
- <div className="relative w-full overflow-hidden">
-        <Banner
-          imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_237.jpg"
-          altText="prototype and design"
-        />
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center ">
-        <MotionH1
-className="text-[#F5F1E8] drop-shadow-lg"
-text="Our Prototype and Design is World-Class"
-/>
 
-        </div>
-      </div>
+ <PageBanner></PageBanner>
 
   <MotionDiv className="pt-14">
     <MotionH1 text="Our Prototype and All design here" className="text-green-600 mb-6" ></MotionH1>

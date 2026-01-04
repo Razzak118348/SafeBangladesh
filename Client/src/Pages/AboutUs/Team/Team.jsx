@@ -1,3 +1,4 @@
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
 
 
@@ -58,13 +59,7 @@ const Team = () => {
   return (
     <>
       {/* Banner */}
-      <MotionDiv className="w-full h-80 md:h-[450px] overflow-hidden md:mt-2 rounded-lg">
-        <img
-          src="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_034.jpg"
-          alt="Our Team Banner"
-          className="w-full h-full object-cover"
-        />
-      </MotionDiv>
+     <PageBanner></PageBanner>
 
       {/* Team Section */}
       <MotionDiv className="max-w-7xl mx-auto px-4">

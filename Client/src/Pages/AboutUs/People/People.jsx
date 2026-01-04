@@ -1,5 +1,6 @@
 import React from "react";
 import { MotionDiv } from "../../../utils/MotionElements";
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 
 const People = () => {
   const teamMembers = [
@@ -13,13 +14,7 @@ const People = () => {
   return (
     <MotionDiv className="w-full mt-3">
       {/* Banner Section */}
-      <MotionDiv className="w-full h-[300px] md:h-[450px] overflow-hidden">
-        <img
-          src="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05633.JPG"
-          alt="People Banner"
-          className="w-full h-full object-cover rounded-lg"
-        />
-      </MotionDiv>
+      <PageBanner></PageBanner>
 
       {/* Team Section */}
       <MotionDiv className="max-w-7xl mx-auto px-4 py-12">

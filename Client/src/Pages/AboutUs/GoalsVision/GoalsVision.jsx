@@ -1,4 +1,3 @@
-import React from "react";
 import { Leaf, Users, Home, Target, CheckCircle } from "lucide-react";
 import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
 

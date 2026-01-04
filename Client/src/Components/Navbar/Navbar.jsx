@@ -28,7 +28,7 @@ const {user,LogOut}=useAuth();
         { name: "Technical Support", path: "/activities/technical-support" },
         { name: "Tree Planting", path: "/activities/tree-planting" },
         { name: "Savings Groups", path: "/activities/savings-groups" },
-        {name:"Prototype & Design",path:"/activities/prototype&design"},
+        {name:"Prototype & Design",path:"/activities/prototype"},
 
       //   ...(user?.email === "abdurrazzak118348@gmail.com" ||
       // user?.email === "alfat422@gmail.com"

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 
 const SafeMaterials = () => {
   const galleryImages = [
@@ -18,14 +19,7 @@ const SafeMaterials = () => {
         />
 
         {/* Banner */}
-        <div className="overflow-hidden rounded-lg shadow-md">
-          <img
-            src="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/CEB.jpg"
-            className="w-full h-80 md:h-96 object-cover hover:scale-105 transition-transform duration-700"
-            alt="SAFE Materials cover"
-          />
-        </div>
-
+       <PageBanner></PageBanner>
 
 
         <MotionDiv className="max-w-7xl mx-auto mt-10 px-4 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">

@@ -3,6 +3,7 @@ import { useLoaderData, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Loading from "../../../Components/Loading/Loading";
 import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionElements";
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 
 const Blog = () => {
   const { blogs, totalPages, currentPage, totalBlogs } = useLoaderData();
@@ -18,7 +19,8 @@ const Blog = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-6 md:10">
+    <section className="max-w-7xl mx-auto px-4 py-6 ">
+<PageBanner></PageBanner>
       {/* HEADER */}
       <MotionDiv className="my-4 text-center">
         <MotionH1

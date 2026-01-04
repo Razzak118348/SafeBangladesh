@@ -117,7 +117,7 @@ const Routes = createBrowserRouter([
                 element: <SavingsGroup></SavingsGroup>,
             },
             {
-                path: "/activities/prototype&design",
+                path: "/activities/prototype",
                 element: <PrototypeDesign></PrototypeDesign>
             },
             // {

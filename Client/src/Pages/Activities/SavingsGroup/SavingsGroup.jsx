@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Banner from '../../../Components/Banner/Banner';
 import { MotionDiv,MotionH1,MotionH2,MotionP } from '../../../utils/MotionElements';
+import PageBanner from '../../../Components/PageBanner/PageBanner';
 
 const SavingsGroup = () => {
        const savingGroupImage = [
@@ -14,21 +15,9 @@ const SavingsGroup = () => {
     return (
          <MotionDiv className="w-full mt-3">
             {/* Reusable Banner */}
-            <div className="relative w-full overflow-hidden">
-                <Banner
-                    imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Saving%20Groups/P1040723.JPG"
-                    altText="tree plantation"
-                />
-                <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-                    <MotionH1
-                        className="bg-gradient-to-r from-lime-200 to-yellow-400 bg-clip-text text-transparent drop-shadow-lg"
-                        text="Our Savings groups"
-                    />
-                </div>
-            </div>
+           <PageBanner></PageBanner>
 
             <MotionDiv className="max-w-7xl mx-auto mt-10">
-
             {/* content 1 */}
 <MotionDiv className="max-w-5xl mx-auto mt-8 md:mt-16 p-6 md:p-8 bg-white dark:bg-gray-800 shadow-lg rounded-xl">
   <MotionH2

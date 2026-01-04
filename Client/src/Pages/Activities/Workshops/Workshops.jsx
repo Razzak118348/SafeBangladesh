@@ -1,4 +1,5 @@
 import Banner from "../../../Components/Banner/Banner";
+import PageBanner from "../../../Components/PageBanner/PageBanner";
 import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
 
 const Workshops = () => {
@@ -23,14 +24,13 @@ const Workshops = () => {
         <>
             {/* Content Section */}
             <MotionDiv className="">
+<PageBanner></PageBanner>
+
                 <MotionH2
-                    className="underline text-green-700 dark:text-white my-8"
+                    className="underline text-green-700 dark:text-white my-6"
                     text="‘Building-for-Safety’ Workshops"
                 />
-                <Banner
-                    imageUrl="https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-118.jpg"
-                    altText="Building-for-Safety Workshop"
-                />
+
                 <MotionP className="max-w-5xl mt-10 mx-auto px-4 text-justify text-gray-700 dark:text-gray-300 leading-relaxed">
                     Workshop participants working in teams to complete house budget exercise.
                     <i> Using traditional song</i> to reinforce the messages taught in the workshops.
