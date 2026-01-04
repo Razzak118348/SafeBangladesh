@@ -120,10 +120,6 @@ const Routes = createBrowserRouter([
                 path: "/activities/prototype",
                 element: <PrototypeDesign></PrototypeDesign>
             },
-            // {
-            //     path: "/activities/latestwork",
-            //     element: <AdminRoute><LatestWork></LatestWork></AdminRoute>
-            // },
             {
                 path: "/latestwork/:id",
                 element: <SingleWork />,
@@ -192,24 +188,6 @@ const Routes = createBrowserRouter([
                         <Admin></Admin>
                     </AdminRoute>
                 ),
-                // loader: async () => {
-                //     const [workerRes, bookingRes] = await Promise.all([
-                //         fetch(''),
-                //         fetch(''),
-                //     ]);
-
-                //     if (!workerRes.ok || !bookingRes.ok) {
-                //         throw new Error('Failed to load admin data');
-                //     }
-
-                //     const [workers, bookings] = await Promise.all([
-                //         workerRes.json(),
-                //         bookingRes.json(),
-                //     ]);
-
-                //     return { workers, bookings };
-                // }
-
             }
         ],
 

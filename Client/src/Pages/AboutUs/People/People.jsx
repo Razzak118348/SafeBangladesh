@@ -3,7 +3,7 @@ import { MotionDiv } from "../../../utils/MotionElements";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
 
 const People = () => {
-  const teamMembers = [
+  const peopleImages = [
     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/Picture5576568.jpg",
     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05548.JPG",
     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/People/DSC05468.JPG",
@@ -23,7 +23,7 @@ const People = () => {
         </h2>
 
         <MotionDiv className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {teamMembers.map((img, index) => (
+          {peopleImages.map((img, index) => (
             <MotionDiv
               key={index}
               className="overflow-hidden rounded-xl shadow-md hover:shadow-xl transition"

@@ -2,21 +2,27 @@
 import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionElements";
 import Banner from "../../../Components/Banner/Banner";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
+import useGalleryData from "../../../hooks/useGalleryData";
+import Loading from "../../../Components/Loading/Loading";
 
 const Background = () => {
+const { gallery, loading} =useGalleryData("background")
+console.log(gallery)
+  // const backgroundImages = [
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Background/AzuKo_028.jpg",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Background/AzuKo_016.jpg",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Background/AzuKo_015.jpg",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0127.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Background/AzuKo_003.jpg",
+  // ];
 
-  const backgroundImages = [
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Background/AzuKo_028.jpg",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Background/AzuKo_016.jpg",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Background/AzuKo_015.jpg",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0127.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Background/AzuKo_003.jpg",
-  ];
-
+  if(loading){
+    return <Loading></Loading>
+  }
+if (!gallery || !gallery.images || gallery.images.length === 0) {
+  return <p className="text-center mt-20">No gallery images found</p>;
+}
   return (
     <MotionDiv className="w-ful">
       {/* banner  */}
@@ -56,21 +62,15 @@ const Background = () => {
             className="md:col-span-7 relative overflow-hidden rounded-3xl shadow-2xl group"
           >
             <img
-              src={backgroundImages[0]}
+              src={gallery?.images[0]}
               alt="Demonstration housing project"
               className="w-full h-[320px] md:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
             />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-
-            <div className="absolute top-5 left-5 bg-green-600 text-white text-xs px-3 py-1 rounded-full">
-              Featured Project
-            </div>
           </MotionDiv>
 
           {/* SUPPORTING IMAGES */}
           <div className="md:col-span-5 grid grid-cols-2 gap-6">
-            {backgroundImages.slice(1, 5).map((img, index) => (
+            {gallery?.images?.slice(1, 5).map((img, index) => (
               <MotionDiv
                 key={index}
                 whileHover={{ scale: 1.05 }}
