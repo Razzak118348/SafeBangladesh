@@ -22,10 +22,10 @@ async function run() {
     const db = client.db(process.env.DB_NAME);
     const blogCollection = db.collection("blog");
 const latestWorkCollection = db.collection("latestwork");
-
+const bannerCollection =db.collection("banner")
 
     // GET blogs with pagination
-  app.get("/blogs", async (req, res) => {
+app.get("/blogs", async (req, res) => {
   try {
     // Get page and limit from query params, default values
     const { page = 1, limit = 9 } = req.query;
@@ -51,10 +51,8 @@ const latestWorkCollection = db.collection("latestwork");
     res.status(500).send({ message: "Error fetching blogs", error: err.message });
   }
 });
-
-
     // GET single blog
-    app.get("/blogs/:id", async (req, res) => {
+app.get("/blogs/:id", async (req, res) => {
       try {
         const blog = await blogCollection.findOne({ _id: new ObjectId(req.params.id) });
         if (!blog) return res.status(404).send({ message: "Blog not found" });
@@ -62,10 +60,10 @@ const latestWorkCollection = db.collection("latestwork");
       } catch (err) {
         res.status(400).send({ message: "Invalid blog ID", error: err.message });
       }
-    });
+});
 
     // GET all latest works
- app.get("/latestwork", async (req, res) => {
+app.get("/latestwork", async (req, res) => {
   try {
     const works = await latestWorkCollection.find().toArray();
     res.send(works);
@@ -73,10 +71,8 @@ const latestWorkCollection = db.collection("latestwork");
     res.status(500).send({ message: "Error fetching latest works", error: err.message });
   }
 });
-
-
     // GET single latest work by ID
-    app.get("/latestwork/:id", async (req, res) => {
+app.get("/latestwork/:id", async (req, res) => {
       try {
         const singleWork = await latestWorkCollection.findOne({ _id: new ObjectId(req.params.id) });
         if (!singleWork) return res.status(404).send({ message: "Work not found" });
@@ -84,8 +80,24 @@ const latestWorkCollection = db.collection("latestwork");
       } catch (err) {
         res.status(400).send({ message: "Invalid work ID", error: err.message });
       }
-    });
+});
 
+
+app.get("/banner", async (req, res) => {
+  try {
+    const { pagePath } = req.query;
+
+    const bannerImage = await bannerCollection.findOne({ pagePath });
+
+    res.send(bannerImage);
+  } catch (error) {
+    res.status(500).send({ message: "Failed to fetch banner" });
+  }
+});
+
+app.get('/',(req,res)=>{
+  res.send("Runnig the server of Safe Bangladesh Organization")
+})
     console.log("MongoDB connected successfully");
   } catch (err) {
     console.error("MongoDB connection failed:", err);
