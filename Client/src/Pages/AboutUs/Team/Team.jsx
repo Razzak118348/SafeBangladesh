@@ -1,60 +1,86 @@
+import { useEffect, useState } from "react";
+import Loading from "../../../Components/Loading/Loading";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
 import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
+import axios from "axios";
 
 
 const Team = () => {
-  const teamImages = [
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_036.jpg",
-      alt: "AzuKo Team Member 1",
-      designation: "Project Coordinator",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_038.jpg",
-      alt: "AzuKo Team Member 2",
-      designation: "Community Architect",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_039-1.jpg",
-      alt: "AzuKo Team Member 3",
-      designation: "Construction Supervisor",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_039-3.jpg",
-      alt: "AzuKo Team Member 4",
-      designation: "Field Engineer",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_041.jpg",
-      alt: "AzuKo Team Member 5",
-      designation: "Programme Officer",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_042.jpg",
-      alt: "AzuKo Team Member 6",
-      designation: "Technical Advisor",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_044-1.jpg",
-      alt: "AzuKo Team Member 7",
-      designation: "Research Assistant",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_044.jpg",
-      alt: "AzuKo Team Member 8",
-      designation: "Community Mobilizer",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_045.jpg",
-      alt: "AzuKo Team Member 9",
-      designation: "Site Manager",
-    },
-    {
-      img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_046.jpg",
-      alt: "AzuKo Team Member 10",
-      designation: "Security Officer",
-    },
-  ];
+  const [allMember, setAllMember] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLatestWork = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/team");
+        setAllMember(response.data);
+      } catch (error) {
+        console.error("Error fetching latest work:", error);
+        setAllMember([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLatestWork();
+  }, []);
+
+  if(loading){
+    return <Loading></Loading>
+  }
+  // const teamImages =
+  // [
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_036.jpg",
+  //     alt: "AzuKo Team Member 1",
+  //     designation: "Project Coordinator",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_038.jpg",
+  //     alt: "AzuKo Team Member 2",
+  //     designation: "Community Architect",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_039-1.jpg",
+  //     alt: "AzuKo Team Member 3",
+  //     designation: "Construction Supervisor",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_039-3.jpg",
+  //     alt: "AzuKo Team Member 4",
+  //     designation: "Field Engineer",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_041.jpg",
+  //     alt: "AzuKo Team Member 5",
+  //     designation: "Programme Officer",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_042.jpg",
+  //     alt: "AzuKo Team Member 6",
+  //     designation: "Technical Advisor",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_044-1.jpg",
+  //     alt: "AzuKo Team Member 7",
+  //     designation: "Research Assistant",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_044.jpg",
+  //     alt: "AzuKo Team Member 8",
+  //     designation: "Community Mobilizer",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_045.jpg",
+  //     alt: "AzuKo Team Member 9",
+  //     designation: "Site Manager",
+  //   },
+  //   {
+  //     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/About_Us/Team/AzuKo_046.jpg",
+  //     alt: "AzuKo Team Member 10",
+  //     designation: "Security Officer",
+  //   },
+  // ];
 
   return (
     <>
@@ -62,14 +88,14 @@ const Team = () => {
      <PageBanner></PageBanner>
 
       {/* Team Section */}
-      <MotionDiv className="max-w-7xl mx-auto px-4">
+      <MotionDiv className="p-4">
         <MotionH2
-          className="underline text-green-700 dark:text-green-400 my-10"
-          text="Our Team"
+          className="text-green-700 dark:text-green-400 my-10"
+          text="We All Together"
         />
 
         <MotionDiv className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-14 my-12">
-          {teamImages.map((member, index) => (
+          {allMember.map((member, index) => (
             <MotionDiv
               key={index}
               className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden text-center"
