@@ -3,16 +3,24 @@ import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionEle
 import Banner from "../../../Components/Banner/Banner";
 import { Link } from "react-router-dom";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
+import useGalleryData from "../../../hooks/useGalleryData";
+import Loading from "../../../Components/Loading/Loading";
 
 const DemoHouse = () => {
-  const demoHouseImages = [
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/20190209_174325.jpg",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0114.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0124.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0127.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0498.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/JAAGOSchoolSide.JPG",
-  ]
+const { gallery, loading} =useGalleryData("demo_house")
+
+  // const demoHouseImages = [
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/20190209_174325.jpg",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0114.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0124.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0127.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/DSC_0498.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Demonstration_House/JAAGOSchoolSide.JPG",
+  // ]
+
+if(loading){
+  return <Loading></Loading>
+}
 
   return (
     <MotionDiv className="w-full mt-3">
@@ -39,7 +47,7 @@ const DemoHouse = () => {
   {/* IMAGE GALLERY */}
         <MotionDiv className="py-14">
   <MotionDiv className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 px-4">
-    {demoHouseImages.map((img, index) => (
+    {gallery?.images?.map((img, index) => (
       <MotionDiv
         key={index}
         whileHover={{ scale: 1.04 }}
@@ -47,7 +55,7 @@ const DemoHouse = () => {
         className={`
           group relative overflow-hidden rounded-2xl
           shadow-lg hover:shadow-2xl
-          ${index === 0 ||index ==5 || index==6 || index==11 || index === demoHouseImages.length - 1 ? "md:col-span-2" : ""}
+          ${index === 0 ||index ==5 || index==6 || index==11 || index === gallery?.images?.length - 1 ? "md:col-span-2" : ""}
         `}
       >
         {/* Image */}

@@ -1,8 +1,11 @@
 import Banner from "../../../Components/Banner/Banner";
+import Loading from "../../../Components/Loading/Loading";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
+import useGalleryData from "../../../hooks/useGalleryData";
 import { MotionDiv, MotionH1 } from "../../../utils/MotionElements";
 
 const PrototypeDesign = () => {
+  const {gallery,loading}=useGalleryData("prototype_design")
     const prototypeDesignImages=[
 "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_210.jpg",
 "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_218.jpg",
@@ -14,6 +17,9 @@ const PrototypeDesign = () => {
 "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/Design/Kitchen%20plan-11.jpg",
 ]
 
+if(loading){
+  <Loading></Loading>
+}
     return (
         <div>
 
@@ -24,7 +30,7 @@ const PrototypeDesign = () => {
 
 
   <MotionDiv className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 px-4">
-    {prototypeDesignImages.map((img, index) => (
+    {gallery?.images?.map((img, index) => (
       <MotionDiv
         key={index}
         whileHover={{ scale: 1.04 }}
@@ -32,7 +38,7 @@ const PrototypeDesign = () => {
         className={`
           group relative overflow-hidden rounded-2xl
           shadow-lg hover:shadow-2xl
-          ${index === 0 ||index ==5 || index==6 || index==11 || index === prototypeDesignImages.length - 1 ? "md:col-span-2" : ""}
+          ${index === 0 ||index ==5 || index==6 || index==11 || index === gallery?.images?.length - 1 ? "md:col-span-2" : ""}
         `}
       >
         {/* Image */}

@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import Banner from "../../../Components/Banner/Banner";
-import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionElements";
+import { MotionDiv,MotionH2, MotionP } from "../../../utils/MotionElements";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
+import Loading from "../../../Components/Loading/Loading";
+import useGalleryData from "../../../hooks/useGalleryData";
 
 const InformalSettlement = () => {
-  const galleryImages = [
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05039.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05036.JPG",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05567.JPG",
-  ];
+  const { gallery, loading} = useGalleryData("informal_settlement")
+
+  // const galleryImages = [
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05039.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05036.JPG",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05567.JPG",
+  // ];
+
+if(loading){
+  return <Loading></Loading>
+}
 
   return (
     <div className="relative">
@@ -57,7 +64,7 @@ const InformalSettlement = () => {
   {/* IMAGE GALLERY */}
   <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-     {galleryImages.map((img, index) => (
+     {gallery?.images?.map((img, index) => (
       <motion.div
         key={index}
         whileHover={{ scale: 1.04 }}
