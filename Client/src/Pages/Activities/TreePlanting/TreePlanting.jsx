@@ -1,24 +1,31 @@
 
 import { Link } from 'react-router-dom';
-import Banner from '../../../Components/Banner/Banner';
+
 import { MotionDiv, MotionH1, MotionH2, MotionP } from '../../../utils/MotionElements';
 import PageBanner from '../../../Components/PageBanner/PageBanner';
+import useGalleryData from '../../../hooks/useGalleryData';
+import Loading from '../../../Components/Loading/Loading';
 
 const TreePlanting = () => {
-    const treePlantingImage = [
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/IMG-20231002-WA0102.jpg",
+    const{gallery,loading}=useGalleryData("tree_planting")
+    // const treePlantingImage = [
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/IMG-20231002-WA0102.jpg",
 
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/IMG-20231002-WA0255.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/IMG-20231002-WA0255.jpg",
 
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T15.JPG",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T15.JPG",
 
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T225.JPG",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T225.JPG",
 
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T86.JPG",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T86.JPG",
 
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T88.JPG",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Tree_Planting/T88.JPG",
 
-    ]
+    // ]
+
+    if(loading){
+        return <Loading></Loading>
+    }
     return (
         <MotionDiv className="w-full mt-3">
             {/* Reusable Banner */}
@@ -58,7 +65,7 @@ const TreePlanting = () => {
                 {/* IMAGE GALLERY */}
                 <MotionDiv className="py-14">
                     <MotionDiv className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 px-4">
-                        {treePlantingImage.map((img, index) => (
+                        {gallery?.images?.map((img, index) => (
                             <MotionDiv
                                 key={index}
                                 whileHover={{ scale: 1.04 }}
@@ -66,7 +73,7 @@ const TreePlanting = () => {
                                 className={`
           group relative overflow-hidden rounded-2xl
           shadow-lg hover:shadow-2xl
-          ${index === 0 || index == 5 || index == 6 || index == 11 || index === treePlantingImage.length - 1 ? "md:col-span-2" : ""}
+          ${index === 0 || index == 5 || index == 6 || index == 11 || index === gallery?.images?.length - 1 ? "md:col-span-2" : ""}
         `}
                             >
                                 {/* Image */}

@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
 import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
+import useGalleryData from "../../../hooks/useGalleryData";
+import Loading from "../../../Components/Loading/Loading";
 
 const SafeMaterials = () => {
-  const galleryImages = [
-    'https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/20190203_171813.jpg',
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/Clinic%20Under%20Construction.jpg",
-    "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/Material%20Support.jpg",
-  ];
+  const {gallery,loading}=useGalleryData("safe_materials")
+  // const galleryImages = [
+  //   'https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/20190203_171813.jpg',
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/Clinic%20Under%20Construction.jpg",
+  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/Material%20Support.jpg",
+  // ];
 
+  if(loading){
+    return<Loading></Loading>
+  }
   return (
     <div className="">
       <MotionDiv>
@@ -26,7 +32,7 @@ const SafeMaterials = () => {
           {/* IMAGE GALLERY */}
 <div className="lg:col-span-5">
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
-    {galleryImages.map((img, index) => (
+    {gallery?.images?.map((img, index) => (
       <MotionDiv
         key={index}
         whileHover={{ scale: 1.04 }}

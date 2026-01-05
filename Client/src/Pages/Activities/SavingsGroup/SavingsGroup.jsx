@@ -2,16 +2,22 @@ import { Link } from 'react-router-dom';
 import Banner from '../../../Components/Banner/Banner';
 import { MotionDiv,MotionH1,MotionH2,MotionP } from '../../../utils/MotionElements';
 import PageBanner from '../../../Components/PageBanner/PageBanner';
+import useGalleryData from '../../../hooks/useGalleryData';
+import Loading from '../../../Components/Loading/Loading';
 
 const SavingsGroup = () => {
-       const savingGroupImage = [
-       "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Saving%20Groups/AzuKo_304.jpg",
+    const {gallery,loading}=useGalleryData("saving_group")
+//        const savingGroupImage = [
+//        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Saving%20Groups/AzuKo_304.jpg",
 
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Saving%20Groups/P1040712.JPG",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Saving%20Groups/P1040712.JPG",
 
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Saving%20Groups/P1040722.JPG",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Saving%20Groups/P1040722.JPG",
 
-    ]
+//     ]
+if(loading){
+    return <Loading></Loading>
+}
     return (
          <MotionDiv className="w-full mt-3">
             {/* Reusable Banner */}
@@ -35,7 +41,7 @@ We facilitate the creation of saving groups by providing willing communities wit
                 {/* IMAGE GALLERY */}
                 <MotionDiv className="py-14">
                     <MotionDiv className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 px-4">
-                        {savingGroupImage.map((img, index) => (
+                        {gallery?.images?.map((img, index) => (
                             <MotionDiv
                                 key={index}
                                 whileHover={{ scale: 1.04 }}

@@ -1,24 +1,30 @@
-import Banner from "../../../Components/Banner/Banner";
+import Loading from "../../../Components/Loading/Loading";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
+import useGalleryData from "../../../hooks/useGalleryData";
 import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
 
 const Workshops = () => {
-    const galleryImages = [
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-116.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-110.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-111.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-122.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-124.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-126.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-133.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-138.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-146.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-160.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-15.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-16.jpg",
-        "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-171.jpg",
-        " https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-228.jpg",
-    ];
+    const{gallery,loading}=useGalleryData("workshop")
+
+    // const galleryImages = [
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-116.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-110.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-111.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-122.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-124.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-126.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-133.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-138.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-146.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-160.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-15.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-16.jpg",
+    //     "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-171.jpg",
+    //     " https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-228.jpg",
+    // ];
+    if(loading){
+      return <Loading></Loading>
+    }
 
     return (
         <>
@@ -48,7 +54,7 @@ const Workshops = () => {
 {/* Image Gallery */}
 <MotionDiv className="py-14">
   <MotionDiv className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-8 px-4">
-    {galleryImages.map((img, index) => (
+    {gallery?.images?.map((img, index) => (
       <MotionDiv
         key={index}
         whileHover={{ scale: 1.04 }}
@@ -56,7 +62,7 @@ const Workshops = () => {
         className={`
           group relative overflow-hidden rounded-2xl
           shadow-lg hover:shadow-2xl
-          ${index === 0 ||index ==5 || index==6 || index==11 || index === galleryImages.length - 1 ? "md:col-span-2" : ""}
+          ${index === 0 ||index ==5 || index==6 || index==11 || index === gallery?.images?.length - 1 ? "md:col-span-2" : ""}
         `}
       >
         {/* Image */}

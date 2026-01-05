@@ -6,16 +6,16 @@ import { MotionDiv, MotionH1 } from "../../../utils/MotionElements";
 
 const PrototypeDesign = () => {
   const {gallery,loading}=useGalleryData("prototype_design")
-    const prototypeDesignImages=[
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_210.jpg",
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_218.jpg",
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_237.jpg",
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_286.jpg",
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_289.jpg",
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/Design/Kitchen%20Plan-1.JPG",
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/Design/Kitchen%20Plan.JPG",
-"https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/Design/Kitchen%20plan-11.jpg",
-]
+//     const prototypeDesignImages=[
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_210.jpg",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_218.jpg",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_237.jpg",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_286.jpg",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/AzuKo_289.jpg",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/Design/Kitchen%20Plan-1.JPG",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/Design/Kitchen%20Plan.JPG",
+// "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/prototype_and_design/Design/Kitchen%20plan-11.jpg",
+// ]
 
 if(loading){
   <Loading></Loading>
