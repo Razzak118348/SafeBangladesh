@@ -211,7 +211,7 @@ const {user,LogOut}=useAuth();
   ) : (
     <Link
       to="/login"
-      className="px-4 py-2 rounded-lg bg-[#3e5a41] hover:bg-[#2b422d] text-white font-medium transition"
+      className="px-4 py-2 rounded-lg text-white bg-[#549c5d] hover:bg-[#55c766] active:scale-95 transition-all shadow-lg"
     >
       Login
     </Link>

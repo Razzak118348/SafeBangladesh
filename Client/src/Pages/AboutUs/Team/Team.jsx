@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Loading from "../../../Components/Loading/Loading";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
-import { MotionDiv, MotionH2, MotionP } from "../../../utils/MotionElements";
-import axios from "axios";
+import { MotionDiv, MotionH1, MotionH2, MotionP } from "../../../utils/MotionElements";
+import axios, { all } from "axios";
 
 
 const Team = () => {
@@ -24,7 +24,7 @@ const Team = () => {
 
     fetchLatestWork();
   }, []);
-
+// console.log(allMember)
   if(loading){
     return <Loading></Loading>
   }
@@ -97,22 +97,22 @@ const Team = () => {
         <MotionDiv className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-14 my-12">
           {allMember.map((member, index) => (
             <MotionDiv
-              key={index}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden text-center"
-            >
-              <img
-                src={member.img}
-                alt={member.alt}
-                className="w-full h-72 object-cover hover:scale-105 transition-transform duration-500"
-              />
+  key={index}
+  className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden text-center"
+>
+  <img
+    src={member.img}
+    alt={member.alt}
+    className="w-full h-72 object-cover hover:scale-105 transition-transform duration-500"
+  />
 
-              <MotionDiv className="pb-2">
-                <MotionH2 className="font-semibold pt-2" text={member.alt} />
-                <MotionP className="text-sm text-green-700 dark:text-green-400">
-                  {member.designation}
-                </MotionP>
-              </MotionDiv>
-            </MotionDiv>
+  <MotionDiv className="p-2">
+    <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+      {member.designation}
+    </h2>
+    <p className="text-gray-600 dark:text-gray-300">NBS Member {index+1}</p>
+  </MotionDiv>
+</MotionDiv>
           ))}
         </MotionDiv>
       </MotionDiv>

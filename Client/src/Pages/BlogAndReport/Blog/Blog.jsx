@@ -8,7 +8,7 @@ import PageBanner from "../../../Components/PageBanner/PageBanner";
 const Blog = () => {
   const { blogs, totalPages, currentPage, totalBlogs } = useLoaderData();
   const navigate = useNavigate();
-
+console.log(blogs)
   // Show loading if needed
   if (!blogs) return <Loading />;
 
@@ -19,7 +19,7 @@ const Blog = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-6 ">
+    <section className="px-4 py-6 ">
 <PageBanner></PageBanner>
       {/* HEADER */}
       <MotionDiv className="my-4 text-center">
@@ -67,7 +67,7 @@ const Blog = () => {
         )}
       </motion.div>
 
-      {/* PAGINATION */}
+
      {/* PAGINATION */}
 {totalPages > 1 && (
   <div className="flex justify-center mt-12 gap-2 items-center">
