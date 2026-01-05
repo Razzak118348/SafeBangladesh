@@ -53,6 +53,18 @@ app.get("/blogs", async (req, res) => {
     res.status(500).send({ message: "Error fetching blogs", error: err.message });
   }
 });
+//all blogs for admin page
+app.get("/allblogs",async(req,res)=>{
+  try{
+    const AllBlogs=await blogCollection.find().toArray()
+    res.send(AllBlogs)
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Error fetching blogs", error: err.message });
+  }
+})
+
     // GET single blog
 app.get("/blogs/:id", async (req, res) => {
       try {
@@ -84,7 +96,18 @@ app.get("/latestwork/:id", async (req, res) => {
       }
 });
 
-//all banner
+//all banner for admin page
+app.get("/allbanner",async(req,res)=>{
+  try{
+    const allBanner =await bannerCollection.find().toArray()
+    res.send(allBanner)
+  }
+  catch(error){
+    res.status(404)
+  }
+})
+
+//banner by pagepath for individual page
 app.get("/banner", async (req, res) => {
   try {
     const { pagePath } = req.query;
@@ -97,7 +120,7 @@ app.get("/banner", async (req, res) => {
   }
 });
 
-//all gallery data for all page
+//all gallery data for admin page
 app.get("/galleries", async (req, res) => {
   try {
     const galleries = await galleryCollection.find().toArray();
@@ -124,7 +147,7 @@ app.get("/galleries/:category", async (req, res) => {
   }
 });
 
-//get all team member
+//get all team member for normal and admin page
 app.get("/team",async(req,res)=>{
   try{
     const allMember = await allTeamMember.find().toArray()
