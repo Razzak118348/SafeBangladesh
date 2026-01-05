@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://safe-bangladesh-org.web.app'],
+  origin: ['http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app'],
   credentials: true
 }));
 app.use(express.json());
@@ -24,6 +24,7 @@ async function run() {
 const latestWorkCollection = db.collection("latestwork");
 const bannerCollection =db.collection("banner")
 const galleryCollection = db.collection("galleries");
+const allTeamMember = db.collection("team")
 
     // GET blogs with pagination
 app.get("/blogs", async (req, res) => {
@@ -122,6 +123,18 @@ app.get("/galleries/:category", async (req, res) => {
     res.status(500).send({ message: "Failed to fetch gallery" });
   }
 });
+
+//get all team member
+app.get("/team",async(req,res)=>{
+  try{
+    const allMember = await allTeamMember.find().toArray()
+    res.send(allMember)
+  }
+  catch (error) {
+    res.status(500).send({ message: "Failed to fetch galleries" });
+  }
+})
+
 
 
 app.get('/',(req,res)=>{
