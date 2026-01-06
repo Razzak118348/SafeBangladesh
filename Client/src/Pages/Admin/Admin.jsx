@@ -7,7 +7,7 @@ const Admin = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newItem, setNewItem] = useState({});
-
+const [galleryInputs,setGalleryInputs]= useState({})
   const baseURL = "http://localhost:5000";
 
   // ================= FETCH (READ) =================
@@ -215,7 +215,7 @@ return (
 
       {/* add blog  */}
  {section === "blogs" && (
-  <div className="border-2 border-black p-4 mb-6">
+  <div className="border-2 border-gray-400 rounded-lg p-4 mb-6">
     <h2 className="font-bold mb-2">Add Blog</h2>
 
     <input
@@ -253,7 +253,7 @@ return (
 
     <button
       onClick={handleCreate}
-      className="bg-green-600 text-white px-4 py-1"
+      className="bg-green-600 button rounded-md text-white px-4 py-1"
     >
       Create Blog
     </button>
@@ -262,7 +262,7 @@ return (
 
 {/* add latest work */}
       {section === "latestwork" && (
-        <div className="border-2 border-black p-4 mb-6">
+        <div className="border-2 border-gray-400 p-4 mb-6">
           <h2 className="font-bold mb-2">Add Latest Work</h2>
           <input className="border-2 border-black p-1 w-full mb-2" placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} />
@@ -270,7 +270,7 @@ return (
             onChange={(e) => setNewItem({ ...newItem, image: e.target.value })} />
           <textarea className="border-2 border-black p-1 w-full mb-2" placeholder="Description"
             onChange={(e) => setNewItem({ ...newItem, description: e.target.value })} />
-          <button onClick={handleCreate} className="bg-green-600 text-white px-4 py-1">
+          <button onClick={handleCreate} className="bg-green-600 button rounded-md text-white px-4 py-1">
             Create Work
           </button>
         </div>
@@ -278,7 +278,7 @@ return (
 
 {/* add team member */}
       {section === "team" && (
-        <div className="border-2 border-black p-4 mb-6">
+        <div className="border-2 border-gray-400 p-4 mb-6 rounded-lg">
           <h2 className="font-bold mb-2">Add Team Member</h2>
           <input className="border-2 border-black p-1 w-full mb-2" placeholder="Image URL"
             onChange={(e) => setNewItem({ ...newItem, img: e.target.value })} />
@@ -286,7 +286,7 @@ return (
             onChange={(e) => setNewItem({ ...newItem, alt: e.target.value })} />
           <input className="border-2 border-black p-1 w-full mb-2" placeholder="Designation"
             onChange={(e) => setNewItem({ ...newItem, designation: e.target.value })} />
-          <button onClick={handleCreate} className="bg-green-600 text-white px-4 py-1">
+          <button onClick={handleCreate} className="bg-green-600 button rounded-md text-white px-4 py-1">
             Add Member
           </button>
         </div>
@@ -294,7 +294,7 @@ return (
 
 {/* add all banner  */}
       {section === "allbanner" && (
-        <div className="border-2 border-black p-4 mb-6">
+        <div className="border-2 border-gray-400 p-4 mb-6">
           <h2 className="font-bold mb-2">Add Banner</h2>
           <input className="border-2 border-black p-1 w-full mb-2" placeholder="Page Path"
             onChange={(e) => setNewItem({ ...newItem, pagePath: e.target.value })} />
@@ -302,7 +302,7 @@ return (
             onChange={(e) => setNewItem({ ...newItem, image: e.target.value })} />
           <input className="border-2 border-black p-1 w-full mb-2" placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} />
-          <button onClick={handleCreate} className="bg-green-600 text-white px-4 py-1">
+          <button onClick={handleCreate} className="bg-green-600 button rounded-md text-white px-4 py-1">
             Create Banner
           </button>
         </div>
@@ -311,86 +311,98 @@ return (
       {/* ================= READ / UPDATE / DELETE ================= */}
 {(section === "blogs" || section === "latestwork") &&
   data.map(item => (
-    <div key={item._id} className="border-2 border-black p-4 mb-4 rounded-md shadow-sm">
-
-      {/* Title */}
-      <div className="flex items-center mb-2">
-        <p className="w-28 font-semibold">Title:</p>
-        <input
-          className="border-2 border-black p-1 flex-1"
-          defaultValue={item.title}
-          onChange={(e) => setNewItem({ ...item, title: e.target.value })}
-          placeholder="Title"
-        />
-      </div>
-
-      {/* Image URL */}
-      <div className="flex items-center mb-2">
-        <p className="w-28 font-semibold">Image URL:</p>
-        <input
-          className="border-2 border-black p-1 flex-1"
-          defaultValue={item.image || item.img}
-          onChange={(e) => setNewItem({ ...item, image: e.target.value })}
-          placeholder="Image URL"
-        />
-      </div>
-
-      {/* Show image preview */}
-      {item.image || item.img ? (
+    <div
+      key={item._id}
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
+    >
+      {/* Image Preview */}
+      <div className="w-48 flex-shrink-0">
         <img
           src={item.image || item.img}
           alt={item.title}
-          className="w-full h-48 object-cover mb-2 rounded-md"
-        />
-      ) : null}
-
-      {/* Description */}
-      <div className="flex items-start mb-2">
-        <p className="w-28 font-semibold pt-1">Description:</p>
-        <textarea
-          className="border-2 border-black p-1 flex-1"
-          defaultValue={item.description}
-          onChange={(e) => setNewItem({ ...item, description: e.target.value })}
-          placeholder="Description"
+          className="w-full h-48 object-cover rounded-md border"
         />
       </div>
 
-      {/* Content (only for blogs) */}
-      {section === "blogs" && (
-        <div className="flex items-start mb-2">
-          <p className="w-28 font-semibold pt-1">Content:</p>
-          <textarea
-            className="border-2 border-black p-1 flex-1"
-            defaultValue={item.content}
-            onChange={(e) => setNewItem({ ...item, content: e.target.value })}
-            placeholder="Content"
+      {/* Form Area */}
+      <div className="flex-1">
+
+        {/* Title */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Title:</p>
+          <input
+            className="border-2 border-black p-2 flex-1 rounded"
+            defaultValue={item.title}
+            onChange={(e) =>
+              setNewItem({ ...item, title: e.target.value })
+            }
           />
         </div>
-      )}
 
-      {/* Action buttons */}
-      <div className="flex gap-2 mt-2">
-        <button
-          onClick={() => handleUpdate(item._id, { ...item })}
-          className="bg-blue-500 text-white px-4 py-1 rounded"
-        >
-          Update
-        </button>
-        <button
-          onClick={() => handleDelete(item._id)}
-          className="bg-red-500 text-white px-4 py-1 rounded"
-        >
-          Delete
-        </button>
+        {/* Image URL */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Image URL:</p>
+          <input
+            className="border-2 border-black p-2 flex-1 rounded"
+            defaultValue={item.image || item.img}
+            onChange={(e) =>
+              setNewItem({ ...item, image: e.target.value })
+            }
+          />
+        </div>
+
+        {/* Description */}
+        <div className="flex items-start mb-3">
+          <p className="w-28 font-semibold pt-1">Description:</p>
+          <textarea
+            className="border-2 border-black p-2 flex-1 rounded min-h-[80px]"
+            defaultValue={item.description}
+            onChange={(e) =>
+              setNewItem({ ...item, description: e.target.value })
+            }
+          />
+        </div>
+
+        {/* Content (Blogs only) */}
+        {section === "blogs" && (
+          <div className="flex items-start mb-3">
+            <p className="w-28 font-semibold pt-1">Content:</p>
+            <textarea
+              className="border-2 border-black p-2 flex-1 rounded min-h-[120px]"
+              defaultValue={item.content}
+              onChange={(e) =>
+                setNewItem({ ...item, content: e.target.value })
+              }
+            />
+          </div>
+        )}
+
+        {/* Buttons */}
+        <div className="flex gap-3 mt-3">
+          <button
+            onClick={() => handleUpdate(item._id, newItem._id ? newItem : item)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
+          >
+            Update
+          </button>
+
+          <button
+            onClick={() => handleDelete(item._id)}
+            className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
+          >
+            Delete
+          </button>
+        </div>
+
       </div>
     </div>
-))}
+  ))}
 
-     {section === "team" &&
+    {section === "team" &&
   data.map(member => (
     <div
       key={member._id}
-      className="border-2 border-black p-4 mb-4 rounded-md shadow-sm flex gap-4"
+      className="border-2 border-green-700 shadow-xl  p-4 mb-4 rounded-md  flex gap-8"
     >
       {/* Image Preview */}
       <div className="w-32 flex-shrink-0">
@@ -461,35 +473,87 @@ return (
     </div>
   ))}
 
-
       {section === "galleries" &&
-        data?.map(gallery => (
-          <div key={gallery._id} className="border-2 border-black p-4 mb-6">
-            <h2 className="font-bold">{gallery.title}</h2>
+  data?.map(gallery => (
+    <div
+      key={gallery._id}
+      className="bg-white border border-gray-200 rounded-xl shadow-lg p-5 mb-8"
+    >
+      {/* ===== Header ===== */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+        <div>
+          <h2 className="text-xl font-bold text-gray-800">{gallery.title}</h2>
+          <p className="text-sm text-gray-500 font-bold">
+            Category: <span className="font-bold text-black">{gallery.category}</span>
+          </p>
+          <p className="text-sm text-gray-500">
+            Total Images: <span className="font-medium">{gallery.images?.length || 0}</span>
+          </p>
+        </div>
 
-            <input className="border-2 border-black p-1 w-full my-2"
-              placeholder="New Image URL (Press Enter)"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  addGalleryImage(gallery.category, e.target.value);
-                  e.target.value = "";
-                }
-              }} />
+        {/* ===== Add Image Input ===== */}
+        <div className="flex gap-2 w-full md:w-1/2">
 
-            <div className="grid grid-cols-3 gap-3">
-              {gallery?.images?.map(img => (
-                <div key={img} className="relative">
-                  <img src={img} className="w-full h-32 object-cover" />
-                  <button
-                    onClick={() => removeGalleryImage(gallery.category, img)}
-                    className="absolute top-1 right-1 bg-red-600 text-white px-2">
-                    ✕
-                  </button>
-                </div>
-              ))}
+          <input
+    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+    placeholder="Paste image URL"
+    value={galleryInputs[gallery.category] || ""}
+    onChange={(e) =>
+      setGalleryInputs({
+        ...galleryInputs,
+        [gallery.category]: e.target.value,
+      })
+    }
+  />
+
+  <button
+    onClick={() => {
+      const url = galleryInputs[gallery.category];
+      if (!url || !url.trim()) return;
+
+      addGalleryImage(gallery.category, url);
+
+      // clear input after add
+      setGalleryInputs({
+        ...galleryInputs,
+        [gallery.category]: "",
+      });
+    }}
+    className="bg-green-600 hover:bg-green-700 text-white px-4 rounded-lg"
+  >
+  Add Image
+  </button>
+        </div>
+      </div>
+
+      {/* ===== Image Grid ===== */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {gallery?.images?.map((img, index) => (
+          <div
+            key={index}
+            className="relative group rounded-lg overflow-hidden border shadow-sm"
+          >
+            <img
+              src={img}
+              alt=""
+              className="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+
+            {/* ===== Overlay ===== */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+              <button
+                onClick={() => removeGalleryImage(gallery.category, img)}
+                className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md text-sm"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  ))}
+
 
       {section === "allbanner" &&
         data.map(banner => (
