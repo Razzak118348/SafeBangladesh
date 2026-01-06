@@ -95,7 +95,7 @@ const TreePlanting = () => {
           transition-opacity duration-500
         " />
 
-                                {/* Caption */}
+
                                 <div className="
           absolute bottom-4 left-4 right-4
           translate-y-6 opacity-0
@@ -103,10 +103,10 @@ const TreePlanting = () => {
           transition-all duration-500
         ">
                                     <h3 className="text-white text-sm md:text-base font-semibold">
-                                        Demonstration house {index + 1}
+                                        Tree plantation Image {index + 1}
                                     </h3>
                                     <p className="text-gray-200 text-xs mt-1">
-                                        Make a reliable and comfort house
+                                    we save the earth
                                     </p>
                                 </div>
                             </MotionDiv>
