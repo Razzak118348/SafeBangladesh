@@ -22,7 +22,7 @@ const [galleryInputs,setGalleryInputs]= useState({})
     if (section === "blogs") res = await axios.get(`${baseURL}/blogs`);
     if (section === "latestwork") res = await axios.get(`${baseURL}/latestwork`);
     if (section === "team") res = await axios.get(`${baseURL}/team`);
-    if (section === "galleries") res = await axios.get("http://localhost:5000/galleries");
+    if (section === "galleries") res = await axios.get(`${baseURL}/galleries`);
     if (section === "allbanner") res = await axios.get(`${baseURL}/allbanner`);
 
     // Ensure data is always an array
@@ -555,26 +555,83 @@ return (
   ))}
 
 
-      {section === "allbanner" &&
-        data.map(banner => (
-          <div key={banner._id} className="border-2 border-black p-4 mb-4">
-            <p className="font-bold mb-2">Page: {banner.pagePath}</p>
+    {section === "allbanner" &&
+  data.map((banner) => (
+    <div
+      key={banner._id}
+      className="bg-white border border-gray-400 rounded-xl shadow-lg p-5 mb-6"
+    >
+      {/* ===== Header ===== */}
+      <div className="mb-4">
+        <h2 className="text-lg font-bold text-gray-800">
+         Frontend Page path: <span className="text-green-700">{banner.pagePath}</span>
+        </h2>
+      </div>
 
-            <input className="border-2 border-black p-1 w-full mb-2" defaultValue={banner.title}
-              onChange={(e) => setNewItem({ ...banner, title: e.target.value })} />
-            <input className="border-2 border-black p-1 w-full mb-2" defaultValue={banner.image}
-              onChange={(e) => setNewItem({ ...banner, image: e.target.value })} />
+      {/* ===== Image Preview ===== */}
+      {banner.backgroundImage && (
+        <img
+          src={banner.backgroundImage}
+          alt={banner.altText}
+          className="w-full h-48 object-cover rounded-lg mb-4 border"
+        />
+      )}
 
-            <button onClick={() => handleUpdate(banner.pagePath, { ...banner })}
-              className="bg-blue-500 text-white px-3 py-1 mr-2">
-              Update
-            </button>
-            <button onClick={() => handleDelete(banner.pagePath)}
-              className="bg-red-500 text-white px-3 py-1">
-              Delete
-            </button>
-          </div>
-        ))}
+      {/* ===== Title ===== */}
+      <div className="flex items-center gap-3 mb-3">
+        <p className="w-32 font-semibold">Title:</p>
+        <input
+          className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
+          defaultValue={banner.title}
+          onChange={(e) =>
+            setNewItem({ ...banner, title: e.target.value })
+          }
+        />
+      </div>
+
+      {/* ===== Background Image ===== */}
+      <div className="flex items-center gap-3 mb-3">
+        <p className="w-32 font-semibold">Image URL:</p>
+        <input
+          className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
+          defaultValue={banner.backgroundImage}
+          onChange={(e) =>
+            setNewItem({ ...banner, backgroundImage: e.target.value })
+          }
+        />
+      </div>
+
+      {/* ===== Alt Text ===== */}
+      <div className="flex items-center gap-3 mb-4">
+        <p className="w-32 font-semibold">Alt Text:</p>
+        <input
+          className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
+          defaultValue={banner.altText}
+          onChange={(e) =>
+            setNewItem({ ...banner, altText: e.target.value })
+          }
+        />
+      </div>
+
+      {/* ===== Action Buttons ===== */}
+      <div className="flex gap-3">
+        <button
+          onClick={() => handleUpdate(banner.pagePath, { ...banner })}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
+        >
+          Update
+        </button>
+
+        <button
+          onClick={() => handleDelete(banner.pagePath)}
+          className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  ))}
+
     </div>
   );
 };

@@ -32,10 +32,10 @@ const TreePlanting = () => {
             <PageBanner>
             </PageBanner>
 
-            <MotionDiv className="max-w-7xl mx-auto mt-10">
+            <MotionDiv className="mx-auto mt-10">
 
                 {/* content 1 */}
-                <MotionDiv className="max-w-5xl mx-auto mt-8 md:mt-16 p-6 md:p-8 bg-white dark:bg-gray-800 shadow-lg rounded-xl">
+                <MotionDiv className="max-w-5xl mx-auto mt-8 md:mt-16 p-6 md:p-8 bg-white dark:bg-gray-800 shadow-xl rounded-xl">
                     <MotionH2
                         text="Environmental Awareness & Community Action"
                         className="text-green-700 dark:text-green-400 mb-4"

@@ -22,9 +22,9 @@ console.log(blogs)
     <section className="px-4 py-6 ">
 <PageBanner></PageBanner>
       {/* HEADER */}
-      <MotionDiv className="my-4 text-center">
+      <MotionDiv className="mt-6 lg:mt-16 text-center">
         <MotionH1
-          className="text-3xl md:text-4xl font-bold text-green-800"
+          className="text-3xl md:text-4xl p-4 font-bold text-green-800"
           text="Our Blogs & Stories"
         />
       </MotionDiv>
