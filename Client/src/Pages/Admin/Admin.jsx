@@ -276,6 +276,7 @@ return (
         </div>
       )}
 
+{/* add team member */}
       {section === "team" && (
         <div className="border-2 border-black p-4 mb-6">
           <h2 className="font-bold mb-2">Add Team Member</h2>
@@ -291,6 +292,7 @@ return (
         </div>
       )}
 
+{/* add all banner  */}
       {section === "allbanner" && (
         <div className="border-2 border-black p-4 mb-6">
           <h2 className="font-bold mb-2">Add Banner</h2>
@@ -384,22 +386,81 @@ return (
     </div>
 ))}
 
-      {section === "team" &&
-        data.map(member => (
-          <div key={member._id} className="border-2 border-black p-4 mb-4">
-            <img src={member.img} className="w-24 mb-2" />
-            <input className="border-2 border-black p-1 w-full mb-2" defaultValue={member.designation}
-              onChange={(e) => setNewItem({ ...member, designation: e.target.value })} />
-            <button onClick={() => handleUpdate(member._id, { ...member })}
-              className="bg-blue-500 text-white px-3 py-1 mr-2">
-              Update
-            </button>
-            <button onClick={() => handleDelete(member._id)}
-              className="bg-red-500 text-white px-3 py-1">
-              Delete
-            </button>
-          </div>
-        ))}
+     {section === "team" &&
+  data.map(member => (
+    <div
+      key={member._id}
+      className="border-2 border-black p-4 mb-4 rounded-md shadow-sm flex gap-4"
+    >
+      {/* Image Preview */}
+      <div className="w-32 flex-shrink-0">
+        <img
+          src={member.img}
+          alt={member.alt}
+          className="w-32 h-32 object-cover rounded-md border"
+        />
+      </div>
+
+      {/* Form Fields */}
+      <div className="flex-1">
+
+        {/* Image URL */}
+        <div className="flex items-center mb-2">
+          <p className="w-32 font-semibold">Image URL:</p>
+          <input
+            className="border-2 border-black p-1 flex-1"
+            defaultValue={member.img}
+            onChange={(e) =>
+              setNewItem({ ...member, img: e.target.value })
+            }
+          />
+        </div>
+
+        {/* Alt Text / Name */}
+        <div className="flex items-center mb-2">
+          <p className="w-32 font-semibold">Alt Text:</p>
+          <input
+            className="border-2 border-black p-1 flex-1"
+            defaultValue={member.alt}
+            onChange={(e) =>
+              setNewItem({ ...member, alt: e.target.value })
+            }
+          />
+        </div>
+
+        {/* Designation */}
+        <div className="flex items-center mb-3">
+          <p className="w-32 font-semibold">Designation:</p>
+          <input
+            className="border-2 border-black p-1 flex-1"
+            defaultValue={member.designation}
+            onChange={(e) =>
+              setNewItem({ ...member, designation: e.target.value })
+            }
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-3">
+          <button
+            onClick={() => handleUpdate(member._id, newItem._id ? newItem : member)}
+            className="bg-blue-500 text-white px-4 py-1 rounded"
+          >
+            Update
+          </button>
+
+          <button
+            onClick={() => handleDelete(member._id)}
+            className="bg-red-500 text-white px-4 py-1 rounded"
+          >
+            Delete
+          </button>
+        </div>
+
+      </div>
+    </div>
+  ))}
+
 
       {section === "galleries" &&
         data?.map(gallery => (
