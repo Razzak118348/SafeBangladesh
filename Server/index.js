@@ -84,23 +84,36 @@ const result =await blogCollection.insertOne(blog);
 });
 
 // UPDATE blog
-app.put("/blogs/:id",async (req, res) => {
-const { id } = req.params;
-const updated = req.body;
+app.put("/blogs/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updated = req.body;
 
-const result =await blogCollection.updateOne(
-    {_id:newObjectId(id) },
-    {$set: updated }
-  );
+    const result = await blogCollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updated }
+    );
 
-  res.send(result);
+    res.send(result);
+  } catch (error) {
+    console.error("Update blog error:", error);
+    res.status(500).send({ message: "Failed to update blog", error: error.message });
+  }
 });
 
+
 // DELETE blog
-app.delete("/blogs/:id",async (req, res) => {
-const { id } = req.params;
-const result =await blogCollection.deleteOne({_id:newObjectId(id) });
-  res.send(result);
+app.delete("/blogs/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await blogCollection.deleteOne({ _id: new ObjectId(id) });
+
+    res.send(result);
+  } catch (error) {
+    console.error("Delete blog error:", error);
+    res.status(500).send({ message: "Failed to delete blog", error: error.message });
+  }
 });
 
 
