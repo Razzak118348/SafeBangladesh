@@ -41,156 +41,300 @@ const [galleryInputs,setGalleryInputs]= useState({})
 
 console.log(data)
   // ================= CREATE (POST) =================
- const handleCreate = async () => {
-  try {
-    let url = "";
-    if (section === "blogs") url = "/blogs";
-    if (section === "latestwork") url = "/latestwork";
-    if (section === "team") url = "/team";
-    if (section === "galleries") url = "/galleries";
-    if (section === "allbanner") url = "/allbanner";
+//  const handleCreate = async () => {
+//   try {
+//     let url = "";
+//     if (section === "blogs") url = "/blogs";
+//     if (section === "latestwork") url = "/latestwork";
+//     if (section === "team") url = "/team";
+//     if (section === "galleries") url = "/galleries";
+//     if (section === "allbanner") url = "/allbanner";
 
-    // POST request
-    await axios.post(baseURL + url, newItem);
+//     // POST request
+//     await axios.post(baseURL + url, newItem);
 
-    // Reset the form
-    setNewItem({});
+//     // Reset the form
+//     setNewItem({});
 
-    // Refetch data
-    fetchData();
+//     // Refetch data
+//     fetchData();
 
-    // Success alert
+//     // Success alert
+//     Swal.fire({
+//       icon: "success",
+//       title: "Created Successfully!",
+//       text: `New ${section} item has been added.`,
+//       timer: 2000,
+//       showConfirmButton: false,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     // Error alert
+//     Swal.fire({
+//       icon: "error",
+//       title: "Oops...",
+//       text: `Failed to create ${section} item!`,
+//     });
+//   }
+// };
+
+// // ================= UPDATE (PUT) =================
+// const handleUpdate = async (id, updatedData, category = null) => {
+//   try {
+//     let url = "";
+//     if (section === "blogs") url = `/blogs/${id}`;
+//     if (section === "latestwork") url = `/latestwork/${id}`;
+//     if (section === "team") url = `/team/${id}`;
+//     if (section === "galleries") url = `/galleries/${category}`;
+//     if (section === "allbanner") url = `/allbanner/${id}`; // id = pagePath
+
+//     await axios.put(baseURL + url, updatedData);
+//     fetchData();
+
+//     Swal.fire({
+//       icon: "success",
+//       title: "Updated Successfully!",
+//       text: `The ${section} item has been updated.`,
+//       timer: 2000,
+//       showConfirmButton: false,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     Swal.fire({
+//       icon: "error",
+//       title: "Oops...",
+//       text: `Failed to update ${section} item!`,
+//     });
+//   }
+// };
+
+// // ================= DELETE =================
+// const handleDelete = async (id, category = null) => {
+//   const result = await Swal.fire({
+//     title: "Are you sure?",
+//     text: `You won't be able to revert this ${section} item!`,
+//     icon: "warning",
+//     showCancelButton: true,
+//     confirmButtonColor: "#d33",
+//     cancelButtonColor: "#3085d6",
+//     confirmButtonText: "Yes, delete it!",
+//   });
+
+//   if (!result.isConfirmed) return;
+
+//   try {
+//     let url = "";
+//     if (section === "blogs") url = `/blogs/${id}`;
+//     if (section === "latestwork") url = `/latestwork/${id}`;
+//     if (section === "team") url = `/team/${id}`;
+//     if (section === "galleries") url = `/galleries/${category}`;
+//     if (section === "allbanner") url = `/allbanner/${id}`; // id = pagePath
+
+//     await axios.delete(baseURL + url);
+//     fetchData();
+
+//     Swal.fire({
+//       icon: "success",
+//       title: "Deleted Successfully!",
+//       text: `The ${section} item has been deleted.`,
+//       timer: 2000,
+//       showConfirmButton: false,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     Swal.fire({
+//       icon: "error",
+//       title: "Oops...",
+//       text: `Failed to delete ${section} item!`,
+//     });
+//   }
+// };
+
+// // ================= GALLERY IMAGE REMOVE =================
+// const removeGalleryImage = async (category, img) => {
+//   const result = await Swal.fire({
+//     title: "Remove this image?",
+//     text: "You won't be able to revert this action!",
+//     icon: "warning",
+//     showCancelButton: true,
+//     confirmButtonColor: "#d33",
+//     cancelButtonColor: "#3085d6",
+//     confirmButtonText: "Yes, remove it!",
+//   });
+
+//   if (!result.isConfirmed) return;
+
+//   const gallery = data.find(g => g.category === category);
+//   const updatedImages = gallery.images.filter(i => i !== img);
+//   await handleUpdate(null, { images: updatedImages }, category);
+
+//   Swal.fire({
+//     icon: "success",
+//     title: "Image Removed!",
+//     timer: 2000,
+//     showConfirmButton: false,
+//   });
+// };
+
+// // ================= GALLERY IMAGE ADD =================
+// const addGalleryImage = async (category, imageUrl) => {
+//   const gallery = data.find(g => g.category === category);
+//   const updatedImages = [...gallery.images, imageUrl];
+//   await handleUpdate(null, { images: updatedImages }, category);
+
+//   Swal.fire({
+//     icon: "success",
+//     title: "Image Added!",
+//     timer: 2000,
+//     showConfirmButton: false,
+//   });
+// };
+
+  const handleCreate = async () => {
+    try {
+      let url = "";
+      if (section === "blogs") url = "/blogs";
+      if (section === "latestwork") url = "/latestwork";
+      if (section === "team") url = "/team";
+      if (section === "galleries") url = "/galleries";
+      if (section === "allbanner") url = "/allbanner";
+
+      await axios.post(baseURL + url, newItem);
+      setNewItem({});
+      fetchData();
+
+      Swal.fire({
+        icon: "success",
+        title: "Created Successfully!",
+        text: `New ${section} item has been added.`,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Failed to create ${section} item!`,
+      });
+    }
+  };
+
+  // ================= UPDATE (PUT) =================
+  const handleUpdate = async (idOrCategory, updatedData, category = null) => {
+    try {
+      let url = "";
+
+      // Remove _id from updatedData before sending
+      const { _id, ...dataToUpdate } = updatedData;
+
+      if (section === "blogs") url = `/blogs/${idOrCategory}`;
+      if (section === "latestwork") url = `/latestwork/${idOrCategory}`;
+      if (section === "team") url = `/team/${idOrCategory}`;
+      if (section === "galleries") url = `/galleries/${idOrCategory}`;
+      if (section === "allbanner") url = `/allbanner/${idOrCategory}`;
+
+      await axios.put(baseURL + url, dataToUpdate);
+      fetchData();
+
+      Swal.fire({
+        icon: "success",
+        title: "Updated Successfully!",
+        text: `The ${section} item has been updated.`,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Failed to update ${section} item!`,
+      });
+    }
+  };
+
+  // ================= DELETE =================
+  const handleDelete = async (idOrCategory, category = null) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: `You won't be able to revert this ${section} item!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      let url = "";
+      if (section === "blogs") url = `/blogs/${idOrCategory}`;
+      if (section === "latestwork") url = `/latestwork/${idOrCategory}`;
+      if (section === "team") url = `/team/${idOrCategory}`;
+      if (section === "galleries") url = `/galleries/${idOrCategory}`;
+      if (section === "allbanner") url = `/allbanner/${idOrCategory}`;
+
+      await axios.delete(baseURL + url);
+      fetchData();
+
+      Swal.fire({
+        icon: "success",
+        title: "Deleted Successfully!",
+        text: `The ${section} item has been deleted.`,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `Failed to delete ${section} item!`,
+      });
+    }
+  };
+
+  // ================= GALLERY IMAGE REMOVE =================
+  const removeGalleryImage = async (category, img) => {
+    const result = await Swal.fire({
+      title: "Remove this image?",
+      text: "You won't be able to revert this action!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove it!",
+    });
+
+    if (!result.isConfirmed) return;
+
+    const gallery = data.find((g) => g.category === category);
+    const updatedImages = gallery.images.filter((i) => i !== img);
+    await handleUpdate(category, { images: updatedImages }, category);
+
     Swal.fire({
       icon: "success",
-      title: "Created Successfully!",
-      text: `New ${section} item has been added.`,
+      title: "Image Removed!",
       timer: 2000,
       showConfirmButton: false,
     });
-  } catch (error) {
-    console.error(error);
-    // Error alert
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: `Failed to create ${section} item!`,
-    });
-  }
-};
+  };
 
-// ================= UPDATE (PUT) =================
-const handleUpdate = async (id, updatedData, category = null) => {
-  try {
-    let url = "";
-    if (section === "blogs") url = `/blogs/${id}`;
-    if (section === "latestwork") url = `/latestwork/${id}`;
-    if (section === "team") url = `/team/${id}`;
-    if (section === "galleries") url = `/galleries/${category}`;
-    if (section === "allbanner") url = `/allbanner/${id}`; // id = pagePath
-
-    await axios.put(baseURL + url, updatedData);
-    fetchData();
+  // ================= GALLERY IMAGE ADD =================
+  const addGalleryImage = async (category, imageUrl) => {
+    const gallery = data.find((g) => g.category === category);
+    const updatedImages = [...gallery.images, imageUrl];
+    await handleUpdate(category, { images: updatedImages }, category);
 
     Swal.fire({
       icon: "success",
-      title: "Updated Successfully!",
-      text: `The ${section} item has been updated.`,
+      title: "Image Added!",
       timer: 2000,
       showConfirmButton: false,
     });
-  } catch (error) {
-    console.error(error);
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: `Failed to update ${section} item!`,
-    });
-  }
-};
-
-// ================= DELETE =================
-const handleDelete = async (id, category = null) => {
-  const result = await Swal.fire({
-    title: "Are you sure?",
-    text: `You won't be able to revert this ${section} item!`,
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#d33",
-    cancelButtonColor: "#3085d6",
-    confirmButtonText: "Yes, delete it!",
-  });
-
-  if (!result.isConfirmed) return;
-
-  try {
-    let url = "";
-    if (section === "blogs") url = `/blogs/${id}`;
-    if (section === "latestwork") url = `/latestwork/${id}`;
-    if (section === "team") url = `/team/${id}`;
-    if (section === "galleries") url = `/galleries/${category}`;
-    if (section === "allbanner") url = `/allbanner/${id}`; // id = pagePath
-
-    await axios.delete(baseURL + url);
-    fetchData();
-
-    Swal.fire({
-      icon: "success",
-      title: "Deleted Successfully!",
-      text: `The ${section} item has been deleted.`,
-      timer: 2000,
-      showConfirmButton: false,
-    });
-  } catch (error) {
-    console.error(error);
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: `Failed to delete ${section} item!`,
-    });
-  }
-};
-
-// ================= GALLERY IMAGE REMOVE =================
-const removeGalleryImage = async (category, img) => {
-  const result = await Swal.fire({
-    title: "Remove this image?",
-    text: "You won't be able to revert this action!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#d33",
-    cancelButtonColor: "#3085d6",
-    confirmButtonText: "Yes, remove it!",
-  });
-
-  if (!result.isConfirmed) return;
-
-  const gallery = data.find(g => g.category === category);
-  const updatedImages = gallery.images.filter(i => i !== img);
-  await handleUpdate(null, { images: updatedImages }, category);
-
-  Swal.fire({
-    icon: "success",
-    title: "Image Removed!",
-    timer: 2000,
-    showConfirmButton: false,
-  });
-};
-
-// ================= GALLERY IMAGE ADD =================
-const addGalleryImage = async (category, imageUrl) => {
-  const gallery = data.find(g => g.category === category);
-  const updatedImages = [...gallery.images, imageUrl];
-  await handleUpdate(null, { images: updatedImages }, category);
-
-  Swal.fire({
-    icon: "success",
-    title: "Image Added!",
-    timer: 2000,
-    showConfirmButton: false,
-  });
-};
-
-
+  };
 return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
@@ -309,94 +453,87 @@ return (
       )}
 
       {/* ================= READ / UPDATE / DELETE ================= */}
-{(section === "blogs" || section === "latestwork") &&
-  data.map(item => (
-    <div
-      key={item._id}
-      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
-    >
-      {/* Image Preview */}
-      <div className="w-48 flex-shrink-0">
-        <img
-          src={item.image || item.img}
-          alt={item.title}
-          className="w-full h-48 object-cover rounded-md border"
-        />
-      </div>
+ {(section === "blogs" || section === "latestwork") &&
+        data.map((item) => (
+          <div
+            key={item._id}
+            className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
+          >
+            {/* Image Preview */}
+            <div className="w-48 flex-shrink-0">
+              <img
+                src={item.image || item.img}
+                alt={item.title}
+                className="w-full h-48 object-cover rounded-md border"
+              />
+            </div>
 
-      {/* Form Area */}
-      <div className="flex-1">
-
-        {/* Title */}
-        <div className="flex items-center mb-3">
-          <p className="w-28 font-semibold">Title:</p>
-          <input
-            className="border-2 border-black p-2 flex-1 rounded"
-            defaultValue={item.title}
-            onChange={(e) =>
-              setNewItem({ ...item, title: e.target.value })
-            }
-          />
-        </div>
-
-        {/* Image URL */}
-        <div className="flex items-center mb-3">
-          <p className="w-28 font-semibold">Image URL:</p>
-          <input
-            className="border-2 border-black p-2 flex-1 rounded"
-            defaultValue={item.image || item.img}
-            onChange={(e) =>
-              setNewItem({ ...item, image: e.target.value })
-            }
-          />
-        </div>
-
-        {/* Description */}
-        <div className="flex items-start mb-3">
-          <p className="w-28 font-semibold pt-1">Description:</p>
-          <textarea
-            className="border-2 border-black p-2 flex-1 rounded min-h-[80px]"
-            defaultValue={item.description}
-            onChange={(e) =>
-              setNewItem({ ...item, description: e.target.value })
-            }
-          />
-        </div>
-
-        {/* Content (Blogs only) */}
-        {section === "blogs" && (
-          <div className="flex items-start mb-3">
-            <p className="w-28 font-semibold pt-1">Content:</p>
-            <textarea
-              className="border-2 border-black p-2 flex-1 rounded min-h-[120px]"
-              defaultValue={item.content}
-              onChange={(e) =>
-                setNewItem({ ...item, content: e.target.value })
-              }
-            />
+            {/* Form Area */}
+            <div className="flex-1">
+              {/* Title */}
+              <div className="flex items-center mb-3">
+                <p className="w-28 font-semibold">Title:</p>
+                <input
+                  className="border-2 border-black p-2 flex-1 rounded"
+                  defaultValue={item.title}
+                  onChange={(e) =>
+                    setNewItem({ ...item, title: e.target.value })
+                  }
+                />
+              </div>
+              {/* Image URL */}
+              <div className="flex items-center mb-3">
+                <p className="w-28 font-semibold">Image URL:</p>
+                <input
+                  className="border-2 border-black p-2 flex-1 rounded"
+                  defaultValue={item.image || item.img}
+                  onChange={(e) =>
+                    setNewItem({ ...item, image: e.target.value })
+                  }
+                />
+              </div>
+              {/* Description */}
+              <div className="flex items-start mb-3">
+                <p className="w-28 font-semibold pt-1">Description:</p>
+                <textarea
+                  className="border-2 border-black p-2 flex-1 rounded min-h-[80px]"
+                  defaultValue={item.description}
+                  onChange={(e) =>
+                    setNewItem({ ...item, description: e.target.value })
+                  }
+                />
+              </div>
+              {/* Content (Blogs only) */}
+              {section === "blogs" && (
+                <div className="flex items-start mb-3">
+                  <p className="w-28 font-semibold pt-1">Content:</p>
+                  <textarea
+                    className="border-2 border-black p-2 flex-1 rounded min-h-[120px]"
+                    defaultValue={item.content}
+                    onChange={(e) =>
+                      setNewItem({ ...item, content: e.target.value })
+                    }
+                  />
+                </div>
+              )}
+              {/* Buttons */}
+              <div className="flex gap-3 mt-3">
+                <button
+                  onClick={() => handleUpdate(item._id, { ...item, ...newItem })}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => handleDelete(item._id)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
-        )}
-
-        {/* Buttons */}
-        <div className="flex gap-3 mt-3">
-          <button
-            onClick={() => handleUpdate(item._id, newItem._id ? newItem : item)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
-          >
-            Update
-          </button>
-
-          <button
-            onClick={() => handleDelete(item._id)}
-            className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
-          >
-            Delete
-          </button>
-        </div>
-
-      </div>
-    </div>
-  ))}
+        ))}
 
     {section === "team" &&
   data.map(member => (
@@ -415,47 +552,42 @@ return (
 
       {/* Form Fields */}
       <div className="flex-1">
-
-        {/* Image URL */}
         <div className="flex items-center mb-2">
           <p className="w-32 font-semibold">Image URL:</p>
           <input
             className="border-2 border-black p-1 flex-1"
             defaultValue={member.img}
             onChange={(e) =>
-              setNewItem({ ...member, img: e.target.value })
+              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], img: e.target.value } }))
             }
           />
         </div>
 
-        {/* Alt Text / Name */}
         <div className="flex items-center mb-2">
           <p className="w-32 font-semibold">Alt Text:</p>
           <input
             className="border-2 border-black p-1 flex-1"
             defaultValue={member.alt}
             onChange={(e) =>
-              setNewItem({ ...member, alt: e.target.value })
+              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], alt: e.target.value } }))
             }
           />
         </div>
 
-        {/* Designation */}
         <div className="flex items-center mb-3">
           <p className="w-32 font-semibold">Designation:</p>
           <input
             className="border-2 border-black p-1 flex-1"
             defaultValue={member.designation}
             onChange={(e) =>
-              setNewItem({ ...member, designation: e.target.value })
+              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], designation: e.target.value } }))
             }
           />
         </div>
 
-        {/* Buttons */}
         <div className="flex gap-3">
           <button
-            onClick={() => handleUpdate(member._id, newItem._id ? newItem : member)}
+            onClick={() => handleUpdate(member._id, newItem[member._id] || member)}
             className="bg-blue-500 text-white px-4 py-1 rounded"
           >
             Update
@@ -468,18 +600,17 @@ return (
             Delete
           </button>
         </div>
-
       </div>
     </div>
   ))}
 
-      {section === "galleries" &&
+{/* //galleries */}
+{section === "galleries" &&
   data?.map(gallery => (
     <div
       key={gallery._id}
       className="bg-white border border-gray-200 rounded-xl shadow-lg p-5 mb-8"
     >
-      {/* ===== Header ===== */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
         <div>
           <h2 className="text-xl font-bold text-gray-800">{gallery.title}</h2>
@@ -491,42 +622,38 @@ return (
           </p>
         </div>
 
-        {/* ===== Add Image Input ===== */}
         <div className="flex gap-2 w-full md:w-1/2">
-
           <input
-    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-    placeholder="Paste image URL"
-    value={galleryInputs[gallery.category] || ""}
-    onChange={(e) =>
-      setGalleryInputs({
-        ...galleryInputs,
-        [gallery.category]: e.target.value,
-      })
-    }
-  />
+            className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            placeholder="Paste image URL"
+            value={galleryInputs[gallery.category] || ""}
+            onChange={(e) =>
+              setGalleryInputs({
+                ...galleryInputs,
+                [gallery.category]: e.target.value,
+              })
+            }
+          />
 
-  <button
-    onClick={() => {
-      const url = galleryInputs[gallery.category];
-      if (!url || !url.trim()) return;
+          <button
+            onClick={() => {
+              const url = galleryInputs[gallery.category];
+              if (!url || !url.trim()) return;
 
-      addGalleryImage(gallery.category, url);
+              addGalleryImage(gallery.category, url);
 
-      // clear input after add
-      setGalleryInputs({
-        ...galleryInputs,
-        [gallery.category]: "",
-      });
-    }}
-    className="bg-green-600 hover:bg-green-700 text-white px-4 rounded-lg"
-  >
-  Add Image
-  </button>
+              setGalleryInputs({
+                ...galleryInputs,
+                [gallery.category]: "",
+              });
+            }}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 rounded-lg"
+          >
+            Add Image
+          </button>
         </div>
       </div>
 
-      {/* ===== Image Grid ===== */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {gallery?.images?.map((img, index) => (
           <div
@@ -539,7 +666,6 @@ return (
               className="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105"
             />
 
-            {/* ===== Overlay ===== */}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
               <button
                 onClick={() => removeGalleryImage(gallery.category, img)}
@@ -555,20 +681,19 @@ return (
   ))}
 
 
-    {section === "allbanner" &&
+{/* //allbanner */}
+  {section === "allbanner" &&
   data.map((banner) => (
     <div
       key={banner._id}
       className="bg-white border border-gray-400 rounded-xl shadow-lg p-5 mb-6"
     >
-      {/* ===== Header ===== */}
       <div className="mb-4">
         <h2 className="text-lg font-bold text-gray-800">
-         Frontend Page path: <span className="text-green-700">{banner.pagePath}</span>
+          Frontend Page path: <span className="text-green-700">{banner.pagePath}</span>
         </h2>
       </div>
 
-      {/* ===== Image Preview ===== */}
       {banner.backgroundImage && (
         <img
           src={banner.backgroundImage}
@@ -577,46 +702,42 @@ return (
         />
       )}
 
-      {/* ===== Title ===== */}
       <div className="flex items-center gap-3 mb-3">
         <p className="w-32 font-semibold">Title:</p>
         <input
           className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
           defaultValue={banner.title}
           onChange={(e) =>
-            setNewItem({ ...banner, title: e.target.value })
+            setNewItem(prev => ({ ...prev, [banner.pagePath]: { ...prev[banner.pagePath], title: e.target.value } }))
           }
         />
       </div>
 
-      {/* ===== Background Image ===== */}
       <div className="flex items-center gap-3 mb-3">
         <p className="w-32 font-semibold">Image URL:</p>
         <input
           className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
           defaultValue={banner.backgroundImage}
           onChange={(e) =>
-            setNewItem({ ...banner, backgroundImage: e.target.value })
+            setNewItem(prev => ({ ...prev, [banner.pagePath]: { ...prev[banner.pagePath], backgroundImage: e.target.value } }))
           }
         />
       </div>
 
-      {/* ===== Alt Text ===== */}
       <div className="flex items-center gap-3 mb-4">
         <p className="w-32 font-semibold">Alt Text:</p>
         <input
           className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
           defaultValue={banner.altText}
           onChange={(e) =>
-            setNewItem({ ...banner, altText: e.target.value })
+            setNewItem(prev => ({ ...prev, [banner.pagePath]: { ...prev[banner.pagePath], altText: e.target.value } }))
           }
         />
       </div>
 
-      {/* ===== Action Buttons ===== */}
       <div className="flex gap-3">
         <button
-          onClick={() => handleUpdate(banner.pagePath, { ...banner })}
+          onClick={() => handleUpdate(banner.pagePath, newItem[banner.pagePath] || banner)}
           className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
         >
           Update
@@ -631,6 +752,7 @@ return (
       </div>
     </div>
   ))}
+
 
     </div>
   );
