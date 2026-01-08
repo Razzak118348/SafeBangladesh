@@ -83,14 +83,17 @@ const {user,LogOut}=useAuth();
     <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-50">
       <div className=" mx-auto px-4 py-3 flex items-center justify-between">
 
-        {/* Logo */}
+       <div className="flex justify-start">
+         {/* Logo */}
+        <img src="/images/NBSLogo.png" alt="logo" className="w-6 h-6 md:w-10 md:h-10 rounded-full"/>
         <NavLink
           to="/"
-          className="text-xl font-bold bg-gradient-to-r from-[#3e5a41] via-[#428576] to-[#223d26]
+          className="text-lg md:text-xl font-bold bg-gradient-to-r from-[#3e5a41] via-[#428576] to-[#223d26]
           text-transparent bg-clip-text dark:text-white"
         >
           Nirapod Bangladesh Songstha
         </NavLink>
+       </div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
