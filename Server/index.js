@@ -76,6 +76,36 @@ app.get("/blogs/:id", async (req, res) => {
       }
 });
 
+// CREATE blog
+app.post("/blogs",async (req, res) => {
+const blog = req.body;
+const result =await blogCollection.insertOne(blog);
+  res.send(result);
+});
+
+// UPDATE blog
+app.put("/blogs/:id",async (req, res) => {
+const { id } = req.params;
+const updated = req.body;
+
+const result =await blogCollection.updateOne(
+    {_id:newObjectId(id) },
+    {$set: updated }
+  );
+
+  res.send(result);
+});
+
+// DELETE blog
+app.delete("/blogs/:id",async (req, res) => {
+const { id } = req.params;
+const result =await blogCollection.deleteOne({_id:newObjectId(id) });
+  res.send(result);
+});
+
+
+
+
     // GET all latest works
 app.get("/latestwork", async (req, res) => {
   try {
@@ -107,7 +137,7 @@ app.get("/allbanner",async(req,res)=>{
   }
 })
 
-//banner by pagepath for individual page
+//banner by=> pagepath for individual page
 app.get("/banner", async (req, res) => {
   try {
     const { pagePath } = req.query;
