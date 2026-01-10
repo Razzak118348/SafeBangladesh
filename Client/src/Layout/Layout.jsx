@@ -26,7 +26,7 @@ const Layout = () => {
       {/* Main Content */}
       <main
         className="
-        pt-16 lg:pt-12 mx-auto
+        pt-16 lg:pt-20 mx-auto
     w-full
     min-h-[calc(100vh-250px)]
     px-4 sm:px-6 md:px-8 lg:px-10

@@ -79,10 +79,10 @@ We facilitate the creation of saving groups by providing willing communities wit
           transition-all duration-500
         ">
                                     <h3 className="text-white text-sm md:text-base font-semibold">
-                                        Demonstration house {index + 1}
+                                    Savings Group image {index + 1}
                                     </h3>
                                     <p className="text-gray-200 text-xs mt-1">
-                                        Make a reliable and comfort house
+                                        Make a trustable savings
                                     </p>
                                 </div>
                             </MotionDiv>
