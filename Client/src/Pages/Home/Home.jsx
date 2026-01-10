@@ -35,12 +35,12 @@ const itemVariants = {
 const Home = () => {
 
   return (
-    <div className="w-full">
+    <div className="">
       {/* Slider */}
       <Slider />
 
       {/* content Section */}
-<div className="container">
+<div className="">
 <HomeContent></HomeContent>
 <LatestWork></LatestWork>
 <Gallery></Gallery>

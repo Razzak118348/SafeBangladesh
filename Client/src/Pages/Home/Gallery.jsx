@@ -50,7 +50,8 @@ const Gallery = () => {
               <img
                 src={img.src}
                 alt={img.alt}
-                className="h-56 md:h-72 w-full object-cover object-center"
+                className="h-56 md:h-72 w-full object-cover object-center
+            transition-transform duration-700 hover:scale-110"
               />
             </MotionDiv>
           ))}
