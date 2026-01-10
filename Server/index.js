@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ['http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app'],
+  origin: ['http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app','https://www.nirapodbangladesh.org/', "https://safe-bangladesh-nms8kw884-abdur-razzaks-projects.vercel.app/","https://safe-bangladesh-git-main-abdur-razzaks-projects.vercel.app/","https://www.nirapodbangladesh.org"],
   credentials: true
 }));
 app.use(express.json());
