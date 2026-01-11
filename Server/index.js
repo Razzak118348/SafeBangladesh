@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ['http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app','https://www.nirapodbangladesh.org/', "https://safe-bangladesh-nms8kw884-abdur-razzaks-projects.vercel.app/","https://safe-bangladesh-git-main-abdur-razzaks-projects.vercel.app/","https://www.nirapodbangladesh.org"],
+  origin: ['http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app','https://www.nirapodbangladesh.org/',"https://www.nirapodbangladesh.org"],
   credentials: true
 }));
 app.use(express.json());
@@ -116,9 +116,6 @@ app.delete("/blogs/:id", async (req, res) => {
   }
 });
 
-
-
-
     // GET all latest works
 app.get("/latestwork", async (req, res) => {
   try {
@@ -138,6 +135,45 @@ app.get("/latestwork/:id", async (req, res) => {
         res.status(400).send({ message: "Invalid work ID", error: err.message });
       }
 });
+
+//Create single work
+app.post("/latestwork",async (req, res) => {
+  const work =req.body;
+const result =await latestWorkCollection.insertOne(work);
+  res.send(result);
+});
+
+//update single work
+app.put("/latestwork/:id",async (req, res) => {
+try{
+  const { id } = req.params;
+const updated =req.body;
+const result =await
+latestWorkCollection.updateOne(
+    {_id:new ObjectId(id) },
+    {$set: updated }
+  );
+  res.send(result);
+}
+catch (error) {
+    console.error("Update latest work error:", error);
+    res.status(500).send({ message: "Failed to update latest work", error: error.message });
+  }
+});
+
+//delete single work
+app.delete("/latestwork/:id",async (req, res) => {
+try{
+  const { id } = req.params;
+const result =await latestWorkCollection.deleteOne({
+_id: new ObjectId(id),
+  });
+  res.send(result);
+}catch (error) {
+    console.error("Delete latest work error:", error);
+    res.status(500).send({ message: "Failed to delete latest work", error: error.message });}
+});
+
 
 //all banner for admin page
 app.get("/allbanner",async(req,res)=>{
