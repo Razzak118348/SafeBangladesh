@@ -12,6 +12,7 @@ import {
 import app from "../Firebase/firebase.config.js";
 import { useEffect, useState, createContext } from "react";
 import axios from "axios";
+import useBanner from "../hooks/useBanner.js";
 
 //this is auth context for export auth context api
 export const AuthContext = createContext(null);
@@ -42,8 +43,8 @@ const ContextApi = ({ children }) => {
   };
 
   //forgate password
-  const forgatePassword=(email)=>{
-  return sendPasswordResetEmail(auth,email).then(()=>{
+  const forgatePassword= async(email)=>{
+  return await sendPasswordResetEmail(auth,email).then(()=>{
       // password reset email sent
     })
    .catch((error) => {
@@ -100,7 +101,8 @@ const ContextApi = ({ children }) => {
     loading,
     setLoading,
     googleLogin,
-    allService
+    allService,
+
   };
 
   return (

@@ -2,19 +2,41 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../utils/color.css"
+import Loading from "../Loading/Loading";
 
 const Slider = () => {
-  const [slides, setSlides] = useState([]);
+  // const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animate, setAnimate] = useState(true);
   const intervalRef = useRef(null);
 
-  useEffect(() => {
-    axios
-      .get("/sliderData.json")
-      .then((res) => setSlides(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/sliderData.json")
+  //     .then((res) => setSlides(res.data))
+  //     .catch((err) => console.error(err));
+  // }, []);
+
+  const slides=[
+  {
+    title: "Your House will be the best quality",
+    desc: "Providing quality house for your little Family and worth ",
+    img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/News_%26_Blogs/News/AMH_1802.JPG",
+    path:"/aboutus/background"
+  },
+  {
+    title: "Initiative house with bamboo",
+    desc: "Building sustainable homes for a greener tomorrow.",
+    img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/20190203_171813.jpg",
+    path:"/"
+  },
+  {
+    title: "Keep your house safe with Nirapod Bangladesh",
+    desc: "Ensuring safety and security for your loved ones.",
+    img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Workshop/WorkshopDay-124.jpg",
+    path:"/activities/workshops"
+  }
+]
 
   useEffect(() => {
     if (!slides.length) return;
@@ -32,7 +54,9 @@ const Slider = () => {
 
   if (!slides.length) return null;
 
-  const { title, desc, img } = slides[currentIndex];
+  const { title, desc, img,path } = slides[currentIndex];
+
+  if (!slides.length) return <Loading></Loading>;
 
   return (
     <section className="relative w-full h-[360px] md:h-[520px] overflow-hidden mt-0 md:mt-3 rounded-lg">
@@ -64,7 +88,7 @@ const Slider = () => {
             {desc}
           </p>
 
-          <Link to="" className="inline-block mt-8">
+          <Link to={path} className="inline-block mt-8">
             <button className="px-7 py-3 rounded-md bg-[#3d6542] hover:bg-[#3f7d48] active:scale-95 transition-all shadow-lg">
               Read More →
             </button>

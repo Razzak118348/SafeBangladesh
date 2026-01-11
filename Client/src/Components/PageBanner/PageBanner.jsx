@@ -1,3 +1,4 @@
+import useAuth from "../../hooks/useAuth";
 import useBanner from "../../hooks/useBanner";
 import { MotionH1 } from "../../utils/MotionElements";
 import Banner from "../Banner/Banner";
@@ -5,7 +6,7 @@ import Loading from "../Loading/Loading";
 
 
 const PageBanner = () => {
-    const { banner, loading } = useBanner();
+    const {banner, loading } = useBanner();
 console.log(banner)
     return (
         <div className="relative w-full">
