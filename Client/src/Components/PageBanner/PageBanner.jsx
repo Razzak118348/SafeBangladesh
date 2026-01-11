@@ -1,4 +1,3 @@
-import useAuth from "../../hooks/useAuth";
 import useBanner from "../../hooks/useBanner";
 import { MotionH1 } from "../../utils/MotionElements";
 import Banner from "../Banner/Banner";

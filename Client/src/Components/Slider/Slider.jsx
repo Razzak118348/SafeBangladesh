@@ -28,7 +28,7 @@ const Slider = () => {
     title: "Initiative house with bamboo",
     desc: "Building sustainable homes for a greener tomorrow.",
     img: "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/SAFE_Materials/20190203_171813.jpg",
-    path:"/"
+    path:"/activities/safe-materials"
   },
   {
     title: "Keep your house safe with Nirapod Bangladesh",
