@@ -52,7 +52,7 @@ const [galleryInputs,setGalleryInputs]= useState({})
       if (section === "galleries") url = "/galleries";
       if (section === "allbanner") url = "/allbanner";
 
-      await axios.post(baseURL + url, newItem);
+      await axios.post(baseURL + url, newItem,{ withCredentials: true });
       setNewItem({});
       fetchData();
 
@@ -87,7 +87,7 @@ const [galleryInputs,setGalleryInputs]= useState({})
       if (section === "galleries") url = `/galleries/${idOrCategory}`;
       if (section === "allbanner") url = `/allbanner/${idOrCategory}`;
 
-      await axios.put(baseURL + url, dataToUpdate);
+      await axios.put(baseURL + url, dataToUpdate,{ withCredentials: true });
       fetchData();
 
       Swal.fire({
@@ -129,7 +129,7 @@ const [galleryInputs,setGalleryInputs]= useState({})
       if (section === "galleries") url = `/galleries/${idOrCategory}`;
       if (section === "allbanner") url = `/allbanner/${idOrCategory}`;
 
-      await axios.delete(baseURL + url);
+      await axios.delete(baseURL + url,{ withCredentials: true });
       fetchData();
 
       Swal.fire({
@@ -167,6 +167,7 @@ const removeGalleryImage = async (category, img) => {
   try {
     await axios.delete(`${baseURL}/galleries/${category}/images`, {
       data: { imageUrl: img },
+        withCredentials: true,
     });
 
     Swal.fire({
@@ -194,9 +195,8 @@ const addGalleryImage = async (category, imageUrl) => {
   if (!imageUrl || !imageUrl.trim()) return;
 
   try {
-    await axios.post(`${baseURL}/galleries/${category}/images`, {
-      imageUrl,
-    });
+    await axios.post(`${baseURL}/galleries/${category}/images`,{imageUrl,},
+{ withCredentials: true });
 
     Swal.fire({
       icon: "success",
@@ -332,88 +332,158 @@ return (
       )}
 
       {/* ================= READ / UPDATE / DELETE ================= */}
- {(section === "blogs" || section === "latestwork") &&
-        data.map((item) => (
-          <div
-            key={item._id}
-            className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
+{/* Blogs Section */}
+{section === "blogs" &&
+  data.map((item) => (
+    <div
+      key={item._id}
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
+    >
+      {/* Image Preview */}
+      <div className="w-48 flex-shrink-0">
+        <img
+          src={item.image || item.img}
+          alt={item.title}
+          className="w-full h-48 object-cover rounded-md border"
+        />
+      </div>
+
+      {/* Form Area */}
+      <div className="flex-1">
+        {/* Title */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Title:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={item.title}
+            onChange={(e) =>
+              setNewItem({ ...item, title: e.target.value })
+            }
+          />
+        </div>
+        {/* Image URL */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Image URL:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={item.image || item.img}
+            onChange={(e) =>
+              setNewItem({ ...item, image: e.target.value })
+            }
+          />
+        </div>
+        {/* Description */}
+        <div className="flex items-start mb-3">
+          <p className="w-28 font-semibold pt-1">Description:</p>
+          <textarea
+            className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
+            defaultValue={item.description}
+            onChange={(e) =>
+              setNewItem({ ...item, description: e.target.value })
+            }
+          />
+        </div>
+        {/* Content */}
+        <div className="flex items-start mb-3">
+          <p className="w-28 font-semibold pt-1">Content:</p>
+          <textarea
+            className="border-2 border-gray-400  p-2 flex-1 rounded min-h-[120px]"
+            defaultValue={item.content}
+            onChange={(e) =>
+              setNewItem({ ...item, content: e.target.value })
+            }
+          />
+        </div>
+        {/* Buttons */}
+        <div className="flex gap-3 mt-3">
+          <button
+            onClick={() => handleUpdate(item._id, { ...item, ...newItem }, "blogs")}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
           >
-            {/* Image Preview */}
-            <div className="w-48 flex-shrink-0">
-              <img
-                src={item.image || item.img}
-                alt={item.title}
-                className="w-full h-48 object-cover rounded-md border"
-              />
-            </div>
+            Update
+          </button>
+          <button
+            onClick={() => handleDelete(item._id, "blogs")}
+            className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
 
-            {/* Form Area */}
-            <div className="flex-1">
-              {/* Title */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Title:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={item.title}
-                  onChange={(e) =>
-                    setNewItem({ ...item, title: e.target.value })
-                  }
-                />
-              </div>
-              {/* Image URL */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Image URL:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={item.image || item.img}
-                  onChange={(e) =>
-                    setNewItem({ ...item, image: e.target.value })
-                  }
-                />
-              </div>
-              {/* Description */}
-              <div className="flex items-start mb-3">
-                <p className="w-28 font-semibold pt-1">Description:</p>
-                <textarea
-                  className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
-                  defaultValue={item.description}
-                  onChange={(e) =>
-                    setNewItem({ ...item, description: e.target.value })
-                  }
-                />
-              </div>
-              {/* Content (Blogs only) */}
-              {section === "blogs" && (
-                <div className="flex items-start mb-3">
-                  <p className="w-28 font-semibold pt-1">Content:</p>
-                  <textarea
-                    className="border-2 border-gray-400  p-2 flex-1 rounded min-h-[120px]"
-                    defaultValue={item.content}
-                    onChange={(e) =>
-                      setNewItem({ ...item, content: e.target.value })
-                    }
-                  />
-                </div>
-              )}
-              {/* Buttons */}
-              <div className="flex gap-3 mt-3">
-                <button
-                  onClick={() => handleUpdate(item._id, { ...item, ...newItem })}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => handleDelete(item._id)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+{/* Latest Work Section */}
+{section === "latestwork" &&
+  data.map((item) => (
+    <div
+      key={item._id}
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
+    >
+      {/* Image Preview */}
+      <div className="w-48 flex-shrink-0">
+        <img
+          src={item.image || item.img}
+          alt={item.title}
+          className="w-full h-48 object-cover rounded-md border"
+        />
+      </div>
 
+      {/* Form Area */}
+      <div className="flex-1">
+        {/* Title */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Title:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={item.title}
+            onChange={(e) =>
+              setNewItem({ ...item, title: e.target.value })
+            }
+          />
+        </div>
+        {/* Image URL */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Image URL:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={item.image || item.img}
+            onChange={(e) =>
+              setNewItem({ ...item, image: e.target.value })
+            }
+          />
+        </div>
+        {/* Description */}
+        <div className="flex items-start mb-3">
+          <p className="w-28 font-semibold pt-1">Description:</p>
+          <textarea
+            className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
+            defaultValue={item.description}
+            onChange={(e) =>
+              setNewItem({ ...item, description: e.target.value })
+            }
+          />
+        </div>
+        {/* Buttons */}
+        <div className="flex gap-3 mt-3">
+          <button
+            onClick={() => handleUpdate(item._id, { ...item, ...newItem }, "latestwork")}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
+          >
+            Update
+          </button>
+          <button
+            onClick={() => handleDelete(item._id, "latestwork")}
+            className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+
+{/* //team section */}
     {section === "team" &&
   data.map(member => (
     <div
