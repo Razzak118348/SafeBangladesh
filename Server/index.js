@@ -177,6 +177,7 @@ _id: new ObjectId(id),
 });
 //--------------Latest work API end ---------------
 
+
 //------------------banner API start -------------
 //all banner for admin page
 app.get("/allbanner",async(req,res)=>{
@@ -202,9 +203,45 @@ app.get("/banner", async (req, res) => {
   }
 });
 
+// POST: Add a single banner
+app.post("/allbanner", async (req, res) => {
+  try {
+    const result = await bannerCollection.insertOne(req.body);
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: "Failed to add banner", error });
+  }
+});
+
+// PUT: Update a banner by _id
+app.put("/allbanner/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await bannerCollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: req.body }
+    );
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: "Failed to update banner", error });
+  }
+});
+
+// DELETE: Delete a banner by _id
+app.delete("/allbanner/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await bannerCollection.deleteOne({ _id: new ObjectId(id) });
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: "Failed to delete banner", error });
+  }
+});
+
 //---------------banner API end -----------
 
-///-----------Gallery API start -------------
+
+///--------------Gallery API start -------------
 //all gallery data for admin page
 app.get("/galleries", async (req, res) => {
   try {
@@ -232,6 +269,7 @@ app.get("/galleries/:category", async (req, res) => {
   }
 });
 //---------------Gallery API end ----------------
+
 
 //-----------------Team API start ------------
 //get all team member for normal and admin page
@@ -266,6 +304,9 @@ _id: new ObjectId(id),
   });
   res.send(result);
 });
+//-----------------Team API end ------------
+
+
 
 
 app.get('/',(req,res)=>{
