@@ -40,156 +40,8 @@ const [galleryInputs,setGalleryInputs]= useState({})
   setLoading(false);
 };
 
-console.log(data)
-  // ================= CREATE (POST) =================
-//  const handleCreate = async () => {
-//   try {
-//     let url = "";
-//     if (section === "blogs") url = "/blogs";
-//     if (section === "latestwork") url = "/latestwork";
-//     if (section === "team") url = "/team";
-//     if (section === "galleries") url = "/galleries";
-//     if (section === "allbanner") url = "/allbanner";
+// console.log(data)
 
-//     // POST request
-//     await axios.post(baseURL + url, newItem);
-
-//     // Reset the form
-//     setNewItem({});
-
-//     // Refetch data
-//     fetchData();
-
-//     // Success alert
-//     Swal.fire({
-//       icon: "success",
-//       title: "Created Successfully!",
-//       text: `New ${section} item has been added.`,
-//       timer: 2000,
-//       showConfirmButton: false,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     // Error alert
-//     Swal.fire({
-//       icon: "error",
-//       title: "Oops...",
-//       text: `Failed to create ${section} item!`,
-//     });
-//   }
-// };
-
-// // ================= UPDATE (PUT) =================
-// const handleUpdate = async (id, updatedData, category = null) => {
-//   try {
-//     let url = "";
-//     if (section === "blogs") url = `/blogs/${id}`;
-//     if (section === "latestwork") url = `/latestwork/${id}`;
-//     if (section === "team") url = `/team/${id}`;
-//     if (section === "galleries") url = `/galleries/${category}`;
-//     if (section === "allbanner") url = `/allbanner/${id}`; // id = pagePath
-
-//     await axios.put(baseURL + url, updatedData);
-//     fetchData();
-
-//     Swal.fire({
-//       icon: "success",
-//       title: "Updated Successfully!",
-//       text: `The ${section} item has been updated.`,
-//       timer: 2000,
-//       showConfirmButton: false,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     Swal.fire({
-//       icon: "error",
-//       title: "Oops...",
-//       text: `Failed to update ${section} item!`,
-//     });
-//   }
-// };
-
-// // ================= DELETE =================
-// const handleDelete = async (id, category = null) => {
-//   const result = await Swal.fire({
-//     title: "Are you sure?",
-//     text: `You won't be able to revert this ${section} item!`,
-//     icon: "warning",
-//     showCancelButton: true,
-//     confirmButtonColor: "#d33",
-//     cancelButtonColor: "#3085d6",
-//     confirmButtonText: "Yes, delete it!",
-//   });
-
-//   if (!result.isConfirmed) return;
-
-//   try {
-//     let url = "";
-//     if (section === "blogs") url = `/blogs/${id}`;
-//     if (section === "latestwork") url = `/latestwork/${id}`;
-//     if (section === "team") url = `/team/${id}`;
-//     if (section === "galleries") url = `/galleries/${category}`;
-//     if (section === "allbanner") url = `/allbanner/${id}`; // id = pagePath
-
-//     await axios.delete(baseURL + url);
-//     fetchData();
-
-//     Swal.fire({
-//       icon: "success",
-//       title: "Deleted Successfully!",
-//       text: `The ${section} item has been deleted.`,
-//       timer: 2000,
-//       showConfirmButton: false,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     Swal.fire({
-//       icon: "error",
-//       title: "Oops...",
-//       text: `Failed to delete ${section} item!`,
-//     });
-//   }
-// };
-
-// // ================= GALLERY IMAGE REMOVE =================
-// const removeGalleryImage = async (category, img) => {
-//   const result = await Swal.fire({
-//     title: "Remove this image?",
-//     text: "You won't be able to revert this action!",
-//     icon: "warning",
-//     showCancelButton: true,
-//     confirmButtonColor: "#d33",
-//     cancelButtonColor: "#3085d6",
-//     confirmButtonText: "Yes, remove it!",
-//   });
-
-//   if (!result.isConfirmed) return;
-
-//   const gallery = data.find(g => g.category === category);
-//   const updatedImages = gallery.images.filter(i => i !== img);
-//   await handleUpdate(null, { images: updatedImages }, category);
-
-//   Swal.fire({
-//     icon: "success",
-//     title: "Image Removed!",
-//     timer: 2000,
-//     showConfirmButton: false,
-//   });
-// };
-
-// // ================= GALLERY IMAGE ADD =================
-// const addGalleryImage = async (category, imageUrl) => {
-//   const gallery = data.find(g => g.category === category);
-//   const updatedImages = [...gallery.images, imageUrl];
-//   await handleUpdate(null, { images: updatedImages }, category);
-
-//   Swal.fire({
-//     icon: "success",
-//     title: "Image Added!",
-//     timer: 2000,
-//     showConfirmButton: false,
-//   });
-// };
 
   const handleCreate = async () => {
     try {
@@ -298,45 +150,70 @@ console.log(data)
   };
 
   // ================= GALLERY IMAGE REMOVE =================
-  const removeGalleryImage = async (category, img) => {
-    const result = await Swal.fire({
-      title: "Remove this image?",
-      text: "You won't be able to revert this action!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, remove it!",
+//new
+const removeGalleryImage = async (category, img) => {
+  const result = await Swal.fire({
+    title: "Remove this image?",
+    text: "You won't be able to revert this action!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, remove it!",
+  });
+
+  if (!result.isConfirmed) return;
+
+  try {
+    await axios.delete(`${baseURL}/galleries/${category}/images`, {
+      data: { imageUrl: img },
     });
-
-    if (!result.isConfirmed) return;
-
-    const gallery = data.find((g) => g.category === category);
-    const updatedImages = gallery.images.filter((i) => i !== img);
-    await handleUpdate(category, { images: updatedImages }, category);
 
     Swal.fire({
       icon: "success",
       title: "Image Removed!",
-      timer: 2000,
+      timer: 1500,
       showConfirmButton: false,
     });
-  };
+
+    fetchData(); // refresh gallery
+  } catch (error) {
+    console.error(error);
+    Swal.fire({
+      icon: "error",
+      title: "Failed to remove image",
+    });
+  }
+};
+
+
 
   // ================= GALLERY IMAGE ADD =================
-  const addGalleryImage = async (category, imageUrl) => {
-    const gallery = data.find((g) => g.category === category);
-    const updatedImages = [...gallery.images, imageUrl];
-    await handleUpdate(category, { images: updatedImages }, category);
+
+const addGalleryImage = async (category, imageUrl) => {
+  if (!imageUrl || !imageUrl.trim()) return;
+
+  try {
+    await axios.post(`${baseURL}/galleries/${category}/images`, {
+      imageUrl,
+    });
 
     Swal.fire({
       icon: "success",
       title: "Image Added!",
-      timer: 2000,
+      timer: 1500,
       showConfirmButton: false,
     });
-  };
 
+    fetchData(); // refresh gallery
+  } catch (error) {
+    console.error(error);
+    Swal.fire({
+      icon: "error",
+      title: "Failed to add image",
+    });
+  }
+};
 return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
@@ -769,7 +646,6 @@ return (
       </div>
     </div>
   ))}
-
 
 
     </div>

@@ -8,7 +8,7 @@ import Loading from "../Loading/Loading";
 
 const PageBanner = () => {
     const {banner, bannerLoading } =useAuth();
-console.log(banner)
+// console.log(banner)
 const location = useLocation()
   const currentBanner = banner.find(
     b => b.pagePath === location.pathname

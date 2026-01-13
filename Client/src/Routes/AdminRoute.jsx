@@ -8,7 +8,7 @@ const AdminRoute = ({ children }) => {
 
   const adminEmails = [
     "abdurrazzak118348@gmail.com",
-"alfat422@gmail.com",
+"jahinkabir2024@gmail.com","info@nirapodbangladesh.org"
   ];
 
   if (loading) {

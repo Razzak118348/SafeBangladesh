@@ -11,7 +11,7 @@ import {
 import app from "../Firebase/firebase.config.js";
 import { useEffect, useState, createContext } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 //this is auth context for export auth context api
 export const AuthContext = createContext(null);
 
@@ -37,6 +37,7 @@ const ContextApi = ({ children }) => {
         console.error("Banner load error:", err);
         setBannerLoading(false);
       });
+
   }, []);
 
 
@@ -76,24 +77,38 @@ const ContextApi = ({ children }) => {
   };
 
   // observer
-  useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser);
+useEffect(() => {
+  const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    setUser(currentUser);
 
-      // if(currentUser?.email){
-      //   const userData={email:currentUser.email}
-      //   //give backend link
-      //   axios.post("https//:localhost backend ",userData)
-      //   .then(res=>{
-      //     console.log('token after jwt',res.data)
+    if (currentUser?.email) {
+      // POST to backend to generate JWT and set it as HTTP-only cookie
+      await axios.post(
+        "http://localhost:5000/jwt",
+        { email: currentUser.email },
+        { withCredentials: true }
+      );
+    } else {
+      // Optional: clear cookie if logged out
+      await axios.post("http://localhost:5000/logout", {}, { withCredentials: true });
+    }
 
-      //   })
-      //   .catch(err=>console.error(err))
-      // }
-      setLoading(false);
-    });
-    return () => unSubscribe();
-  }, []);
+    setLoading(false);
+
+    // Manually set auto logout (e.g., 12 hours)
+    const timeout = 5 * 60 * 1000; // 12 hours in ms
+    const logoutTimer = setTimeout(async () => {
+      await LogOut(); // firebase logout
+      await axios.post("http://localhost:5000/logout", {}, { withCredentials: true }); // clear cookie
+      setUser(null);
+    }, timeout);
+
+    // Clear timeout if component unmounts or user changes
+    return () => clearTimeout(logoutTimer);
+  });
+
+  return () => unSubscribe();
+}, []);
 
 
   const authInfo = {

@@ -53,7 +53,7 @@ const {user,LogOut}=useAuth();
 
     // Conditional Admin link
     ...(user?.email === "abdurrazzak118348@gmail.com" ||
-      user?.email === "jahinkabir2024@gmail.com" || user?.email === "info@nirapodbangladesh.org "
+      user?.email === "jahinkabir2024@gmail.com" || user?.email === "info@nirapodbangladesh.org"
       ? [{ name: "Admin", path: "/admin" }]
       : []),
   ];
