@@ -25,19 +25,16 @@ const HomeContent = () => {
     return (
         <div>
 
-<section className="pt-10 lg:pt-24 px-4 text-black dark:text-white">
+<section className="pt-10 lg:pt-20 px-4 text-black dark:text-white">
   <div className="">
 
     {/* Heading */}
-    <MotionH2
-      text="Building Safer Homes, Stronger Communities"
-      className="mb-4 pt-8 md:pt-4 md:mb-8 text-green-600 hover:text-green-700 "
-    />
+<h1 className="text-lg md:text-2xl lg:text-3xl text-green-600 dark:text-white text-center mb-5 text-wrap">Building Safer House By Nirapod Bangladesh Songstha</h1>
 
     {/* Paragraph */}
     <MotionDiv className="space-y-6 max-w-4xl mx-auto text-justify">
       <MotionP className="text-gray-700 text-sm md:text-base dark:text-gray-300">
-        SAFE Bangladesh is a non-government organization dedicated to helping vulnerable communities build safer homes and stronger futures.
+        Nirapod Bangladesh(SAFE BD) is a non-government organization dedicated to helping vulnerable communities build safer homes and stronger futures.
         We promote <b><i> safe, affordable, and locally appropriate housing solutions</i></b> by strengthening traditional building practices.
         <br />
         We believe real change happens within communities. Through practical learning, local craftsmanship, and environmental initiatives such as tree planting, SAFE supports people in protecting their homes, livelihoods, and surroundings.

@@ -149,7 +149,6 @@ app.delete("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
     res.status(500).send({ message: "Failed to delete blog", error: error.message });
   }
 });
-
 //-------------------blog API end-----------
 
 

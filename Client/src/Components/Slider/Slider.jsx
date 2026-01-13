@@ -10,13 +10,6 @@ const Slider = () => {
   const [animate, setAnimate] = useState(true);
   const intervalRef = useRef(null);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("/sliderData.json")
-  //     .then((res) => setSlides(res.data))
-  //     .catch((err) => console.error(err));
-  // }, []);
-
   const slides=[
   {
     title: "Your House will be the best quality",
