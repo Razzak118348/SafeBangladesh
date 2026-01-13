@@ -2,15 +2,19 @@ const express = require("express");
 const cors = require("cors");
 const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
-
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const verifyJWT = require("./verifyJWT");
+const verifyAdmin = require("./verifyAdmin");
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
   origin: ['http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app','https://www.nirapodbangladesh.org/',"https://www.nirapodbangladesh.org"],
-  credentials: true
+credentials: true
 }));
 app.use(express.json());
+app.use(cookieParser());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.rtselns.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
@@ -25,6 +29,36 @@ const latestWorkCollection = db.collection("latestwork");
 const bannerCollection =db.collection("banner")
 const galleryCollection = db.collection("galleries");
 const allTeamMember = db.collection("team")
+
+const adminEmails = [
+  "abdurrazzak118348@gmail.com",
+  "jahinkabir2024@gmail.com",
+  "info@nirapodbangladesh.org",
+];
+
+app.post("/jwt", (req, res) => {
+  const { email } = req.body;
+
+  const isAdmin = adminEmails.includes(email);
+
+  // create token
+  const token = jwt.sign(
+    { email, role: isAdmin ? "admin" : "user" },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1d" }
+  );
+
+  // send token as HTTP-only cookie
+  res.cookie("access_token", token, {
+    httpOnly: true, // cannot be accessed via JS
+    secure: process.env.NODE_ENV === "production", // only HTTPS in prod
+    sameSite: "strict", // CSRF protection
+    maxAge: 5 * 60 * 1000, // 1 hour
+  });
+
+  res.send({ message: "JWT set in cookie" });
+});
+
 //-------------------blog API start-----------
     // GET blogs with pagination
 app.get("/blogs", async (req, res) => {
@@ -54,7 +88,7 @@ app.get("/blogs", async (req, res) => {
   }
 });
 //all blogs for admin page
-app.get("/allblogs",async(req,res)=>{
+app.get("/allblogs",verifyJWT,verifyAdmin,async(req,res)=>{
   try{
     const AllBlogs=await blogCollection.find().toArray()
     res.send(AllBlogs)
@@ -77,14 +111,14 @@ app.get("/blogs/:id", async (req, res) => {
 });
 
 // CREATE blog
-app.post("/blogs",async (req, res) => {
+app.post("/blogs",verifyJWT,verifyAdmin, async (req, res) => {
 const blog = req.body;
 const result =await blogCollection.insertOne(blog);
   res.send(result);
 });
 
 // UPDATE blog
-app.put("/blogs/:id", async (req, res) => {
+app.put("/blogs/:id",verifyJWT,verifyAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const updated = req.body;
@@ -237,7 +271,6 @@ app.delete("/allbanner/:id", async (req, res) => {
     res.status(500).send({ message: "Failed to delete banner", error });
   }
 });
-
 //---------------banner API end -----------
 
 
@@ -268,6 +301,65 @@ app.get("/galleries/:category", async (req, res) => {
     res.status(500).send({ message: "Failed to fetch gallery" });
   }
 });
+
+// Add image to a gallery category
+app.post("/galleries/:category/images", async (req, res) => {
+  try {
+    const { category } = req.params;
+    const { imageUrl } = req.body;
+
+    if (!imageUrl) {
+      return res.status(400).send({ message: "imageUrl is required" });
+    }
+
+    const result = await galleryCollection.updateOne(
+      { category },
+      { $push: { images: imageUrl } }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).send({ message: "Gallery category not found" });
+    }
+
+    res.send({
+      success: true,
+      message: "Image added successfully",
+      result,
+    });
+  } catch (error) {
+    res.status(500).send({ message: "Failed to add image", error });
+  }
+});
+
+// Remove image from a gallery category
+app.delete("/galleries/:category/images", async (req, res) => {
+  try {
+    const { category } = req.params;
+    const { imageUrl } = req.body;
+
+    if (!imageUrl) {
+      return res.status(400).send({ message: "imageUrl is required" });
+    }
+
+    const result = await galleryCollection.updateOne(
+      { category },
+      { $pull: { images: imageUrl } }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).send({ message: "Gallery category not found" });
+    }
+
+    res.send({
+      success: true,
+      message: "Image removed successfully",
+      result,
+    });
+  } catch (error) {
+    res.status(500).send({ message: "Failed to remove image", error });
+  }
+});
+
 //---------------Gallery API end ----------------
 
 
@@ -307,7 +399,15 @@ _id: new ObjectId(id),
 //-----------------Team API end ------------
 
 
-
+//logout if you are not  authorized
+app.post("/logout", (req, res) => {
+  res.clearCookie("access_token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+  res.send({ message: "Logged out" });
+});
 
 app.get('/',(req,res)=>{
   res.send("Runnig the server of Safe Bangladesh Organization")
