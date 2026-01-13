@@ -95,8 +95,8 @@ useEffect(() => {
 
     setLoading(false);
 
-    // Manually set auto logout (e.g., 12 hours)
-    const timeout = 5 * 60 * 1000; // 12 hours in ms
+    // Manually set auto logout (e.g., 6 hours)
+    const timeout = 6 * 60 * 60 * 1000; // 6 hours in ms
     const logoutTimer = setTimeout(async () => {
       await LogOut(); // firebase logout
       await axios.post("http://localhost:5000/logout", {}, { withCredentials: true }); // clear cookie
