@@ -42,20 +42,6 @@ const[galleryLoading,setGalleryLoading]=useState(true)
   }, []);
 
 
-// load all gallery data
-useEffect(()=>{
-  axios.get("http://localhost:5000/galleries")
-  .then(res=>{
-setAllGalleryData(res.data)
-setGalleryLoading(false)
-  })
-  .catch(err => {
-        console.error("Gallery data load error:", err);
-  setGalleryLoading(false);
-      });
-},[])
-
-
   // create user
   const creatUser = (email, password) => {
     setLoading(true);
@@ -125,11 +111,6 @@ setGalleryLoading(false)
     // Banner data
     banner: allBanners,
     bannerLoading,
-
-    //gallery data
-    allGalleryData,
-    galleryLoading
-
   };
 
   return (
