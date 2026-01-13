@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loading from "../../Components/Loading/Loading";
 
 const Admin = () => {
   const [section, setSection] = useState("blogs");
@@ -335,6 +336,7 @@ console.log(data)
       showConfirmButton: false,
     });
   };
+
 return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
@@ -355,7 +357,7 @@ return (
         <option value="allbanner">All Banner</option>
       </select>
 
-      {loading && <p>Loading...</p>}
+      {loading && <Loading></Loading>}
 
       {/* add blog  */}
  {section === "blogs" && (
@@ -436,7 +438,7 @@ return (
         </div>
       )}
 
-{/* add all banner  */}
+{/* add  banner  */}
       {section === "allbanner" && (
         <div className="border-2 border-gray-400 p-4 mb-6">
           <h2 className="font-bold mb-2">Add Banner</h2>
@@ -682,76 +684,92 @@ return (
 
 
 {/* //allbanner */}
-  {section === "allbanner" &&
+{section === "allbanner" &&
   data.map((banner) => (
     <div
       key={banner._id}
-      className="bg-white border border-gray-400 rounded-xl shadow-lg p-5 mb-6"
+      className="border-2 border-green-700 shadow-xl p-5 mb-6 rounded-lg flex gap-5"
     >
-      <div className="mb-4">
-        <h2 className="text-lg font-bold text-gray-800">
-          Frontend Page path: <span className="text-green-700">{banner.pagePath}</span>
-        </h2>
+      {/* Image Preview */}
+      <div className="w-48 flex-shrink-0">
+        {banner.backgroundImage && (
+          <img
+            src={banner.backgroundImage}
+            alt={banner.altText}
+            className="w-full h-48 object-cover rounded-md border"
+          />
+        )}
       </div>
 
-      {banner.backgroundImage && (
-        <img
-          src={banner.backgroundImage}
-          alt={banner.altText}
-          className="w-full h-48 object-cover rounded-lg mb-4 border"
-        />
-      )}
+      {/* Form Area */}
+      <div className="flex-1">
+        {/* Page Path */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Page Path:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={banner.pagePath}
+            onChange={(e) =>
+              setNewItem({ ...banner, pagePath: e.target.value })
+            }
+          />
+        </div>
 
-      <div className="flex items-center gap-3 mb-3">
-        <p className="w-32 font-semibold">Title:</p>
-        <input
-          className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
-          defaultValue={banner.title}
-          onChange={(e) =>
-            setNewItem(prev => ({ ...prev, [banner.pagePath]: { ...prev[banner.pagePath], title: e.target.value } }))
-          }
-        />
-      </div>
+        {/* Title */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Title:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={banner.title}
+            onChange={(e) =>
+              setNewItem({ ...banner, title: e.target.value })
+            }
+          />
+        </div>
 
-      <div className="flex items-center gap-3 mb-3">
-        <p className="w-32 font-semibold">Image URL:</p>
-        <input
-          className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
-          defaultValue={banner.backgroundImage}
-          onChange={(e) =>
-            setNewItem(prev => ({ ...prev, [banner.pagePath]: { ...prev[banner.pagePath], backgroundImage: e.target.value } }))
-          }
-        />
-      </div>
+        {/* Image URL */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Image URL:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={banner.backgroundImage}
+            onChange={(e) =>
+              setNewItem({ ...banner, backgroundImage: e.target.value })
+            }
+          />
+        </div>
 
-      <div className="flex items-center gap-3 mb-4">
-        <p className="w-32 font-semibold">Alt Text:</p>
-        <input
-          className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
-          defaultValue={banner.altText}
-          onChange={(e) =>
-            setNewItem(prev => ({ ...prev, [banner.pagePath]: { ...prev[banner.pagePath], altText: e.target.value } }))
-          }
-        />
-      </div>
+        {/* Alt Text */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Alt Text:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={banner.altText}
+            onChange={(e) =>
+              setNewItem({ ...banner, altText: e.target.value })
+            }
+          />
+        </div>
 
-      <div className="flex gap-3">
-        <button
-          onClick={() => handleUpdate(banner.pagePath, newItem[banner.pagePath] || banner)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
-        >
-          Update
-        </button>
-
-        <button
-          onClick={() => handleDelete(banner.pagePath)}
-          className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg"
-        >
-          Delete
-        </button>
+        {/* Buttons */}
+        <div className="flex gap-3 mt-3">
+          <button
+            onClick={() => handleUpdate(banner._id, { ...banner, ...newItem })}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
+          >
+            Update
+          </button>
+          <button
+            onClick={() => handleDelete(banner._id)}
+            className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   ))}
+
 
 
     </div>
