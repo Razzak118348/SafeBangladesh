@@ -39,13 +39,15 @@ const adminEmails = [
 app.post("/jwt", (req, res) => {
   const { email } = req.body;
 
-  const isAdmin = adminEmails.includes(email);
+  if (!email) {
+    return res.status(400).send({ message: "Email is required" });
+  }
 
-  // create token
+  // create token with only email
   const token = jwt.sign(
-    { email, role: isAdmin ? "admin" : "user" },
+    { email },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "1d" }
+    { expiresIn: "1d" } // token valid for 1 day
   );
 
   // send token as HTTP-only cookie
@@ -53,11 +55,12 @@ app.post("/jwt", (req, res) => {
     httpOnly: true, // cannot be accessed via JS
     secure: process.env.NODE_ENV === "production", // only HTTPS in prod
     sameSite: "strict", // CSRF protection
-    maxAge: 5 * 60 * 1000, // 1 hour
+    maxAge: 6 * 60 * 60 * 1000, //  6 hours in ms
   });
 
   res.send({ message: "JWT set in cookie" });
 });
+
 
 //-------------------blog API start-----------
     // GET blogs with pagination
@@ -88,7 +91,7 @@ app.get("/blogs", async (req, res) => {
   }
 });
 //all blogs for admin page
-app.get("/allblogs",verifyJWT,verifyAdmin,async(req,res)=>{
+app.get("/allblogs",async(req,res)=>{
   try{
     const AllBlogs=await blogCollection.find().toArray()
     res.send(AllBlogs)
@@ -136,18 +139,17 @@ app.put("/blogs/:id",verifyJWT,verifyAdmin, async (req, res) => {
 });
 
 // DELETE blog
-app.delete("/blogs/:id", async (req, res) => {
+app.delete("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
   try {
     const { id } = req.params;
-
     const result = await blogCollection.deleteOne({ _id: new ObjectId(id) });
-
     res.send(result);
   } catch (error) {
     console.error("Delete blog error:", error);
     res.status(500).send({ message: "Failed to delete blog", error: error.message });
   }
 });
+
 //-------------------blog API end-----------
 
 
@@ -173,14 +175,14 @@ app.get("/latestwork/:id", async (req, res) => {
 });
 
 //Create single work
-app.post("/latestwork",async (req, res) => {
+app.post("/latestwork",verifyJWT,verifyAdmin,async (req, res) => {
   const work =req.body;
 const result =await latestWorkCollection.insertOne(work);
   res.send(result);
 });
 
 //update single work
-app.put("/latestwork/:id",async (req, res) => {
+app.put("/latestwork/:id",verifyJWT,verifyAdmin,async (req, res) => {
 try{
   const { id } = req.params;
 const updated =req.body;
@@ -198,7 +200,7 @@ catch (error) {
 });
 
 //delete single work
-app.delete("/latestwork/:id",async (req, res) => {
+app.delete("/latestwork/:id",verifyJWT,verifyAdmin,async (req, res) => {
 try{
   const { id } = req.params;
 const result =await latestWorkCollection.deleteOne({
@@ -238,7 +240,7 @@ app.get("/banner", async (req, res) => {
 });
 
 // POST: Add a single banner
-app.post("/allbanner", async (req, res) => {
+app.post("/allbanner",verifyJWT,verifyAdmin, async (req, res) => {
   try {
     const result = await bannerCollection.insertOne(req.body);
     res.send(result);
@@ -248,7 +250,7 @@ app.post("/allbanner", async (req, res) => {
 });
 
 // PUT: Update a banner by _id
-app.put("/allbanner/:id", async (req, res) => {
+app.put("/allbanner/:id",verifyJWT,verifyAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const result = await bannerCollection.updateOne(
@@ -262,7 +264,7 @@ app.put("/allbanner/:id", async (req, res) => {
 });
 
 // DELETE: Delete a banner by _id
-app.delete("/allbanner/:id", async (req, res) => {
+app.delete("/allbanner/:id",verifyJWT,verifyAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const result = await bannerCollection.deleteOne({ _id: new ObjectId(id) });
@@ -303,7 +305,7 @@ app.get("/galleries/:category", async (req, res) => {
 });
 
 // Add image to a gallery category
-app.post("/galleries/:category/images", async (req, res) => {
+app.post("/galleries/:category/images",verifyJWT,verifyAdmin, async (req, res) => {
   try {
     const { category } = req.params;
     const { imageUrl } = req.body;
@@ -332,7 +334,7 @@ app.post("/galleries/:category/images", async (req, res) => {
 });
 
 // Remove image from a gallery category
-app.delete("/galleries/:category/images", async (req, res) => {
+app.delete("/galleries/:category/images",verifyJWT,verifyAdmin, async (req, res) => {
   try {
     const { category } = req.params;
     const { imageUrl } = req.body;
@@ -380,7 +382,7 @@ const result =await allTeamMember.insertOne(req.body);
   res.send(result);
 });
 //update single team member
-app.put("/team/:id",async (req, res) => {
+app.put("/team/:id",verifyJWT,verifyAdmin,async (req, res) => {
 const { id } = req.params;
 const result =await allTeamMember.updateOne(
     {_id: new ObjectId(id) },
@@ -389,7 +391,7 @@ const result =await allTeamMember.updateOne(
   res.send(result);
 });
 //delete team member
-app.delete("/team/:id",async (req, res) => {
+app.delete("/team/:id",verifyJWT,verifyAdmin,async (req, res) => {
 const { id } = req.params;
 const result =await allTeamMember.deleteOne({
 _id: new ObjectId(id),
