@@ -34,15 +34,15 @@ const LatestWork = () => {
         text="Our Latest Work"
       />
 
-      <MotionDiv className='p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-6 text-center justify-items-center'>
+      <MotionDiv className='p-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 lg:gap-6 text-center justify-items-center'>
         {latestWork.map((work) => (
-          <Link key={work._id} to={`/latestwork/${work._id}`}>
-            <MotionDiv className="card bg-base-100 dark:bg-gray-800 w-full md:w-72 lg:w-96 shadow-lg">
+          <Link key={work._id} to={`/latestwork/${work._id}`} className='transition-transform duration-700 hover:scale-110'>
+            <MotionDiv className="card bg-base-100 dark:bg-gray-800 w-full md:w-52 lg:w-96 shadow-lg">
               <figure>
                 <img src={work.image} alt={work.title} className="object-cover w-full h-48" />
               </figure>
               <div className="card-body">
-                <h2 className="text-[#3e8846] dark:text-green-700 dark:hover:text-green-500 hover:text-[#2bd73d] hover:underline">
+                <h2 className="text-[#3e8846] dark:text-green-700 dark:hover:text-green-500 hover:text-[#23ba32] hover:underline text-wrap">
                   {work.title}
                 </h2>
               </div>

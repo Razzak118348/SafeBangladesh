@@ -341,7 +341,7 @@ return (
 
       {/* SECTION SELECT */}
       <select
-        className="border-2 border-black p-2 mb-6"
+        className="border-2 border-gray-400 p-2 mb-6"
         value={section}
         onChange={(e) => {
           setSection(e.target.value);
@@ -363,13 +363,13 @@ return (
     <h2 className="font-bold mb-2">Add Blog</h2>
 
     <input
-      className="border-2 border-black p-1 w-full mb-2"
+      className="border-2 border-gray-400 p-1 w-full mb-2"
       placeholder="Title"
       onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
     />
 
     <input
-      className="border-2 border-black p-1 w-full mb-2"
+      className="border-2 border-gray-400 p-1 w-full mb-2"
       placeholder="Image URL"
       onChange={(e) => setNewItem({ ...newItem, image: e.target.value })}
     />
@@ -384,13 +384,13 @@ return (
     )}
 
     <textarea
-      className="border-2 border-black p-1 w-full mb-2"
+      className="border-2 border-gray-400 p-1 w-full mb-2"
       placeholder="Description"
       onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
     />
 
     <textarea
-      className="border-2 border-black p-1 w-full mb-2"
+      className="border-2 border-gray-400 p-1 w-full mb-2"
       placeholder="Content"
       onChange={(e) => setNewItem({ ...newItem, content: e.target.value })}
     />
@@ -408,11 +408,11 @@ return (
       {section === "latestwork" && (
         <div className="border-2 border-gray-400 p-4 mb-6">
           <h2 className="font-bold mb-2">Add Latest Work</h2>
-          <input className="border-2 border-black p-1 w-full mb-2" placeholder="Title"
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} />
-          <input className="border-2 border-black p-1 w-full mb-2" placeholder="Image URL"
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Image URL"
             onChange={(e) => setNewItem({ ...newItem, image: e.target.value })} />
-          <textarea className="border-2 border-black p-1 w-full mb-2" placeholder="Description"
+          <textarea className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Description"
             onChange={(e) => setNewItem({ ...newItem, description: e.target.value })} />
           <button onClick={handleCreate} className="bg-green-600 button rounded-md text-white px-4 py-1">
             Create Work
@@ -424,11 +424,11 @@ return (
       {section === "team" && (
         <div className="border-2 border-gray-400 p-4 mb-6 rounded-lg">
           <h2 className="font-bold mb-2">Add Team Member</h2>
-          <input className="border-2 border-black p-1 w-full mb-2" placeholder="Image URL"
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Image URL"
             onChange={(e) => setNewItem({ ...newItem, img: e.target.value })} />
-          <input className="border-2 border-black p-1 w-full mb-2" placeholder="Alt Text"
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Alt Text"
             onChange={(e) => setNewItem({ ...newItem, alt: e.target.value })} />
-          <input className="border-2 border-black p-1 w-full mb-2" placeholder="Designation"
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Designation"
             onChange={(e) => setNewItem({ ...newItem, designation: e.target.value })} />
           <button onClick={handleCreate} className="bg-green-600 button rounded-md text-white px-4 py-1">
             Add Member
@@ -440,11 +440,11 @@ return (
       {section === "allbanner" && (
         <div className="border-2 border-gray-400 p-4 mb-6">
           <h2 className="font-bold mb-2">Add Banner</h2>
-          <input className="border-2 border-black p-1 w-full mb-2" placeholder="Page Path"
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Page Path"
             onChange={(e) => setNewItem({ ...newItem, pagePath: e.target.value })} />
-          <input className="border-2 border-black p-1 w-full mb-2" placeholder="Banner Image URL"
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Banner Image URL"
             onChange={(e) => setNewItem({ ...newItem, image: e.target.value })} />
-          <input className="border-2 border-black p-1 w-full mb-2" placeholder="Title"
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} />
           <button onClick={handleCreate} className="bg-green-600 button rounded-md text-white px-4 py-1">
             Create Banner
@@ -474,7 +474,7 @@ return (
               <div className="flex items-center mb-3">
                 <p className="w-28 font-semibold">Title:</p>
                 <input
-                  className="border-2 border-black p-2 flex-1 rounded"
+                  className="border-2 border-gray-400 p-2 flex-1 rounded"
                   defaultValue={item.title}
                   onChange={(e) =>
                     setNewItem({ ...item, title: e.target.value })
@@ -485,7 +485,7 @@ return (
               <div className="flex items-center mb-3">
                 <p className="w-28 font-semibold">Image URL:</p>
                 <input
-                  className="border-2 border-black p-2 flex-1 rounded"
+                  className="border-2 border-gray-400 p-2 flex-1 rounded"
                   defaultValue={item.image || item.img}
                   onChange={(e) =>
                     setNewItem({ ...item, image: e.target.value })
@@ -496,7 +496,7 @@ return (
               <div className="flex items-start mb-3">
                 <p className="w-28 font-semibold pt-1">Description:</p>
                 <textarea
-                  className="border-2 border-black p-2 flex-1 rounded min-h-[80px]"
+                  className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
                   defaultValue={item.description}
                   onChange={(e) =>
                     setNewItem({ ...item, description: e.target.value })
@@ -508,7 +508,7 @@ return (
                 <div className="flex items-start mb-3">
                   <p className="w-28 font-semibold pt-1">Content:</p>
                   <textarea
-                    className="border-2 border-black p-2 flex-1 rounded min-h-[120px]"
+                    className="border-2 border-gray-400  p-2 flex-1 rounded min-h-[120px]"
                     defaultValue={item.content}
                     onChange={(e) =>
                       setNewItem({ ...item, content: e.target.value })
@@ -555,7 +555,7 @@ return (
         <div className="flex items-center mb-2">
           <p className="w-32 font-semibold">Image URL:</p>
           <input
-            className="border-2 border-black p-1 flex-1"
+            className="border-2 border-gray-400 p-1 flex-1"
             defaultValue={member.img}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], img: e.target.value } }))
@@ -566,7 +566,7 @@ return (
         <div className="flex items-center mb-2">
           <p className="w-32 font-semibold">Alt Text:</p>
           <input
-            className="border-2 border-black p-1 flex-1"
+            className="border-2 border-gray-400 p-1 flex-1"
             defaultValue={member.alt}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], alt: e.target.value } }))
@@ -577,7 +577,7 @@ return (
         <div className="flex items-center mb-3">
           <p className="w-32 font-semibold">Designation:</p>
           <input
-            className="border-2 border-black p-1 flex-1"
+            className="border-2 border-gray-400 p-1 flex-1"
             defaultValue={member.designation}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], designation: e.target.value } }))

@@ -70,7 +70,7 @@ const Slider = () => {
       />
 
       {/* Dark Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+      <div className="absolute" />
 
       {/* Content */}
       <div

@@ -25,8 +25,6 @@ const ContextApi = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [allBanners, setAllBanners] = useState([]);
   const [bannerLoading, setBannerLoading] = useState(true);
-const [allGalleryData,setAllGalleryData]=useState([])
-const[galleryLoading,setGalleryLoading]=useState(true)
 
     //load all bannner data
   useEffect(() => {
