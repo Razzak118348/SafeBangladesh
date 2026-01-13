@@ -25,7 +25,7 @@ const latestWorkCollection = db.collection("latestwork");
 const bannerCollection =db.collection("banner")
 const galleryCollection = db.collection("galleries");
 const allTeamMember = db.collection("team")
-
+//-------------------blog API start-----------
     // GET blogs with pagination
 app.get("/blogs", async (req, res) => {
   try {
@@ -114,7 +114,10 @@ app.delete("/blogs/:id", async (req, res) => {
     res.status(500).send({ message: "Failed to delete blog", error: error.message });
   }
 });
+//-------------------blog API end-----------
 
+
+//--------------Latest work API start---------------
     // GET all latest works
 app.get("/latestwork", async (req, res) => {
   try {
@@ -172,8 +175,9 @@ _id: new ObjectId(id),
     console.error("Delete latest work error:", error);
     res.status(500).send({ message: "Failed to delete latest work", error: error.message });}
 });
+//--------------Latest work API end ---------------
 
-
+//------------------banner API start -------------
 //all banner for admin page
 app.get("/allbanner",async(req,res)=>{
   try{
@@ -198,6 +202,9 @@ app.get("/banner", async (req, res) => {
   }
 });
 
+//---------------banner API end -----------
+
+///-----------Gallery API start -------------
 //all gallery data for admin page
 app.get("/galleries", async (req, res) => {
   try {
@@ -224,7 +231,9 @@ app.get("/galleries/:category", async (req, res) => {
     res.status(500).send({ message: "Failed to fetch gallery" });
   }
 });
+//---------------Gallery API end ----------------
 
+//-----------------Team API start ------------
 //get all team member for normal and admin page
 app.get("/team",async(req,res)=>{
   try{
@@ -235,7 +244,28 @@ app.get("/team",async(req,res)=>{
     res.status(500).send({ message: "Failed to fetch galleries" });
   }
 })
-
+//post team member
+app.post("/team",async (req, res) => {
+const result =await allTeamMember.insertOne(req.body);
+  res.send(result);
+});
+//update single team member
+app.put("/team/:id",async (req, res) => {
+const { id } = req.params;
+const result =await allTeamMember.updateOne(
+    {_id: new ObjectId(id) },
+    {$set: req.body }
+  );
+  res.send(result);
+});
+//delete team member
+app.delete("/team/:id",async (req, res) => {
+const { id } = req.params;
+const result =await allTeamMember.deleteOne({
+_id: new ObjectId(id),
+  });
+  res.send(result);
+});
 
 
 app.get('/',(req,res)=>{
