@@ -58,7 +58,6 @@ const {user,LogOut}=useAuth();
       : []),
   ];
 
-
   //  RESPONSIVE FIX (Resize / Multitasking)
   useEffect(() => {
     const handleResize = () => {
