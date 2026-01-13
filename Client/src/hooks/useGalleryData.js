@@ -1,27 +1,16 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
+import useAuth from "./useAuth";
 
 
 const useGalleryData = (category) => {
-  const [gallery, setGallery] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+ const {  allGalleryData, galleryLoading} =useAuth()
 
-  useEffect(() => {
-    if (!category) return;
-    setLoading(true);
-axios.get(`http://localhost:5000/galleries/${category}`)
-      .then(res => {
-        setGallery(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-        setLoading(false);
-      });
-  }, [category]);
-
-  return { gallery, loading, error };
-};
+  const gallery = allGalleryData.find(
+    b => b.category === category
+  );
+console.log(gallery)
+  return { gallery, galleryLoading };
+}
 
 export default useGalleryData;

@@ -25,6 +25,8 @@ const ContextApi = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [allBanners, setAllBanners] = useState([]);
   const [bannerLoading, setBannerLoading] = useState(true);
+const [allGalleryData,setAllGalleryData]=useState([])
+const[galleryLoading,setGalleryLoading]=useState(true)
 
     //load all bannner data
   useEffect(() => {
@@ -40,7 +42,18 @@ const ContextApi = ({ children }) => {
   }, []);
 
 
-// load all team member
+// load all gallery data
+useEffect(()=>{
+  axios.get("http://localhost:5000/galleries")
+  .then(res=>{
+setAllGalleryData(res.data)
+setGalleryLoading(false)
+  })
+  .catch(err => {
+        console.error("Gallery data load error:", err);
+  setGalleryLoading(false);
+      });
+},[])
 
 
   // create user
@@ -111,7 +124,12 @@ const ContextApi = ({ children }) => {
 
     // Banner data
     banner: allBanners,
-    bannerLoading
+    bannerLoading,
+
+    //gallery data
+    allGalleryData,
+    galleryLoading
+
   };
 
   return (
