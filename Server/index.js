@@ -101,7 +101,6 @@ app.put("/blogs/:id", async (req, res) => {
   }
 });
 
-
 // DELETE blog
 app.delete("/blogs/:id", async (req, res) => {
   try {

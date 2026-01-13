@@ -1,7 +1,6 @@
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   sendPasswordResetEmail,
@@ -12,7 +11,6 @@ import {
 import app from "../Firebase/firebase.config.js";
 import { useEffect, useState, createContext } from "react";
 import axios from "axios";
-import useBanner from "../hooks/useBanner.js";
 
 //this is auth context for export auth context api
 export const AuthContext = createContext(null);
@@ -25,16 +23,25 @@ const ContextApi = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [allBanners, setAllBanners] = useState([]);
+  const [bannerLoading, setBannerLoading] = useState(true);
 
-
-  const [allService, setallService] = useState([]);
-
-
+    //load all bannner data
   useEffect(() => {
-    axios.get("https//:backendlink") // your backend endpoint
-      .then(res => setallService(res.data))
-      .catch(err => console.error("Service fetch error:", err));
+    axios.get("http://localhost:5000/allbanner")
+      .then(res => {
+        setAllBanners(res.data);
+        setBannerLoading(false);
+      })
+      .catch(err => {
+        console.error("Banner load error:", err);
+        setBannerLoading(false);
+      });
   }, []);
+
+
+// load all team member
+
 
   // create user
   const creatUser = (email, password) => {
@@ -43,15 +50,15 @@ const ContextApi = ({ children }) => {
   };
 
   //forgate password
-  const forgatePassword= async(email)=>{
-  return await sendPasswordResetEmail(auth,email).then(()=>{
+  const forgatePassword = async (email) => {
+    return await sendPasswordResetEmail(auth, email).then(() => {
       // password reset email sent
     })
-   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      })
 
   }
 
@@ -101,13 +108,15 @@ const ContextApi = ({ children }) => {
     loading,
     setLoading,
     googleLogin,
-    allService,
 
+    // Banner data
+    banner: allBanners,
+    bannerLoading
   };
 
   return (
     <AuthContext.Provider value={authInfo}>
-{children}
+      {children}
     </AuthContext.Provider>
   );
 };
