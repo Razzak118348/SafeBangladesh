@@ -29,11 +29,6 @@ const {user,LogOut}=useAuth();
         { name: "Tree Planting", path: "/activities/tree-planting" },
         { name: "Savings Groups", path: "/activities/savings-groups" },
         {name:"Prototype & Design",path:"/activities/prototype"},
-
-      //   ...(user?.email === "abdurrazzak118348@gmail.com" ||
-      // user?.email === "alfat422@gmail.com"
-      // ? [{ name: "Latest Work", path: "activities/latestwork" }]
-      // : []),
       ],
     },
     {
@@ -58,7 +53,7 @@ const {user,LogOut}=useAuth();
 
     // Conditional Admin link
     ...(user?.email === "abdurrazzak118348@gmail.com" ||
-       user?.email === "alfat422@gmail.com"
+      user?.email === "jahinkabir2024@gmail.com" || user?.email === "info@nirapodbangladesh.org "
       ? [{ name: "Admin", path: "/admin" }]
       : []),
   ];
@@ -81,12 +76,12 @@ const {user,LogOut}=useAuth();
   //all code
   return (
     <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-50">
-      <div className=" mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="mx-auto px-4 py-3 flex items-center justify-between">
 
-       <div className="flex justify-start">
+      <div className="flex justify-start">
          {/* Logo */}
         <img
-  src="/images/NBSLogo.png"
+  src="/NBSLogo.svg"
   alt="logo"
   className="w-8 md:w-12 h-auto object-contain"
 />
@@ -98,7 +93,7 @@ const {user,LogOut}=useAuth();
         >
           Nirapod Bangladesh Songstha
         </NavLink>
-       </div>
+      </div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">

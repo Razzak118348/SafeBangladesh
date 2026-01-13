@@ -6,7 +6,7 @@ const Footer = () => {
       <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10 dark:bg-gray-900 dark:text-white ">
 
   <nav className="grid grid-flow-col gap-4">
-    <Link to={'/'}> <img src="/images/NBSLogo.png" alt="" className='w-16 h-16 rounded-full' /></Link>
+    <Link to={'/'}> <img src="/NBSLogo.svg" alt="" className='w-16 h-16 rounded-full' /></Link>
     <Link to={'/aboutus/background'} className="link link-hover">About us</Link>
     <Link to={"/contact"} className="link link-hover">Contact</Link>
     <Link to={'/aboutus/goals-vision'} className="link link-hover">Goal</Link>
