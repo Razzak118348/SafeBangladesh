@@ -80,14 +80,14 @@ const {user,LogOut}=useAuth();
       <div className="flex justify-start">
          {/* Logo */}
         <img
-  src="/NBSLogo.svg"
+  src="/favicon.ico"
   alt="logo"
-  className="w-8 md:w-12 h-auto object-contain"
+  className="w-8 md:w-12 h-12 object-contain"
 />
 
         <NavLink
           to="/"
-          className="text-lg md:text-xl pt-2 md:pt-4 font-bold bg-gradient-to-r from-[#3e5a41] via-[#428576] to-[#223d26]
+          className="text-lg md:text-xl pt-2 font-bold bg-gradient-to-r from-[#3e5a41] via-[#428576] to-[#223d26]
           text-transparent bg-clip-text dark:text-white"
         >
           Nirapod Bangladesh Songstha
