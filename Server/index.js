@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 
 //in cors the domain link will be added without last slash (/)
 app.use(cors({
-  origin: ["https://www.nirapodbangladesh.org", "https://nirapodbangladesh.org", 'http://localhost:5173', "http://localhost:5174", 'https://safe-bangladesh-org.web.app', "https://safe-bangladesh-org.firebaseapp.com"],
+  origin: ["https://www.nirapodbangladesh.org","https://www.nirapodbangladesh.org/", "https://nirapodbangladesh.org", 'http://localhost:5173', "http://localhost:5174", 'https://safe-bangladesh-org.web.app', "https://safe-bangladesh-org.firebaseapp.com"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
@@ -127,11 +127,9 @@ async function run() {
     app.put("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       try {
         const { id } = req.params;
-        const updated = req.body;
-
         const result = await blogCollection.updateOne(
           { _id: new ObjectId(id) },
-          { $set: updated }
+          { $set: req.body }
         );
 
         res.send(result);
@@ -187,11 +185,11 @@ async function run() {
     app.put("/latestwork/:id", verifyJWT, verifyAdmin, async (req, res) => {
       try {
         const { id } = req.params;
-        const updated = req.body;
+
         const result = await
           latestWorkCollection.updateOne(
             { _id: new ObjectId(id) },
-            { $set: updated }
+            { $set: req.body }
           );
         res.send(result);
       }
