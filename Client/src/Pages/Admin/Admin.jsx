@@ -20,11 +20,11 @@ const Admin = () => {
     setLoading(true);
     try {
       let res;
-      if (section === "blogs") res = await axios.get(`${baseURL}/blogs`);
-      if (section === "latestwork") res = await axios.get(`${baseURL}/latestwork`);
-      if (section === "team") res = await axios.get(`${baseURL}/team`);
-      if (section === "galleries") res = await axios.get(`${baseURL}/galleries`);
-      if (section === "allbanner") res = await axios.get(`${baseURL}/allbanner`);
+      if (section === "blogs") res = await axios.get(`${baseURL}/blogs`,{withCredentials:true});
+      if (section === "latestwork") res = await axios.get(`${baseURL}/latestwork`,{withCredentials:true});
+      if (section === "team") res = await axios.get(`${baseURL}/team`,{withCredentials:true});
+      if (section === "galleries") res = await axios.get(`${baseURL}/galleries`,{withCredentials:true});
+      if (section === "allbanner") res = await axios.get(`${baseURL}/allbanner`,{withCredentials:true});
 
       // Ensure data is always an array
       if (section === "blogs") setData(res.data.blogs || res.data || []);

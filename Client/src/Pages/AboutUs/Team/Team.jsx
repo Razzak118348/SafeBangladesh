@@ -12,7 +12,7 @@ const Team = () => {
   useEffect(() => {
     const fetchLatestWork = async () => {
       try {
-        const response = await axios.get("https://safebangladesh-server.vercel.app/team");
+        const response = await axios.get("https://safebangladesh-server.vercel.app/team",{withCredentials:true});
         setAllMember(response.data);
       } catch (error) {
         console.error("Error fetching latest work:", error);

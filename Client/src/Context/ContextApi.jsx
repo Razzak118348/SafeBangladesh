@@ -28,7 +28,7 @@ const ContextApi = ({ children }) => {
 
     //load all bannner data
   useEffect(() => {
-    axios.get("https://safebangladesh-server.vercel.app/allbanner")
+    axios.get("https://safebangladesh-server.vercel.app/allbanner",{withCredentials:tr})
       .then(res => {
         setAllBanners(res.data);
         setBannerLoading(false);

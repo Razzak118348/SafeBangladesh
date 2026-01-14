@@ -10,7 +10,7 @@ const useGalleryData = (category) => {
   useEffect(() => {
     if (!category) return;
     setLoading(true);
-axios.get(`https://safebangladesh-server.vercel.app/galleries/${category}`)
+axios.get(`https://safebangladesh-server.vercel.app/galleries/${category}`,{withCredentials:true})
       .then(res => {
         setGallery(res.data);
         setLoading(false);
