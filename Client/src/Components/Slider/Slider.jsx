@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import "../../utils/color.css"
 import Loading from "../Loading/Loading";
 
