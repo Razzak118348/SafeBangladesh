@@ -250,6 +250,17 @@ async function run() {
       }
     });
 
+    //get single banner
+    app.get("/allbanner/:id",async(req,res)=>{
+       try {
+        const banner = await bannerCollection.findOne({ _id: new ObjectId(req.params.id) });
+        if (!banner) return res.status(404).send({ message: "banner not found" });
+        res.send(banner);
+      } catch (err) {
+        res.status(400).send({ message: "Invalid banner ID", error: err.message });
+      }
+    })
+
     // PUT: Update a banner by _id
     app.put("/allbanner/:id", verifyJWT, verifyAdmin, async (req, res) => {
       try {
