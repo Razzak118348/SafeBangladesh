@@ -10,31 +10,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //in cors the domain link will be added without last slash (/)
-app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://www.nirapodbangladesh.org",
-      "https://nirapodbangladesh.org",
-      "https://safe-bangladesh-org.web.app",
-      "https://safe-bangladesh-org.firebaseapp.com"
-    ];
-
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+app.use(cors({origin:["https://www.nirapodbangladesh.org","https://nirapodbangladesh.org",'http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app',"https://safe-bangladesh-org.firebaseapp.com"],
+credentials: true
 }));
-
-// Preflight fix
-app.options("*", cors());
-
 app.use(express.json());
 app.use(cookieParser());
 
@@ -44,8 +22,8 @@ const client = new MongoClient(uri);
 
 const cookieOption = {
   httpOnly: true,
-  secure: true,
-  sameSite: "none",
+  secure: process.env.NODE_ENV === "production"? true: false, //if production then true otherwise false
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
   maxAge: 6 * 60 * 60 * 1000,
 };
 
