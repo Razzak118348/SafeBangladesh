@@ -75,18 +75,20 @@ const Admin = () => {
 
   // ================= UPDATE (PUT) =================
   const handleUpdate = async (idOrCategory, updatedData, category = null) => {
+    console.log(idOrCategory)
     try {
+      console.log(idOrCategory)
       let url = "";
 
       // Remove _id from updatedData before sending
       const { _id, ...dataToUpdate } = updatedData;
-
+console.log(_id)
       if (section === "blogs") url = `/blogs/${idOrCategory}`;
       if (section === "latestwork") url = `/latestwork/${idOrCategory}`;
       if (section === "team") url = `/team/${idOrCategory}`;
       if (section === "galleries") url = `/galleries/${idOrCategory}`;
       if (section === "allbanner") url = `/allbanner/${idOrCategory}`;
-
+console.log("put url is ",baseURL+url)
       await axios.put(baseURL + url, dataToUpdate, { withCredentials: true });
       fetchData();
 
