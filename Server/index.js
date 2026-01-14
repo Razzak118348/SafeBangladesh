@@ -415,11 +415,6 @@ async function run() {
       res.send({ message: "Logged out" });
     });
 
-// Serve React app for all unmatched routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
     app.get('/', (req, res) => {
       res.send("Runnig the server of Safe Bangladesh Organization")
     })
