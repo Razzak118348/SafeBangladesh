@@ -1,8 +1,6 @@
-const adminEmails = [
-  "abdurrazzak118348@gmail.com",
-  "jahinkabir2024@gmail.com",
-  "info@nirapodbangladesh.org",
-];
+const adminEmails = process.env.ADMIN_EMAILS
+  .split(",")
+  .map(e => e.trim());
 
 const verifyAdmin = (req, res, next) => {
   const userEmail = req.user?.email; // req.user comes from verifyJWT

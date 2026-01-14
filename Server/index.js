@@ -9,8 +9,9 @@ const verifyAdmin = require("./verifyAdmin");
 const app = express();
 const port = process.env.PORT || 5000;
 
+//in cors the domain link will be added without last slash (/)
 app.use(cors({
-  origin: ['http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app','https://www.nirapodbangladesh.org/',"https://www.nirapodbangladesh.org"],
+  origin: ['http://localhost:5173',"http://localhost:5174",'https://safe-bangladesh-org.web.app','https://www.nirapodbangladesh.org',"https://www.nirapodbangladesh.org","https://safe-bangladesh-org.firebaseapp.com"],
 credentials: true
 }));
 app.use(express.json());
@@ -20,9 +21,19 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
 
 const client = new MongoClient(uri);
 
+const cookieOption = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production"? true: false, //if production then true otherwise false
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+  maxAge: 6 * 60 * 60 * 1000,
+};
+
+
 async function run() {
   try {
-    await client.connect();
+//await client=> this line will be comment out for server deployment=> this is for locally
+    // await client.connect();
+
     const db = client.db(process.env.DB_NAME);
     const blogCollection = db.collection("blog");
 const latestWorkCollection = db.collection("latestwork");
@@ -30,11 +41,6 @@ const bannerCollection =db.collection("banner")
 const galleryCollection = db.collection("galleries");
 const allTeamMember = db.collection("team")
 
-const adminEmails = [
-  "abdurrazzak118348@gmail.com",
-  "jahinkabir2024@gmail.com",
-  "info@nirapodbangladesh.org",
-];
 
 app.post("/jwt", (req, res) => {
   const { email } = req.body;
@@ -47,16 +53,11 @@ app.post("/jwt", (req, res) => {
   const token = jwt.sign(
     { email },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "1d" } // token valid for 1 day
+    { expiresIn: "6h" } // token valid for 6 hour
   );
 
   // send token as HTTP-only cookie
-  res.cookie("access_token", token, {
-    httpOnly: true, // cannot be accessed via JS
-    secure: process.env.NODE_ENV === "production", // only HTTPS in prod
-    sameSite: "strict", // CSRF protection
-    maxAge: 6 * 60 * 60 * 1000, //  6 hours in ms
-  });
+  res.cookie("access_token", token,cookieOption);
 
   res.send({ message: "JWT set in cookie" });
 });
@@ -402,10 +403,13 @@ _id: new ObjectId(id),
 
 //logout if you are not  authorized
 app.post("/logout", (req, res) => {
+  const user =req.body;
+  console.log(user ," is logout")
   res.clearCookie("access_token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+   secure: process.env.NODE_ENV === "production"? true: false, //if production then true otherwise false
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+  maxAge:0
   });
   res.send({ message: "Logged out" });
 });
