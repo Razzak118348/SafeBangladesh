@@ -10,7 +10,7 @@ const useBanner = () => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:5000/banner?pagePath=${pathname}`)
+            .get(`https://safebangladesh-server.vercel.app/banner?pagePath=${pathname}`)
             .then(res => {
                 setBanner(res.data);
                 setLoading(false);

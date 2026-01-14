@@ -28,7 +28,7 @@ const ContextApi = ({ children }) => {
 
     //load all bannner data
   useEffect(() => {
-    axios.get("http://localhost:5000/allbanner")
+    axios.get("https://safebangladesh-server.vercel.app/allbanner")
       .then(res => {
         setAllBanners(res.data);
         setBannerLoading(false);
@@ -84,13 +84,13 @@ useEffect(() => {
     if (currentUser?.email) {
       // POST to backend to generate JWT and set it as HTTP-only cookie
       await axios.post(
-        "http://localhost:5000/jwt",
+        "https://safebangladesh-server.vercel.app/jwt",
         { email: currentUser.email },
         { withCredentials: true }
       );
     } else {
       // Optional: clear cookie if logged out
-      await axios.post("http://localhost:5000/logout", {}, { withCredentials: true });
+      await axios.post("https://safebangladesh-server.vercel.app/logout", {}, { withCredentials: true });
     }
 
     setLoading(false);
@@ -99,7 +99,7 @@ useEffect(() => {
     const timeout = 6 * 60 * 60 * 1000; // 6 hours in ms
     const logoutTimer = setTimeout(async () => {
       await LogOut(); // firebase logout
-      await axios.post("http://localhost:5000/logout", {}, { withCredentials: true }); // clear cookie
+      await axios.post("https://safebangladesh-server.vercel.app/logout", {}, { withCredentials: true }); // clear cookie
       setUser(null);
     }, timeout);
 

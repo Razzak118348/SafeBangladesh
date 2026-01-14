@@ -34,7 +34,7 @@ import axios from "axios";
 export const blogsLoader = async ({ params }) => {
   // We pass page via params or default to 1
   const page = params?.page || 1;
-  const response = await axios.get(`http://localhost:5000/blogs?page=${page}&limit=9`);
+  const response = await axios.get(`https://safebangladesh-server.vercel.app/blogs?page=${page}&limit=9`);
   return response.data;
 };
 
@@ -42,7 +42,7 @@ export const blogsLoader = async ({ params }) => {
 /* Load single blog */
 export const blogDetailsLoader = async ({ params }) => {
     try {
-        const singleBlog = await axios.get(`http://localhost:5000/blogs/${params.id}`)
+        const singleBlog = await axios.get(`https://safebangladesh-server.vercel.app/blogs/${params.id}`)
         return singleBlog.data;
     }
     catch (error) {
@@ -53,7 +53,7 @@ export const blogDetailsLoader = async ({ params }) => {
 //all latest work
 export const latestWorkLoader = async () => {
   try {
-    const response = await axios.get("http://localhost:5000/latestwork");
+    const response = await axios.get("https://safebangladesh-server.vercel.app/latestwork");
     return response.data;
   } catch (error) {
     console.error("something is wrong", error);
@@ -66,7 +66,7 @@ export const singleLatestWorkLoader = async ({ params }) => {
   const { id } = params;
 
   try {
-    const response = await axios.get(`http://localhost:5000/latestwork/${id}`);
+    const response = await axios.get(`https://safebangladesh-server.vercel.app/latestwork/${id}`);
     return response.data; // returns the single work object
   } catch (error) {
     console.error("Error fetching single work:", error);

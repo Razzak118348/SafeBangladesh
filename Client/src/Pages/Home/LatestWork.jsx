@@ -11,7 +11,7 @@ const LatestWork = () => {
   useEffect(() => {
     const fetchLatestWork = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/latestwork");
+        const response = await axios.get("https://safebangladesh-server.vercel.app/latestwork");
         setLatestWork(response.data);
       } catch (error) {
         console.error("Error fetching latest work:", error);

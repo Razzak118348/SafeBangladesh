@@ -9,7 +9,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [newItem, setNewItem] = useState({});
 const [galleryInputs,setGalleryInputs]= useState({})
-  const baseURL = "http://localhost:5000";
+  const baseURL = "https://safebangladesh-server.vercel.app";
 
   // ================= FETCH (READ) =================
   useEffect(() => {
