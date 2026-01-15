@@ -10,14 +10,32 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //in cors the domain link will be added without last slash (/)
-app.use(cors({
-  origin: ["https://www.nirapodbangladesh.org","https://www.nirapodbangladesh.org/", "https://nirapodbangladesh.org", 'http://localhost:5173', "http://localhost:5174", 'https://safe-bangladesh-org.web.app', "https://safe-bangladesh-org.firebaseapp.com"],
+// app.use(cors({
+//   origin: ["https://www.nirapodbangladesh.org","https://www.nirapodbangladesh.org/", "https://nirapodbangladesh.org", 'http://localhost:5173', "http://localhost:5174", 'https://safe-bangladesh-org.web.app', "https://safe-bangladesh-org.firebaseapp.com"],
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
+// }));
+// app.options("*",cors())
+const corsOptions = {
+  origin: [
+    "https://www.nirapodbangladesh.org",
+    "https://www.nirapodbangladesh.org/",
+    "https://nirapodbangladesh.org",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://safe-bangladesh-org.web.app",
+    "https://safe-bangladesh-org.firebaseapp.com"
+  ],
   credentials: true,
-  methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
-}));
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
 app.use(express.json());
 app.use(cookieParser());
-app.options("*",cors())
+
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.rtselns.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
@@ -135,7 +153,9 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).send({ message: "No fields provided to update" });
     }
-delete req.body._id;
+
+    delete req.body._id; // Prevent updating _id
+
     const result = await blogCollection.updateOne(
       { _id: new ObjectId(id) },
       { $set: req.body }
