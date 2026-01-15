@@ -600,13 +600,17 @@ const handleUpdate = async ({ id, originalData, section }) => {
               </div>
               {/* Buttons */}
               <div className="flex gap-3 mt-3">
-                onClick={() =>
+<button
+              onClick={() =>
   handleUpdate({
     id: item._id,
     originalData: item,
     section: "latestwork",
   })
 }
+className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded">
+Update
+</button>
 
                 <button
                   onClick={() => handleDelete(item._id, "latestwork")}
@@ -671,6 +675,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
               </div>
 
               <div className="flex gap-3 mt-3">
+<button
                 onClick={() =>
   handleUpdate({
     id: member._id,
@@ -678,6 +683,10 @@ const handleUpdate = async ({ id, originalData, section }) => {
     section: "team",
   })
 }
+className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
+>
+Update
+</button>
                 <button
                   onClick={() => handleDelete(member._id)}
                   className="bg-red-500 text-white px-4 py-1 rounded"
@@ -759,13 +768,18 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
               {/* Buttons */}
               <div className="flex mt-3">
-                onClick={() =>
+<button
+onClick={() =>
   handleUpdate({
     id: banner._id,
     originalData: banner,
     section: "allbanner",
   })
 }
+className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
+>
+  Update
+</button>
                 <button
                   onClick={() => handleDelete(banner._id)}
                   className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
