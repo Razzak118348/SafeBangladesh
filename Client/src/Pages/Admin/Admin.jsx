@@ -185,7 +185,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
       return Swal.fire("Nothing to update");
     }
 
-    // ✅ only changed fields
+    //  only changed fields
     const changes = {};
     for (let key in editedData) {
       if (editedData[key] !== originalData[key]) {
@@ -599,7 +599,15 @@ const handleUpdate = async ({ id, originalData, section }) => {
                 />
               </div>
               {/* Buttons */}
-              <div className="flex mt-3">
+              <div className="flex gap-3 mt-3">
+                onClick={() =>
+  handleUpdate({
+    id: item._id,
+    originalData: item,
+    section: "latestwork",
+  })
+}
+
                 <button
                   onClick={() => handleDelete(item._id, "latestwork")}
                   className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
@@ -662,10 +670,105 @@ const handleUpdate = async ({ id, originalData, section }) => {
                 />
               </div>
 
-              <div className="flex mt-3">
+              <div className="flex gap-3 mt-3">
+                onClick={() =>
+  handleUpdate({
+    id: member._id,
+    originalData: member,
+    section: "team",
+  })
+}
                 <button
                   onClick={() => handleDelete(member._id)}
                   className="bg-red-500 text-white px-4 py-1 rounded"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+
+      {/* //allbanner */}
+      {section === "allbanner" &&
+        data.map((banner) => (
+          <div
+            key={banner._id}
+            className="border-2 border-green-700 shadow-xl p-5 mb-6 rounded-lg flex gap-5"
+          >
+            {/* Image Preview */}
+            <div className="w-48 flex-shrink-0">
+              {banner.backgroundImage && (
+                <img
+                  src={banner.backgroundImage}
+                  alt={banner.altText}
+                  className="w-full h-48 object-cover rounded-md border"
+                />
+              )}
+            </div>
+
+            {/* Form Area */}
+            <div className="flex-1">
+              {/* Page Path */}
+              <div className="flex items-center mb-3">
+                <p className="w-28 font-semibold">Page Path:</p>
+                <input
+                  className="border-2 border-gray-400 p-2 flex-1 rounded"
+                  defaultValue={banner.pagePath}
+                  onChange={(e) =>
+                    setNewItem({ ...banner, pagePath: e.target.value })
+                  }
+                />
+              </div>
+
+              {/* Title */}
+              <div className="flex items-center mb-3">
+                <p className="w-28 font-semibold">Title:</p>
+                <input
+                  className="border-2 border-gray-400 p-2 flex-1 rounded"
+                  defaultValue={banner.title}
+                  onChange={(e) =>
+                    setNewItem({ ...banner, title: e.target.value })
+                  }
+                />
+              </div>
+
+              {/* Image URL */}
+              <div className="flex items-center mb-3">
+                <p className="w-28 font-semibold">Image URL:</p>
+                <input
+                  className="border-2 border-gray-400 p-2 flex-1 rounded"
+                  defaultValue={banner.backgroundImage}
+                  onChange={(e) =>
+                    setNewItem({ ...banner, backgroundImage: e.target.value })
+                  }
+                />
+              </div>
+
+              {/* Alt Text */}
+              <div className="flex items-center mb-3">
+                <p className="w-28 font-semibold">Alt Text:</p>
+                <input
+                  className="border-2 border-gray-400 p-2 flex-1 rounded"
+                  defaultValue={banner.altText}
+                  onChange={(e) =>
+                    setNewItem({ ...banner, altText: e.target.value })
+                  }
+                />
+              </div>
+
+              {/* Buttons */}
+              <div className="flex mt-3">
+                onClick={() =>
+  handleUpdate({
+    id: banner._id,
+    originalData: banner,
+    section: "allbanner",
+  })
+}
+                <button
+                  onClick={() => handleDelete(banner._id)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
                 >
                   Delete
                 </button>
@@ -749,89 +852,6 @@ const handleUpdate = async ({ id, originalData, section }) => {
             </div>
           </div>
         ))}
-
-
-      {/* //allbanner */}
-      {section === "allbanner" &&
-        data.map((banner) => (
-          <div
-            key={banner._id}
-            className="border-2 border-green-700 shadow-xl p-5 mb-6 rounded-lg flex gap-5"
-          >
-            {/* Image Preview */}
-            <div className="w-48 flex-shrink-0">
-              {banner.backgroundImage && (
-                <img
-                  src={banner.backgroundImage}
-                  alt={banner.altText}
-                  className="w-full h-48 object-cover rounded-md border"
-                />
-              )}
-            </div>
-
-            {/* Form Area */}
-            <div className="flex-1">
-              {/* Page Path */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Page Path:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={banner.pagePath}
-                  onChange={(e) =>
-                    setNewItem({ ...banner, pagePath: e.target.value })
-                  }
-                />
-              </div>
-
-              {/* Title */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Title:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={banner.title}
-                  onChange={(e) =>
-                    setNewItem({ ...banner, title: e.target.value })
-                  }
-                />
-              </div>
-
-              {/* Image URL */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Image URL:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={banner.backgroundImage}
-                  onChange={(e) =>
-                    setNewItem({ ...banner, backgroundImage: e.target.value })
-                  }
-                />
-              </div>
-
-              {/* Alt Text */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Alt Text:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={banner.altText}
-                  onChange={(e) =>
-                    setNewItem({ ...banner, altText: e.target.value })
-                  }
-                />
-              </div>
-
-              {/* Buttons */}
-              <div className="flex mt-3">
-                <button
-                  onClick={() => handleDelete(banner._id)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-
 
     </div>
   );
