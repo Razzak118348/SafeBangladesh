@@ -132,10 +132,18 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       return res.status(400).send({ message: "Invalid ID format" });
     }
 
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).send({ message: "No fields provided to update" });
+    }
+
     const result = await blogCollection.updateOne(
       { _id: new ObjectId(id) },
-      { $set: req.body }   // only updates provided fields
+      { $set: req.body }
     );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).send({ message: "Blog not found" });
+    }
 
     res.send(result);
   } catch (error) {
@@ -143,6 +151,7 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
     res.status(500).send({ message: "Failed to update blog", error: error.message });
   }
 });
+
 
     // DELETE blog
     app.delete("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
