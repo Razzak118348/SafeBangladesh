@@ -73,23 +73,40 @@ const Admin = () => {
     }
   };
 
-  // ================= UPDATE (PUT) =================
-  const handleUpdate = async (idOrCategory, updatedData, category = null) => {
-    console.log(idOrCategory)
+// ================= UPDATE blog (PUT) =================
+  const handleUpdate = async (idOrCategory, updatedData,category=null) => {
     try {
-      console.log(idOrCategory)
-      let url = "";
+      // 1. Extract the specific changes for this item from our state if they exist
+      // We look inside newItem[idOrCategory] because that's where onChange stores them
+      const specificChanges = newItem[idOrCategory] || {};
 
-      // Remove _id from updatedData before sending
-      const { _id, ...dataToUpdate } = updatedData;
-console.log(_id)
+      // 2. Merge the original data with the new changes
+      // This ensures we have a flat object: { title: "New", description: "Old", ... }
+      const mergedData = { ...updatedData, ...specificChanges };
+
+      // 3. Remove metadata that MongoDB/Server might reject
+      // We remove _id because MongoDB doesn't allow updating the immutable _id field
+      // We remove the tracking key [idOrCategory] so it doesn't save a nested object to the DB
+      const { _id, [idOrCategory]: junk, ...dataToUpdate } = mergedData;
+
+      let url = "";
       if (section === "blogs") url = `/blogs/${idOrCategory}`;
-      if (section === "latestwork") url = `/latestwork/${idOrCategory}`;
-      if (section === "team") url = `/team/${idOrCategory}`;
-      if (section === "galleries") url = `/galleries/${idOrCategory}`;
-      if (section === "allbanner") url = `/allbanner/${idOrCategory}`;
-console.log("put url is ",baseURL+url)
+      else if (section === "latestwork") url = `/latestwork/${idOrCategory}`;
+      else if (section === "team") url = `/team/${idOrCategory}`;
+      else if (section === "galleries") url = `/galleries/${idOrCategory}`;
+      else if (section === "allbanner") url = `/allbanner/${idOrCategory}`;
+
+      // 4. Send the clean, flat object to the server
       await axios.put(baseURL + url, dataToUpdate, { withCredentials: true });
+
+      // 5. Clean up local state for this specific ID
+      setNewItem((prev) => {
+        const newState = { ...prev };
+        delete newState[idOrCategory];
+        return newState;
+      });
+
+      // 6. Refresh UI and notify user
       fetchData();
 
       Swal.fire({
@@ -100,7 +117,7 @@ console.log("put url is ",baseURL+url)
         showConfirmButton: false,
       });
     } catch (error) {
-      console.error(error);
+      console.error("Update Error:", error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -336,85 +353,86 @@ console.log("put url is ",baseURL+url)
 
       {/* ================= READ / UPDATE / DELETE ================= */}
       {/* Blogs Section */}
-      {section === "blogs" &&
-        data.map((item) => (
-          <div
-            key={item._id}
-            className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
-          >
-            {/* Image Preview */}
-            <div className="w-48 flex-shrink-0">
-              <img
-                src={item.image || item.img}
-                alt={item.title}
-                className="w-full h-48 object-cover rounded-md border"
-              />
-            </div>
+    {/* Blogs Section */}
+{section === "blogs" &&
+  data.map((item) => (
+    <div
+      key={item._id}
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
+    >
+      {/* Image Preview */}
+      <div className="w-48 flex-shrink-0">
+        <img
+          src={newItem[item._id]?.image || item.image || item.img}
+          alt={item.title}
+          className="w-full h-48 object-cover rounded-md border"
+        />
+      </div>
 
-            {/* Form Area */}
-            <div className="flex-1">
-              {/* Title */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Title:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={item.title}
-                  onChange={(e) =>
+      {/* Form Area */}
+      <div className="flex-1">
+        {/* Title */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Title:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={item.title}
+            onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], title: e.target.value } }))
             }
-                />
-              </div>
-              {/* Image URL */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Image URL:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={item.image || item.img}
-                  onChange={(e) =>
+          />
+        </div>
+        {/* Image URL */}
+        <div className="flex items-center mb-3">
+          <p className="w-28 font-semibold">Image URL:</p>
+          <input
+            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            defaultValue={item.image || item.img}
+            onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], image: e.target.value } }))
             }
-                />
-              </div>
-              {/* Description */}
-              <div className="flex items-start mb-3">
-                <p className="w-28 font-semibold pt-1">Description:</p>
-                <textarea
-                  className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
-                  defaultValue={item.description}
-                  onChange={(e) =>
+          />
+        </div>
+        {/* Description */}
+        <div className="flex items-start mb-3">
+          <p className="w-28 font-semibold pt-1">Description:</p>
+          <textarea
+            className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
+            defaultValue={item.description}
+            onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], description: e.target.value } }))
             }
-                />
-              </div>
-              {/* Content */}
-              <div className="flex items-start mb-3">
-                <p className="w-28 font-semibold pt-1">Content:</p>
-                <textarea
-                  className="border-2 border-gray-400  p-2 flex-1 rounded min-h-[120px]"
-                  defaultValue={item.content}
-                  onChange={(e) =>
+          />
+        </div>
+        {/* Content */}
+        <div className="flex items-start mb-3">
+          <p className="w-28 font-semibold pt-1">Content:</p>
+          <textarea
+            className="border-2 border-gray-400  p-2 flex-1 rounded min-h-[120px]"
+            defaultValue={item.content}
+            onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], content: e.target.value } }))
             }
-                />
-              </div>
-              {/* Buttons */}
-              <div className="flex gap-3 mt-3">
-                <button
-                  onClick={() => handleUpdate(item._id, { ...item, ...newItem }, "blogs")}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
-                >
-                  Update
-                </button>
-                <button
+          />
+        </div>
+        {/* Buttons */}
+        <div className="flex gap-3 mt-3">
+          <button
+            onClick={() => handleUpdate(item._id, item)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
+          >
+            Update
+          </button>
+         <button
                   onClick={() => handleDelete(item._id, "blogs")}
                   className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
                 >
                   Delete
                 </button>
-              </div>
-            </div>
-          </div>
-        ))}
+        </div>
+      </div>
+    </div>
+  ))}
 
       {/* Latest Work Section */}
       {section === "latestwork" &&
