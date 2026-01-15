@@ -233,12 +233,12 @@ const handleUpdate = async ({ id, originalData, section }) => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 dark:text-black">
       <h1 className="text-2xl font-bold mb-4 text-center text-green-600">Admin Dashboard</h1>
 
       {/* SECTION SELECT */}
       <select
-        className="border-2 border-gray-400 p-2 mb-6"
+        className="border-2 border-gray-400 p-2 mb-6 dark:text-black"
         value={section}
         onChange={(e) => {
           setSection(e.target.value);
@@ -257,16 +257,16 @@ const handleUpdate = async ({ id, originalData, section }) => {
       {/* add blog  */}
       {section === "blogs" && (
         <div className="border-2 border-gray-400 rounded-lg p-4 mb-6">
-          <h2 className="font-bold mb-2">Add Blog</h2>
+          <h2 className="font-bold mb-2 text-green-600">Add Blog</h2>
 
           <input
-            className="border-2 border-gray-400 p-1 w-full mb-2"
+            className="border-2 border-gray-400 p-1 w-full mb-2 dark:text-black"
             placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
           />
 
           <input
-            className="border-2 border-gray-400 p-1 w-full mb-2"
+            className="border-2 border-gray-400 p-1 w-full mb-2 dark:text-black"
             placeholder="Image URL"
             onChange={(e) => setNewItem({ ...newItem, image: e.target.value })}
           />
@@ -281,13 +281,13 @@ const handleUpdate = async ({ id, originalData, section }) => {
           )}
 
           <textarea
-            className="border-2 border-gray-400 p-1 w-full mb-2"
+            className="border-2 border-gray-400 p-1 w-full mb-2 dark:text-black"
             placeholder="Description"
             onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
           />
 
           <textarea
-            className="border-2 border-gray-400 p-1 w-full mb-2"
+            className="border-2 border-gray-400 p-1 w-full mb-2 dark:text-black"
             placeholder="Content"
             onChange={(e) => setNewItem({ ...newItem, content: e.target.value })}
           />
@@ -303,7 +303,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
       {/* add latest work */}
       {section === "latestwork" && (
-        <div className="border-2 border-gray-400 p-4 mb-6">
+        <div className="border-2 border-gray-400 p-4 mb-6 dark:text-black">
           <h2 className="font-bold mb-2">Add Latest Work</h2>
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} />
@@ -319,7 +319,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
       {/* add team member */}
       {section === "team" && (
-        <div className="border-2 border-gray-400 p-4 mb-6 rounded-lg">
+        <div className="border-2 border-gray-400 p-4 mb-6 rounded-lg dark:text-black">
           <h2 className="font-bold mb-2">Add Team Member</h2>
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Image URL"
             onChange={(e) => setNewItem({ ...newItem, img: e.target.value })} />
@@ -335,7 +335,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
       {/* add  banner  */}
       {section === "allbanner" && (
-        <div className="border-2 border-gray-400 p-4 mb-6">
+        <div className="border-2 border-gray-400 p-4 mb-6 dark:text-black">
           <h2 className="font-bold mb-2">Add Banner</h2>
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Page Path"
             onChange={(e) => setNewItem({ ...newItem, pagePath: e.target.value })} />
@@ -604,28 +604,29 @@ const handleUpdate = async ({ id, originalData, section }) => {
 ))}
 
 
-    {/* //allbanner */}
+{/* All Banner Section */}
 {section === "allbanner" &&
   data.map((banner) => (
     <div
       key={banner._id}
-      className="border-2 border-green-700 shadow-xl p-4 mb-4 rounded-md flex gap-8"
+      className="border-2 border-green-700 shadow-xl p-4 mb-4 rounded-md flex flex-col md:flex-row gap-5 dark:border-green-500 dark:shadow-gray-700"
     >
       {/* Image Preview */}
-      <div className="w-32 flex-shrink-0">
+      <div className="w-full md:w-32 flex-shrink-0 flex justify-center items-center">
         <img
           src={banner.backgroundImage || banner.image}
           alt={banner.altText}
-          className="w-32 h-32 object-cover rounded-md border"
+          className="w-full md:w-32 h-32 object-cover rounded-md border dark:border-gray-600"
         />
       </div>
 
       {/* Form Fields */}
-      <div className="flex-1">
-        <div className="flex items-center mb-2">
-          <p className="w-32 font-semibold">Page Path:</p>
+      <div className="flex-1 flex flex-col gap-3">
+        {/* Page Path */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Page Path:</p>
           <input
-            className="border-2 border-gray-400 p-1 flex-1"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white  text-black "
             defaultValue={banner.pagePath}
             onChange={(e) =>
               setNewItem(prev => ({
@@ -636,10 +637,11 @@ const handleUpdate = async ({ id, originalData, section }) => {
           />
         </div>
 
-        <div className="flex items-center mb-2">
-          <p className="w-32 font-semibold">Title:</p>
+        {/* Title */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Title:</p>
           <input
-            className="border-2 border-gray-400 p-1 flex-1"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white text-black"
             defaultValue={banner.title}
             onChange={(e) =>
               setNewItem(prev => ({
@@ -650,10 +652,11 @@ const handleUpdate = async ({ id, originalData, section }) => {
           />
         </div>
 
-        <div className="flex items-center mb-2">
-          <p className="w-32 font-semibold">Image URL:</p>
+        {/* Image URL */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Image URL:</p>
           <input
-            className="border-2 border-gray-400 p-1 flex-1"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white  text-black"
             defaultValue={banner.backgroundImage || banner.image}
             onChange={(e) =>
               setNewItem(prev => ({
@@ -664,10 +667,11 @@ const handleUpdate = async ({ id, originalData, section }) => {
           />
         </div>
 
-        <div className="flex items-center mb-2">
-          <p className="w-32 font-semibold">Alt Text:</p>
+        {/* Alt Text */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Alt Text:</p>
           <input
-            className="border-2 border-gray-400 p-1 flex-1"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white  text-black "
             defaultValue={banner.altText}
             onChange={(e) =>
               setNewItem(prev => ({
@@ -679,7 +683,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-3 mt-3">
+        <div className="flex flex-col sm:flex-row gap-3 mt-3">
           <button
             onClick={() =>
               handleUpdate({
@@ -688,20 +692,21 @@ const handleUpdate = async ({ id, originalData, section }) => {
                 section: "allbanner",
               })
             }
-            className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
+            className="bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
           >
             Update
           </button>
           <button
             onClick={() => handleDelete(banner._id)}
-            className="bg-red-500 text-white px-4 py-1 rounded"
+            className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
           >
             Delete
           </button>
         </div>
       </div>
     </div>
-  ))}
+))}
+
 
       {/* //galleries */}
       {section === "galleries" &&
