@@ -136,13 +136,13 @@ const Admin = () => {
 const handleBlogUpdate = async (id, originalData) => {
   const updatedData = {
     ...originalData,
-    ...newItem[id], // only changed fields override original
+    ...newItem[id],
   };
 
   try {
     const res = await fetch(`${baseURL}/blogs/${id}`, {
       method: "PATCH",
-      withCredentials:true,
+      credentials: "include", //  MUST for JWT cookie
       headers: {
         "Content-Type": "application/json",
       },
@@ -154,7 +154,6 @@ const handleBlogUpdate = async (id, originalData) => {
     if (res.ok) {
       alert("Blog updated successfully");
 
-      // optional: clear edited state
       setNewItem(prev => {
         const copy = { ...prev };
         delete copy[id];
