@@ -74,58 +74,54 @@ const Admin = () => {
   };
 
 // ================= UPDATE blog (PUT) =================
-  const handleUpdate = async (idOrCategory, updatedData,category=null) => {
-    try {
-      // 1. Extract the specific changes for this item from our state if they exist
-      // We look inside newItem[idOrCategory] because that's where onChange stores them
-      const specificChanges = newItem[idOrCategory] || {};
+const handleUpdate = async (idOrCategory, updatedData,category=null) => {
+  try {
+    // 1. Get the specific changes for this ID
+    const specificChanges = newItem[idOrCategory] || {};
 
-      // 2. Merge the original data with the new changes
-      // This ensures we have a flat object: { title: "New", description: "Old", ... }
-      const mergedData = { ...updatedData, ...specificChanges };
+    // 2. Merge changes with original item
+    const mergedData = { ...updatedData, ...specificChanges };
 
-      // 3. Remove metadata that MongoDB/Server might reject
-      // We remove _id because MongoDB doesn't allow updating the immutable _id field
-      // We remove the tracking key [idOrCategory] so it doesn't save a nested object to the DB
-      const { _id, [idOrCategory]: junk, ...dataToUpdate } = mergedData;
+    // 3. Remove _id and the temporary state key before sending to DB
+    const { _id, [idOrCategory]: junk, ...dataToUpdate } = mergedData;
 
-      let url = "";
-      if (section === "blogs") url = `/blogs/${idOrCategory}`;
-      else if (section === "latestwork") url = `/latestwork/${idOrCategory}`;
-      else if (section === "team") url = `/team/${idOrCategory}`;
-      else if (section === "galleries") url = `/galleries/${idOrCategory}`;
-      else if (section === "allbanner") url = `/allbanner/${idOrCategory}`;
+    // 4. Construct URL carefully (no double slashes)
+    const endpoint = section; // 'blogs', 'latestwork', etc.
+    const finalURL = `${baseURL}/${endpoint}/${idOrCategory}`;
 
-      // 4. Send the clean, flat object to the server
-      await axios.put(baseURL + url, dataToUpdate, { withCredentials: true });
+    console.log("PUT Request URL:", finalURL);
+    console.log("Payload:", dataToUpdate);
 
-      // 5. Clean up local state for this specific ID
-      setNewItem((prev) => {
+    const res = await axios.put(finalURL, dataToUpdate, { withCredentials: true });
+
+    if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
+      // 5. Clean state and refresh
+      setNewItem(prev => {
         const newState = { ...prev };
         delete newState[idOrCategory];
         return newState;
       });
-
-      // 6. Refresh UI and notify user
       fetchData();
 
       Swal.fire({
         icon: "success",
         title: "Updated Successfully!",
-        text: `The ${section} item has been updated.`,
         timer: 2000,
         showConfirmButton: false,
       });
-    } catch (error) {
-      console.error("Update Error:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: `Failed to update ${section} item!`,
-      });
+    } else {
+        throw new Error("No changes made to the database.");
     }
-  };
 
+  } catch (error) {
+    console.error("Update error detail:", error.response?.data || error.message);
+    Swal.fire({
+      icon: "error",
+      title: "Update Failed",
+      text: error.response?.data?.message || "Check console for details",
+    });
+  }
+};
   // ================= DELETE =================
   const handleDelete = async (idOrCategory, category = null) => {
     const result = await Swal.fire({
