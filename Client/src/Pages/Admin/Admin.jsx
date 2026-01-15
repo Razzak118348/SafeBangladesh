@@ -40,9 +40,7 @@ const Admin = () => {
     setLoading(false);
   };
 
-  // console.log(data)
-
-
+  ///Create
   const handleCreate = async () => {
     try {
       let url = "";
@@ -133,38 +131,104 @@ const Admin = () => {
 //   }
 // };
 
-const handleBlogUpdate = async (id, originalData) => {
-  const updatedData = {
-    ...originalData,
-    ...newItem[id],
-  };
+// const handleBlogUpdate = async (id, originalData) => {
+//   const updatedData = {
+//     ...originalData,
+//     ...newItem[id],
+//   };
 
+//   try {
+//     let endpoint = section;
+//     const res = await fetch(`${baseURL}/${endpoint}/${id}`, {
+//       method: "PATCH",
+//       credentials: "include", //  MUST for JWT cookie
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(updatedData),
+//     });
+
+//     const result = await res.json();
+
+//     if (res.ok) {
+//       alert("Blog updated successfully");
+
+//       setNewItem(prev => {
+//         const copy = { ...prev };
+//         delete copy[id];
+//         return copy;
+//       });
+//       Swal.fire({
+//         icon: "success",
+//         title: "Updated Successfully!",
+//         timer: 2000,
+//         showConfirmButton: false,
+//       });
+//     } else {
+//       alert(result.message || "Update failed");
+//     }
+//   } catch (error) {
+//     console.error("Update error:", error);
+//     console.error("Patch error:", error.response?.data || error.message);
+//     Swal.fire({
+//       icon: "error",
+//       title: "Update Failed",
+//       text: error.response?.data?.message || "Check console",
+//     });
+//   }
+// };
+const handleUpdate = async ({ id, originalData, section }) => {
   try {
-    const res = await fetch(`${baseURL}/blogs/${id}`, {
-      method: "PATCH",
-      credentials: "include", //  MUST for JWT cookie
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
+    const editedData = newItem[id];
+
+    if (!editedData || Object.keys(editedData).length === 0) {
+      return Swal.fire("Nothing to update");
+    }
+
+    // ✅ only changed fields
+    const changes = {};
+    for (let key in editedData) {
+      if (editedData[key] !== originalData[key]) {
+        changes[key] = editedData[key];
+      }
+    }
+
+    if (Object.keys(changes).length === 0) {
+      return Swal.fire("No real changes detected");
+    }
+
+    const url = `${baseURL}/${section}/${id}`;
+
+    const res = await axios.patch(url, changes, {
+      withCredentials: true,
     });
 
-    const result = await res.json();
-
-    if (res.ok) {
-      alert("Blog updated successfully");
-
+    if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
       setNewItem(prev => {
         const copy = { ...prev };
         delete copy[id];
         return copy;
       });
+
+      fetchData();
+
+      Swal.fire({
+        icon: "success",
+        title: "Updated Successfully!",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     } else {
-      alert(result.message || "Update failed");
+      throw new Error("No update applied");
     }
+
   } catch (error) {
-    console.error("Update error:", error);
-    alert("Something went wrong");
+    console.error("Patch error:", error.response?.data || error.message);
+    Swal.fire({
+      icon: "error",
+      title: "Update Failed",
+      text: error.response?.data?.message || "Check console",
+    });
   }
 };
 
@@ -461,7 +525,13 @@ const handleBlogUpdate = async (id, originalData) => {
         {/* Buttons */}
         <div className="flex gap-3 mt-3">
           <button
-            onClick={() => handleBlogUpdate(item._id, item)}
+            onClick={() =>
+  handleUpdate({
+    id: item._id,
+    originalData: item,
+    section: "blogs",
+  })
+}
             className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
           >
             Update
