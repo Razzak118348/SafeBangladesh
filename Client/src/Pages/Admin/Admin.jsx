@@ -357,14 +357,14 @@ const handleUpdate = async ({ id, originalData, section }) => {
   data.map((item) => (
     <div
       key={item._id}
-      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-5"
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-5 dark:border-green-500 dark:shadow-gray-700"
     >
       {/* Image Preview */}
       <div className="w-full md:w-auto md:col-span-1 flex justify-center items-center">
         <img
           src={newItem[item._id]?.image || item.image || item.img}
           alt={item.title}
-          className="w-full md:w-48 h-48 md:h-48 object-cover rounded-md border"
+          className="w-full md:w-48 h-48 md:h-48 object-cover rounded-md border dark:border-gray-600"
         />
       </div>
 
@@ -372,9 +372,9 @@ const handleUpdate = async ({ id, originalData, section }) => {
       <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
         {/* Title */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-          <p className="w-full sm:w-28 font-semibold">Title:</p>
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Title:</p>
           <input
-            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
             defaultValue={item.title}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], title: e.target.value } }))
@@ -384,9 +384,9 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
         {/* Image URL */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-          <p className="w-full sm:w-28 font-semibold">Image URL:</p>
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Image URL:</p>
           <input
-            className="border-2 border-gray-400 p-2 flex-1 rounded"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
             defaultValue={item.image || item.img}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], image: e.target.value } }))
@@ -396,9 +396,9 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
         {/* Description */}
         <div className="flex flex-col sm:flex-row sm:items-start gap-2">
-          <p className="w-full sm:w-28 font-semibold pt-1">Description:</p>
+          <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">Description:</p>
           <textarea
-            className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[80px] bg-white dark:bg-gray-800 text-black dark:text-white"
             defaultValue={item.description}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], description: e.target.value } }))
@@ -408,9 +408,9 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
         {/* Content */}
         <div className="flex flex-col sm:flex-row sm:items-start gap-2">
-          <p className="w-full sm:w-28 font-semibold pt-1">Content:</p>
+          <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">Content:</p>
           <textarea
-            className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[120px]"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[120px] bg-white dark:bg-gray-800 text-black dark:text-white"
             defaultValue={item.content}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], content: e.target.value } }))
@@ -428,13 +428,13 @@ const handleUpdate = async ({ id, originalData, section }) => {
                 section: "blogs",
               })
             }
-            className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+            className="bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
           >
             Update
           </button>
           <button
             onClick={() => handleDelete(item._id, "blogs")}
-            className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+            className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
           >
             Delete
           </button>
@@ -444,81 +444,85 @@ const handleUpdate = async ({ id, originalData, section }) => {
   ))}
 
 
-      {/* Latest Work Section */}
-      {section === "latestwork" &&
-        data.map((item) => (
-          <div
-            key={item._id}
-            className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
+   {/* Latest Work Section */}
+{section === "latestwork" &&
+  data.map((item) => (
+    <div
+      key={item._id}
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex flex-col md:flex-row gap-5 dark:border-green-500 dark:shadow-gray-700"
+    >
+      {/* Image Preview */}
+      <div className="w-full md:w-48 flex-shrink-0 flex justify-center items-center">
+        <img
+          src={item.image || item.img}
+          alt={item.title}
+          className="w-full md:w-48 h-48 object-cover rounded-md border dark:border-gray-600"
+        />
+      </div>
+
+      {/* Form Area */}
+      <div className="flex-1 flex flex-col gap-3">
+        {/* Title */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Title:</p>
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+            defaultValue={item.title}
+            onChange={(e) =>
+              setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], title: e.target.value } }))
+            }
+          />
+        </div>
+
+        {/* Image URL */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Image URL:</p>
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+            defaultValue={item.image || item.img}
+            onChange={(e) =>
+              setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], image: e.target.value } }))
+            }
+          />
+        </div>
+
+        {/* Description */}
+        <div className="flex flex-col sm:flex-row sm:items-start gap-2">
+          <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">Description:</p>
+          <textarea
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[80px] bg-white dark:bg-gray-800 text-black dark:text-white"
+            defaultValue={item.description}
+            onChange={(e) =>
+              setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], description: e.target.value } }))
+            }
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-3">
+          <button
+            onClick={() =>
+              handleUpdate({
+                id: item._id,
+                originalData: item,
+                section: "latestwork",
+              })
+            }
+            className="bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
           >
-            {/* Image Preview */}
-            <div className="w-48 flex-shrink-0">
-              <img
-                src={item.image || item.img}
-                alt={item.title}
-                className="w-full h-48 object-cover rounded-md border"
-              />
-            </div>
+            Update
+          </button>
 
-            {/* Form Area */}
-            <div className="flex-1">
-              {/* Title */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Title:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={item.title}
-                  onChange={(e) =>
-                    setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], title: e.target.value } }))
-                  }
-                />
-              </div>
-              {/* Image URL */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Image URL:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={item.image || item.img}
-                  onChange={(e) =>
-                    setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], image: e.target.value } }))
-                  }
-                />
-              </div>
-              {/* Description */}
-              <div className="flex items-start mb-3">
-                <p className="w-28 font-semibold pt-1">Description:</p>
-                <textarea
-                  className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
-                  defaultValue={item.description}
-                  onChange={(e) =>
-                    setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], description: e.target.value } }))
-                  }
-                />
-              </div>
-              {/* Buttons */}
-              <div className="flex gap-3 mt-3">
-<button
-              onClick={() =>
-  handleUpdate({
-    id: item._id,
-    originalData: item,
-    section: "latestwork",
-  })
-}
-className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded">
-Update
-</button>
-
-                <button
-                  onClick={() => handleDelete(item._id, "latestwork")}
-                  className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+          <button
+            onClick={() => handleDelete(item._id, "latestwork")}
+            className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+))}
 
       {/* //team section */}
       {section === "team" &&
