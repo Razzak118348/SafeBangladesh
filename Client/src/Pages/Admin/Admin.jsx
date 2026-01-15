@@ -73,34 +73,44 @@ const Admin = () => {
     }
   };
 
-// ================= UPDATE blog (PUT) =================
-const handleUpdate = async (idOrCategory, updatedData,category=null) => {
+// ================= UPDATE blog (PATCH) =================
+const handleUpdate = async (id, originalData) => {
   try {
-    // 1. Get the specific changes for this ID
-    const specificChanges = newItem[idOrCategory] || {};
+    const editedData = newItem[id];
 
-    // 2. Merge changes with original item
-    const mergedData = { ...updatedData, ...specificChanges };
+    console.log("Edited:", editedData, "Original:", originalData);
 
-    // 3. Remove _id and the temporary state key before sending to DB
-    const { _id, [idOrCategory]: junk, ...dataToUpdate } = mergedData;
+    if (!editedData || Object.keys(editedData).length === 0) {
+      return Swal.fire("Nothing to update");
+    }
 
-    // 4. Construct URL carefully (no double slashes)
-    const endpoint = section; // 'blogs', 'latestwork', etc.
-    const finalURL = `${baseURL}/${endpoint}/${idOrCategory}`;
+    //  only send actually changed fields
+    const changes = {};
 
-    console.log("PUT Request URL:", finalURL);
-    console.log("Payload:", dataToUpdate);
+    for (let key in editedData) {
+      if (editedData[key] !== originalData[key]) {
+        changes[key] = editedData[key];
+      }
+    }
 
-    const res = await axios.put(finalURL, dataToUpdate, { withCredentials: true });
+    console.log("Final PATCH Changes:", changes);
+
+    if (Object.keys(changes).length === 0) {
+      return Swal.fire("No real changes detected");
+    }
+
+    const endpoint = section; // blogs, latestwork etc
+    const finalURL = `${baseURL}/${endpoint}/${id}`;
+
+    const res = await axios.patch(finalURL, changes, { withCredentials: true });
 
     if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
-      // 5. Clean state and refresh
       setNewItem(prev => {
         const newState = { ...prev };
-        delete newState[idOrCategory];
+        delete newState[id];
         return newState;
       });
+
       fetchData();
 
       Swal.fire({
@@ -110,18 +120,20 @@ const handleUpdate = async (idOrCategory, updatedData,category=null) => {
         showConfirmButton: false,
       });
     } else {
-        throw new Error("No changes made to the database.");
+      throw new Error("Database not modified");
     }
 
   } catch (error) {
-    console.error("Update error detail:", error.response?.data || error.message);
+    console.error("Patch error:", error.response?.data || error.message);
     Swal.fire({
       icon: "error",
       title: "Update Failed",
-      text: error.response?.data?.message || "Check console for details",
+      text: error.response?.data?.message || "Check console",
     });
   }
 };
+
+
   // ================= DELETE =================
   const handleDelete = async (idOrCategory, category = null) => {
     const result = await Swal.fire({
