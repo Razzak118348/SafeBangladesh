@@ -767,7 +767,7 @@ Update
               </div>
 
               {/* Buttons */}
-              <div className="flex mt-3">
+              <div className="flex gap-3 mt-3">
 <button
 onClick={() =>
   handleUpdate({
