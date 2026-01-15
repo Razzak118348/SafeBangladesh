@@ -441,6 +441,7 @@ app.patch("/allbanner/:id", verifyJWT, verifyAdmin, async (req, res) => {
         res.status(500).send({ message: "Failed to fetch galleries" });
       }
     })
+
     //post team member
     app.post("/team", async (req, res) => {
       const result = await allTeamMember.insertOne(req.body);
