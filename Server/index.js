@@ -124,21 +124,26 @@ async function run() {
     });
 
     // UPDATE blog
-    app.put("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
-      try {
-        const { id } = req.params;
-        const result = await blogCollection.updateOne(
-          { _id: new ObjectId(id) },
-          { $set: req.body }
-        );
+app.put("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
 
-        res.send(result);
-      } catch (error) {
-        console.error("Update blog error:", error);
-        res.status(500).send({ message: "Failed to update blog", error: error.message });
-      }
-    });
+    // Ensure the ID is valid before querying MongoDB
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).send({ message: "Invalid ID format" });
+    }
 
+    const result = await blogCollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: req.body }
+    );
+
+    res.send(result);
+  } catch (error) {
+    console.error("Update blog error:", error);
+    res.status(500).send({ message: "Failed to update blog", error: error.message });
+  }
+});
     // DELETE blog
     app.delete("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       try {
