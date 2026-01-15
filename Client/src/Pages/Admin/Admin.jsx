@@ -71,112 +71,7 @@ const Admin = () => {
     }
   };
 
-// ================= UPDATE blog (PATCH) =================
-// const handleUpdate = async (id, originalData) => {
-//   try {
-//     const editedData = newItem[id];
-
-//     console.log("Edited:", editedData, "Original:", originalData);
-
-//     if (!editedData || Object.keys(editedData).length === 0) {
-//       return Swal.fire("Nothing to update");
-//     }
-
-//     //  only send actually changed fields
-//     const changes = {};
-
-//     for (let key in editedData) {
-//       if (editedData[key] !== originalData[key]) {
-//         changes[key] = editedData[key];
-//       }
-//     }
-
-//     console.log("Final PATCH Changes:", changes);
-
-//     if (Object.keys(changes).length === 0) {
-//       return Swal.fire("No real changes detected");
-//     }
-
-//     const endpoint = section; // blogs, latestwork etc
-//     const finalURL = `${baseURL}/${endpoint}/${id}`;
-
-//     const res = await axios.patch(finalURL, changes, { withCredentials: true });
-
-//     if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
-//       setNewItem(prev => {
-//         const newState = { ...prev };
-//         delete newState[id];
-//         return newState;
-//       });
-
-//       fetchData();
-
-//       Swal.fire({
-//         icon: "success",
-//         title: "Updated Successfully!",
-//         timer: 2000,
-//         showConfirmButton: false,
-//       });
-//     } else {
-//       throw new Error("Database not modified");
-//     }
-
-//   } catch (error) {
-//     console.error("Patch error:", error.response?.data || error.message);
-//     Swal.fire({
-//       icon: "error",
-//       title: "Update Failed",
-//       text: error.response?.data?.message || "Check console",
-//     });
-//   }
-// };
-
-// const handleBlogUpdate = async (id, originalData) => {
-//   const updatedData = {
-//     ...originalData,
-//     ...newItem[id],
-//   };
-
-//   try {
-//     let endpoint = section;
-//     const res = await fetch(`${baseURL}/${endpoint}/${id}`, {
-//       method: "PATCH",
-//       credentials: "include", //  MUST for JWT cookie
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(updatedData),
-//     });
-
-//     const result = await res.json();
-
-//     if (res.ok) {
-//       alert("Blog updated successfully");
-
-//       setNewItem(prev => {
-//         const copy = { ...prev };
-//         delete copy[id];
-//         return copy;
-//       });
-//       Swal.fire({
-//         icon: "success",
-//         title: "Updated Successfully!",
-//         timer: 2000,
-//         showConfirmButton: false,
-//       });
-//     } else {
-//       alert(result.message || "Update failed");
-//     }
-//   } catch (error) {
-//     console.error("Update error:", error);
-//     console.error("Patch error:", error.response?.data || error.message);
-//     Swal.fire({
-//       icon: "error",
-//       title: "Update Failed",
-//       text: error.response?.data?.message || "Check console",
-//     });
-//   }
-// };
+// ================= UPDATE blog (PATCH)
 const handleUpdate = async ({ id, originalData, section }) => {
   try {
     const editedData = newItem[id];
@@ -698,98 +593,106 @@ Update
           </div>
         ))}
 
-      {/* //allbanner */}
-      {section === "allbanner" &&
-        data.map((banner) => (
-          <div
-            key={banner._id}
-            className="border-2 border-green-700 shadow-xl p-5 mb-6 rounded-lg flex gap-5"
+
+    {/* //allbanner */}
+{section === "allbanner" &&
+  data.map((banner) => (
+    <div
+      key={banner._id}
+      className="border-2 border-green-700 shadow-xl p-4 mb-4 rounded-md flex gap-8"
+    >
+      {/* Image Preview */}
+      <div className="w-32 flex-shrink-0">
+        <img
+          src={banner.backgroundImage || banner.image}
+          alt={banner.altText}
+          className="w-32 h-32 object-cover rounded-md border"
+        />
+      </div>
+
+      {/* Form Fields */}
+      <div className="flex-1">
+        <div className="flex items-center mb-2">
+          <p className="w-32 font-semibold">Page Path:</p>
+          <input
+            className="border-2 border-gray-400 p-1 flex-1"
+            defaultValue={banner.pagePath}
+            onChange={(e) =>
+              setNewItem(prev => ({
+                ...prev,
+                [banner._id]: { ...prev[banner._id], pagePath: e.target.value }
+              }))
+            }
+          />
+        </div>
+
+        <div className="flex items-center mb-2">
+          <p className="w-32 font-semibold">Title:</p>
+          <input
+            className="border-2 border-gray-400 p-1 flex-1"
+            defaultValue={banner.title}
+            onChange={(e) =>
+              setNewItem(prev => ({
+                ...prev,
+                [banner._id]: { ...prev[banner._id], title: e.target.value }
+              }))
+            }
+          />
+        </div>
+
+        <div className="flex items-center mb-2">
+          <p className="w-32 font-semibold">Image URL:</p>
+          <input
+            className="border-2 border-gray-400 p-1 flex-1"
+            defaultValue={banner.backgroundImage || banner.image}
+            onChange={(e) =>
+              setNewItem(prev => ({
+                ...prev,
+                [banner._id]: { ...prev[banner._id], backgroundImage: e.target.value }
+              }))
+            }
+          />
+        </div>
+
+        <div className="flex items-center mb-2">
+          <p className="w-32 font-semibold">Alt Text:</p>
+          <input
+            className="border-2 border-gray-400 p-1 flex-1"
+            defaultValue={banner.altText}
+            onChange={(e) =>
+              setNewItem(prev => ({
+                ...prev,
+                [banner._id]: { ...prev[banner._id], altText: e.target.value }
+              }))
+            }
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-3 mt-3">
+          <button
+            onClick={() =>
+              handleUpdate({
+                id: banner._id,
+                originalData: banner,
+                section:"allbanner",
+              })
+            }
+            className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
           >
-            {/* Image Preview */}
-            <div className="w-48 flex-shrink-0">
-              {banner.backgroundImage && (
-                <img
-                  src={banner.backgroundImage}
-                  alt={banner.altText}
-                  className="w-full h-48 object-cover rounded-md border"
-                />
-              )}
-            </div>
+            Update
+          </button>
+          <button
+            onClick={() => handleDelete(banner._id)}
+            className="bg-red-500 text-white px-4 py-1 rounded"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
 
-            {/* Form Area */}
-            <div className="flex-1">
-              {/* Page Path */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Page Path:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={banner.pagePath}
-                  onChange={(e) =>
-                    setNewItem({ ...banner, pagePath: e.target.value })
-                  }
-                />
-              </div>
-
-              {/* Title */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Title:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={banner.title}
-                  onChange={(e) =>
-                    setNewItem({ ...banner, title: e.target.value })
-                  }
-                />
-              </div>
-
-              {/* Image URL */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Image URL:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={banner.backgroundImage}
-                  onChange={(e) =>
-                    setNewItem({ ...banner, backgroundImage: e.target.value })
-                  }
-                />
-              </div>
-
-              {/* Alt Text */}
-              <div className="flex items-center mb-3">
-                <p className="w-28 font-semibold">Alt Text:</p>
-                <input
-                  className="border-2 border-gray-400 p-2 flex-1 rounded"
-                  defaultValue={banner.altText}
-                  onChange={(e) =>
-                    setNewItem({ ...banner, altText: e.target.value })
-                  }
-                />
-              </div>
-
-              {/* Buttons */}
-              <div className="flex gap-3 mt-3">
-<button
-onClick={() =>
-  handleUpdate({
-    id: banner._id,
-    originalData: banner,
-    section: "allbanner",
-  })
-}
-className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
->
-  Update
-</button>
-                <button
-                  onClick={() => handleDelete(banner._id)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
 
       {/* //galleries */}
       {section === "galleries" &&
