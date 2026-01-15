@@ -74,64 +74,64 @@ const Admin = () => {
   };
 
 // ================= UPDATE blog (PATCH) =================
-const handleUpdate = async (id, originalData) => {
-  try {
-    const editedData = newItem[id];
+// const handleUpdate = async (id, originalData) => {
+//   try {
+//     const editedData = newItem[id];
 
-    console.log("Edited:", editedData, "Original:", originalData);
+//     console.log("Edited:", editedData, "Original:", originalData);
 
-    if (!editedData || Object.keys(editedData).length === 0) {
-      return Swal.fire("Nothing to update");
-    }
+//     if (!editedData || Object.keys(editedData).length === 0) {
+//       return Swal.fire("Nothing to update");
+//     }
 
-    //  only send actually changed fields
-    const changes = {};
+//     //  only send actually changed fields
+//     const changes = {};
 
-    for (let key in editedData) {
-      if (editedData[key] !== originalData[key]) {
-        changes[key] = editedData[key];
-      }
-    }
+//     for (let key in editedData) {
+//       if (editedData[key] !== originalData[key]) {
+//         changes[key] = editedData[key];
+//       }
+//     }
 
-    console.log("Final PATCH Changes:", changes);
+//     console.log("Final PATCH Changes:", changes);
 
-    if (Object.keys(changes).length === 0) {
-      return Swal.fire("No real changes detected");
-    }
+//     if (Object.keys(changes).length === 0) {
+//       return Swal.fire("No real changes detected");
+//     }
 
-    const endpoint = section; // blogs, latestwork etc
-    const finalURL = `${baseURL}/${endpoint}/${id}`;
+//     const endpoint = section; // blogs, latestwork etc
+//     const finalURL = `${baseURL}/${endpoint}/${id}`;
 
-    const res = await axios.patch(finalURL, changes, { withCredentials: true });
+//     const res = await axios.patch(finalURL, changes, { withCredentials: true });
 
-    if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
-      setNewItem(prev => {
-        const newState = { ...prev };
-        delete newState[id];
-        return newState;
-      });
+//     if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
+//       setNewItem(prev => {
+//         const newState = { ...prev };
+//         delete newState[id];
+//         return newState;
+//       });
 
-      fetchData();
+//       fetchData();
 
-      Swal.fire({
-        icon: "success",
-        title: "Updated Successfully!",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-    } else {
-      throw new Error("Database not modified");
-    }
+//       Swal.fire({
+//         icon: "success",
+//         title: "Updated Successfully!",
+//         timer: 2000,
+//         showConfirmButton: false,
+//       });
+//     } else {
+//       throw new Error("Database not modified");
+//     }
 
-  } catch (error) {
-    console.error("Patch error:", error.response?.data || error.message);
-    Swal.fire({
-      icon: "error",
-      title: "Update Failed",
-      text: error.response?.data?.message || "Check console",
-    });
-  }
-};
+//   } catch (error) {
+//     console.error("Patch error:", error.response?.data || error.message);
+//     Swal.fire({
+//       icon: "error",
+//       title: "Update Failed",
+//       text: error.response?.data?.message || "Check console",
+//     });
+//   }
+// };
 
 
   // ================= DELETE =================
@@ -424,14 +424,8 @@ const handleUpdate = async (id, originalData) => {
           />
         </div>
         {/* Buttons */}
-        <div className="flex gap-3 mt-3">
-          <button
-            onClick={() => handleUpdate(item._id, item)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
-          >
-            Update
-          </button>
-         <button
+        <div className="flex  mt-3">
+        <button
                   onClick={() => handleDelete(item._id, "blogs")}
                   className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
                 >
@@ -563,14 +557,7 @@ const handleUpdate = async (id, originalData) => {
                 />
               </div>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={() => handleUpdate(member._id, newItem[member._id] || member)}
-                  className="bg-blue-500 text-white px-4 py-1 rounded"
-                >
-                  Update
-                </button>
-
+              <div className="flex mt-3">
                 <button
                   onClick={() => handleDelete(member._id)}
                   className="bg-red-500 text-white px-4 py-1 rounded"
@@ -728,13 +715,7 @@ const handleUpdate = async (id, originalData) => {
               </div>
 
               {/* Buttons */}
-              <div className="flex gap-3 mt-3">
-                <button
-                  onClick={() => handleUpdate(banner._id, { ...banner, ...newItem })}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
-                >
-                  Update
-                </button>
+              <div className="flex mt-3">
                 <button
                   onClick={() => handleDelete(banner._id)}
                   className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
