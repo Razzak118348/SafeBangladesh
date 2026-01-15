@@ -1,7 +1,12 @@
 const jwt = require("jsonwebtoken");
 
 const verifyJWT = (req, res, next) => {
-  const token = req.cookies.access_token; // <-- read from cookie
+  // 1. Allow pre-flight OPTIONS requests to skip token check
+  if (req.method === "OPTIONS") {
+    return next();
+  }
+
+  const token = req.cookies.access_token;
   if (!token) {
     return res.status(401).send({ message: "Unauthorized" });
   }
@@ -10,7 +15,7 @@ const verifyJWT = (req, res, next) => {
     if (err) {
       return res.status(403).send({ message: "Forbidden" });
     }
-    req.user = decoded; // attach user info to request
+    req.user = decoded;
     next();
   });
 };
