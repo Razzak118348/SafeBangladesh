@@ -374,7 +374,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Title:</p>
           <input
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black"
             defaultValue={item.title}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], title: e.target.value } }))
@@ -386,7 +386,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Image URL:</p>
           <input
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black "
             defaultValue={item.image || item.img}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], image: e.target.value } }))
@@ -398,7 +398,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="flex flex-col sm:flex-row sm:items-start gap-2">
           <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">Description:</p>
           <textarea
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[80px] bg-white dark:bg-gray-800 text-black dark:text-white"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[80px] bg-white dark:bg-gray-800 text-black "
             defaultValue={item.description}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], description: e.target.value } }))
@@ -410,7 +410,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="flex flex-col sm:flex-row sm:items-start gap-2">
           <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">Content:</p>
           <textarea
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[120px] bg-white dark:bg-gray-800 text-black dark:text-white"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[120px] bg-white dark:bg-gray-800 text-black "
             defaultValue={item.content}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], content: e.target.value } }))
@@ -466,7 +466,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Title:</p>
           <input
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black"
             defaultValue={item.title}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], title: e.target.value } }))
@@ -478,7 +478,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Image URL:</p>
           <input
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black"
             defaultValue={item.image || item.img}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], image: e.target.value } }))
@@ -490,7 +490,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="flex flex-col sm:flex-row sm:items-start gap-2">
           <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">Description:</p>
           <textarea
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[80px] bg-white dark:bg-gray-800 text-black dark:text-white"
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[80px] bg-white dark:bg-gray-800 text-black"
             defaultValue={item.description}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], description: e.target.value } }))
@@ -524,80 +524,85 @@ const handleUpdate = async ({ id, originalData, section }) => {
     </div>
 ))}
 
-      {/* //team section */}
-      {section === "team" &&
-        data.map(member => (
-          <div
-            key={member._id}
-            className="border-2 border-green-700 shadow-xl  p-4 mb-4 rounded-md  flex gap-8"
+     {/* Team Section */}
+{section === "team" &&
+  data.map((member) => (
+    <div
+      key={member._id}
+      className="border-2 border-green-700 shadow-xl p-4 mb-4 rounded-md flex flex-col md:flex-row gap-5 dark:border-green-500 dark:shadow-gray-700"
+    >
+      {/* Image Preview */}
+      <div className="w-full md:w-32 flex-shrink-0 flex justify-center items-center">
+        <img
+          src={member.img}
+          alt={member.alt}
+          className="w-full md:w-32 h-32 object-cover rounded-md border dark:border-gray-600"
+        />
+      </div>
+
+      {/* Form Fields */}
+      <div className="flex-1 flex flex-col gap-3">
+        {/* Image URL */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Image URL:</p>
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black"
+            defaultValue={member.img}
+            onChange={(e) =>
+              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], img: e.target.value } }))
+            }
+          />
+        </div>
+
+        {/* Alt Text */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Alt Text:</p>
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black"
+            defaultValue={member.alt}
+            onChange={(e) =>
+              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], alt: e.target.value } }))
+            }
+          />
+        </div>
+
+        {/* Designation */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Designation:</p>
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-gray-800 text-black"
+            defaultValue={member.designation}
+            onChange={(e) =>
+              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], designation: e.target.value } }))
+            }
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-3">
+          <button
+            onClick={() =>
+              handleUpdate({
+                id: member._id,
+                originalData: member,
+                section: "team",
+              })
+            }
+            className="bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
           >
-            {/* Image Preview */}
-            <div className="w-32 flex-shrink-0">
-              <img
-                src={member.img}
-                alt={member.alt}
-                className="w-32 h-32 object-cover rounded-md border"
-              />
-            </div>
+            Update
+          </button>
+          <button
+            onClick={() => handleDelete(member._id)}
+            className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+))}
 
-            {/* Form Fields */}
-            <div className="flex-1">
-              <div className="flex items-center mb-2">
-                <p className="w-32 font-semibold">Image URL:</p>
-                <input
-                  className="border-2 border-gray-400 p-1 flex-1"
-                  defaultValue={member.img}
-                  onChange={(e) =>
-                    setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], img: e.target.value } }))
-                  }
-                />
-              </div>
-
-              <div className="flex items-center mb-2">
-                <p className="w-32 font-semibold">Alt Text:</p>
-                <input
-                  className="border-2 border-gray-400 p-1 flex-1"
-                  defaultValue={member.alt}
-                  onChange={(e) =>
-                    setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], alt: e.target.value } }))
-                  }
-                />
-              </div>
-
-              <div className="flex items-center mb-3">
-                <p className="w-32 font-semibold">Designation:</p>
-                <input
-                  className="border-2 border-gray-400 p-1 flex-1"
-                  defaultValue={member.designation}
-                  onChange={(e) =>
-                    setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], designation: e.target.value } }))
-                  }
-                />
-              </div>
-
-              <div className="flex gap-3 mt-3">
-<button
-                onClick={() =>
-  handleUpdate({
-    id: member._id,
-    originalData: member,
-    section: "team",
-  })
-}
-className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
->
-Update
-</button>
-                <button
-                  onClick={() => handleDelete(member._id)}
-                  className="bg-red-500 text-white px-4 py-1 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
 
     {/* //allbanner */}
 {section === "allbanner" &&
