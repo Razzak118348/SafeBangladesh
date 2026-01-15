@@ -488,13 +488,7 @@ const Admin = () => {
                 />
               </div>
               {/* Buttons */}
-              <div className="flex gap-3 mt-3">
-                <button
-                  onClick={() => handleUpdate(item._id, { ...item, ...newItem }, "latestwork")}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded"
-                >
-                  Update
-                </button>
+              <div className="flex mt-3">
                 <button
                   onClick={() => handleDelete(item._id, "latestwork")}
                   className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
