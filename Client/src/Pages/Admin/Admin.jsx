@@ -366,10 +366,10 @@ const Admin = () => {
   data.map((item) => (
     <div
       key={item._id}
-      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg flex gap-5"
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg grid grid-cols-1 lg:flax gap-5"
     >
       {/* Image Preview */}
-      <div className="w-48 flex-shrink-0">
+      <div className="grid lg:flex-auto">
         <img
           src={newItem[item._id]?.image || item.image || item.img}
           alt={item.title}
@@ -378,7 +378,7 @@ const Admin = () => {
       </div>
 
       {/* Form Area */}
-      <div className="flex-1">
+      <div className="grid lg:flax-1">
         {/* Title */}
         <div className="flex items-center mb-3">
           <p className="w-28 font-semibold">Title:</p>
