@@ -40,7 +40,7 @@ const Admin = () => {
     setLoading(false);
   };
 
-  ///Create
+  ///=============Create
   const handleCreate = async () => {
     try {
       let url = "";
@@ -71,7 +71,7 @@ const Admin = () => {
     }
   };
 
-// ================= UPDATE blog (PATCH)
+// ================= UPDATE (PATCH)
 const handleUpdate = async ({ id, originalData, section }) => {
   try {
     const editedData = newItem[id];
@@ -171,7 +171,6 @@ const handleUpdate = async ({ id, originalData, section }) => {
   };
 
   // ================= GALLERY IMAGE REMOVE =================
-  //new
   const removeGalleryImage = async (category, img) => {
     const result = await Swal.fire({
       title: "Remove this image?",
@@ -208,10 +207,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
     }
   };
 
-
-
   // ================= GALLERY IMAGE ADD =================
-
   const addGalleryImage = async (category, imageUrl) => {
     if (!imageUrl || !imageUrl.trim()) return;
 
@@ -235,9 +231,10 @@ const handleUpdate = async ({ id, originalData, section }) => {
       });
     }
   };
+
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center text-green-600">Admin Dashboard</h1>
 
       {/* SECTION SELECT */}
       <select
@@ -354,28 +351,28 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
 
       {/* ================= READ / UPDATE / DELETE ================= */}
-      {/* Blogs Section */}
+
     {/* Blogs Section */}
 {section === "blogs" &&
   data.map((item) => (
     <div
       key={item._id}
-      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg grid grid-cols-1 lg:flax gap-5"
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-5"
     >
       {/* Image Preview */}
-      <div className="grid lg:flex-auto">
+      <div className="w-full md:w-auto md:col-span-1 flex justify-center items-center">
         <img
           src={newItem[item._id]?.image || item.image || item.img}
           alt={item.title}
-          className="w-full h-48 object-cover rounded-md border"
+          className="w-full md:w-48 h-48 md:h-48 object-cover rounded-md border"
         />
       </div>
 
       {/* Form Area */}
-      <div className="grid lg:flax-1">
+      <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
         {/* Title */}
-        <div className="flex items-center mb-3">
-          <p className="w-28 font-semibold">Title:</p>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold">Title:</p>
           <input
             className="border-2 border-gray-400 p-2 flex-1 rounded"
             defaultValue={item.title}
@@ -384,9 +381,10 @@ const handleUpdate = async ({ id, originalData, section }) => {
             }
           />
         </div>
+
         {/* Image URL */}
-        <div className="flex items-center mb-3">
-          <p className="w-28 font-semibold">Image URL:</p>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold">Image URL:</p>
           <input
             className="border-2 border-gray-400 p-2 flex-1 rounded"
             defaultValue={item.image || item.img}
@@ -395,9 +393,10 @@ const handleUpdate = async ({ id, originalData, section }) => {
             }
           />
         </div>
+
         {/* Description */}
-        <div className="flex items-start mb-3">
-          <p className="w-28 font-semibold pt-1">Description:</p>
+        <div className="flex flex-col sm:flex-row sm:items-start gap-2">
+          <p className="w-full sm:w-28 font-semibold pt-1">Description:</p>
           <textarea
             className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[80px]"
             defaultValue={item.description}
@@ -406,41 +405,44 @@ const handleUpdate = async ({ id, originalData, section }) => {
             }
           />
         </div>
+
         {/* Content */}
-        <div className="flex items-start mb-3">
-          <p className="w-28 font-semibold pt-1">Content:</p>
+        <div className="flex flex-col sm:flex-row sm:items-start gap-2">
+          <p className="w-full sm:w-28 font-semibold pt-1">Content:</p>
           <textarea
-            className="border-2 border-gray-400  p-2 flex-1 rounded min-h-[120px]"
+            className="border-2 border-gray-400 p-2 flex-1 rounded min-h-[120px]"
             defaultValue={item.content}
             onChange={(e) =>
               setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], content: e.target.value } }))
             }
           />
         </div>
+
         {/* Buttons */}
-        <div className="flex gap-3 mt-3">
+        <div className="flex flex-col sm:flex-row gap-3 mt-3">
           <button
             onClick={() =>
-  handleUpdate({
-    id: item._id,
-    originalData: item,
-    section: "blogs",
-  })
-}
-            className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
+              handleUpdate({
+                id: item._id,
+                originalData: item,
+                section: "blogs",
+              })
+            }
+            className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded w-full sm:w-auto"
           >
             Update
           </button>
-        <button
-                  onClick={() => handleDelete(item._id, "blogs")}
-                  className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
-                >
-                  Delete
-                </button>
+          <button
+            onClick={() => handleDelete(item._id, "blogs")}
+            className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
   ))}
+
 
       {/* Latest Work Section */}
       {section === "latestwork" &&
@@ -593,7 +595,6 @@ Update
           </div>
         ))}
 
-
     {/* //allbanner */}
 {section === "allbanner" &&
   data.map((banner) => (
@@ -675,7 +676,7 @@ Update
               handleUpdate({
                 id: banner._id,
                 originalData: banner,
-                section:"allbanner",
+                section: "allbanner",
               })
             }
             className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
@@ -692,7 +693,6 @@ Update
       </div>
     </div>
   ))}
-
 
       {/* //galleries */}
       {section === "galleries" &&
