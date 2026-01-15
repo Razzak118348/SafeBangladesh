@@ -233,24 +233,36 @@ const handleUpdate = async ({ id, originalData, section }) => {
   };
 
   return (
-    <div className="p-6 dark:text-black">
+    <div className="p-6">
       <h1 className="text-2xl font-bold mb-4 text-center text-green-600">Admin Dashboard</h1>
 
       {/* SECTION SELECT */}
-      <select
-        className="border-2 border-gray-400 p-2 mb-6 dark:text-black"
-        value={section}
-        onChange={(e) => {
-          setSection(e.target.value);
-          setNewItem({});
-        }}
-      >
-        <option value="blogs">Blogs</option>
-        <option value="latestwork">Latest Work</option>
-        <option value="team">Team</option>
-        <option value="galleries">Galleries</option>
-        <option value="allbanner">All Banner</option>
-      </select>
+    <select
+  className="
+    w-full sm:w-64 md:w-80 lg:w-96
+    px-4 py-3
+    mb-6
+    text-gray-700 dark:text-white
+    bg-white dark:bg-gray-800
+    border border-gray-300 dark:border-gray-600
+    rounded-lg
+    shadow-sm
+    focus:outline-none
+    focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+    transition-colors duration-200
+  "
+  value={section}
+  onChange={(e) => {
+    setSection(e.target.value);
+    setNewItem({});
+  }}
+>
+  <option value="blogs">Blogs</option>
+  <option value="latestwork">Latest Work</option>
+  <option value="team">Team</option>
+  <option value="galleries">Galleries</option>
+  <option value="allbanner">All Banner</option>
+</select>
 
       {loading && <Loading></Loading>}
 
@@ -260,13 +272,13 @@ const handleUpdate = async ({ id, originalData, section }) => {
           <h2 className="font-bold mb-2 text-green-600">Add Blog</h2>
 
           <input
-            className="border-2 border-gray-400 p-1 w-full mb-2 dark:text-black"
+            className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
             placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
           />
 
           <input
-            className="border-2 border-gray-400 p-1 w-full mb-2 dark:text-black"
+            className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
             placeholder="Image URL"
             onChange={(e) => setNewItem({ ...newItem, image: e.target.value })}
           />
@@ -281,20 +293,20 @@ const handleUpdate = async ({ id, originalData, section }) => {
           )}
 
           <textarea
-            className="border-2 border-gray-400 p-1 w-full mb-2 dark:text-black"
+            className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
             placeholder="Description"
             onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
           />
 
           <textarea
-            className="border-2 border-gray-400 p-1 w-full mb-2 dark:text-black"
+            className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
             placeholder="Content"
             onChange={(e) => setNewItem({ ...newItem, content: e.target.value })}
           />
 
           <button
             onClick={handleCreate}
-            className="bg-green-600 button rounded-md text-white px-4 py-1"
+            className="bg-green-600 button rounded-md text-white  px-4 py-1"
           >
             Create Blog
           </button>
@@ -303,7 +315,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
       {/* add latest work */}
       {section === "latestwork" && (
-        <div className="border-2 border-gray-400 p-4 mb-6 dark:text-black">
+        <div className="border-2 border-gray-400 p-4 mb-6 dark:bg-white dark:text-black">
           <h2 className="font-bold mb-2">Add Latest Work</h2>
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} />
@@ -319,7 +331,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
       {/* add team member */}
       {section === "team" && (
-        <div className="border-2 border-gray-400 p-4 mb-6 rounded-lg dark:text-black">
+        <div className="border-2 border-gray-400 p-4 mb-6 rounded-lg dark:bg-white dark:text-black">
           <h2 className="font-bold mb-2">Add Team Member</h2>
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Image URL"
             onChange={(e) => setNewItem({ ...newItem, img: e.target.value })} />
@@ -335,7 +347,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
 
       {/* add  banner  */}
       {section === "allbanner" && (
-        <div className="border-2 border-gray-400 p-4 mb-6 dark:text-black">
+        <div className="border-2 border-gray-400 p-4 mb-6 dark:bg-white dark:text-black">
           <h2 className="font-bold mb-2">Add Banner</h2>
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Page Path"
             onChange={(e) => setNewItem({ ...newItem, pagePath: e.target.value })} />
@@ -671,7 +683,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Alt Text:</p>
           <input
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white  text-black "
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white  text-black"
             defaultValue={banner.altText}
             onChange={(e) =>
               setNewItem(prev => ({
