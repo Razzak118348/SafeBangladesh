@@ -135,7 +135,7 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).send({ message: "No fields provided to update" });
     }
-
+delete req.body._id;
     const result = await blogCollection.updateOne(
       { _id: new ObjectId(id) },
       { $set: req.body }
