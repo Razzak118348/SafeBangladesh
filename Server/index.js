@@ -10,28 +10,11 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //in cors the domain link will be added without last slash (/)
-// app.use(cors({
-//   origin: ["https://www.nirapodbangladesh.org","https://www.nirapodbangladesh.org/", "https://nirapodbangladesh.org", 'http://localhost:5173', "http://localhost:5174", 'https://safe-bangladesh-org.web.app', "https://safe-bangladesh-org.firebaseapp.com"],
-//   credentials: true,
-//   methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
-// }));
-// app.options("*",cors())
-const corsOptions = {
-  origin: [
-    "https://www.nirapodbangladesh.org",
-    "https://www.nirapodbangladesh.org/",
-    "https://nirapodbangladesh.org",
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "https://safe-bangladesh-org.web.app",
-    "https://safe-bangladesh-org.firebaseapp.com"
-  ],
+app.use(cors({
+  origin: ["https://www.nirapodbangladesh.org","https://www.nirapodbangladesh.org/", "https://nirapodbangladesh.org", 'http://localhost:5173', "http://localhost:5174", 'https://safe-bangladesh-org.web.app', "https://safe-bangladesh-org.firebaseapp.com"],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+  methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
+}));
 
 app.use(express.json());
 app.use(cookieParser());

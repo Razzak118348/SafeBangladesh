@@ -3,8 +3,6 @@ const adminEmails = process.env.ADMIN_EMAILS
   .map(e => e.trim());
 
 const verifyAdmin = (req, res, next) => {
-  // Skip OPTIONS preflight
-  if (req.method === "OPTIONS") return next();
 
   const userEmail = req.user?.email; // req.user comes from verifyJWT
   if (!userEmail || !adminEmails.includes(userEmail)) {
