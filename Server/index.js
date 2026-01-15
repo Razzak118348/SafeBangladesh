@@ -13,11 +13,11 @@ const port = process.env.PORT || 5000;
 app.use(cors({
   origin: ["https://www.nirapodbangladesh.org","https://www.nirapodbangladesh.org/", "https://nirapodbangladesh.org", 'http://localhost:5173', "http://localhost:5174", 'https://safe-bangladesh-org.web.app', "https://safe-bangladesh-org.firebaseapp.com"],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
 }));
 app.use(express.json());
 app.use(cookieParser());
+app.options("*",cors())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.rtselns.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
