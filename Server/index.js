@@ -170,6 +170,7 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
 
 
     //--------------Latest work API start---------------
+
     // GET all latest works
     app.get("/latestwork", async (req, res) => {
       try {
@@ -179,6 +180,7 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
         res.status(500).send({ message: "Error fetching latest works", error: err.message });
       }
     });
+
     // GET single latest work by ID
     app.get("/latestwork/:id", async (req, res) => {
       try {
@@ -197,23 +199,36 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       res.send(result);
     });
 
-    //update single work
-    app.put("/latestwork/:id", verifyJWT, verifyAdmin, async (req, res) => {
-      try {
-        const { id } = req.params;
+   // Update single work (PATCH)
+app.patch("/latestwork/:id", verifyJWT, verifyAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
 
-        const result = await
-          latestWorkCollection.updateOne(
-            { _id: new ObjectId(id) },
-            { $set: req.body }
-          );
-        res.send(result);
-      }
-      catch (error) {
-        console.error("Update latest work error:", error);
-        res.status(500).send({ message: "Failed to update latest work", error: error.message });
-      }
-    });
+  if (!ObjectId.isValid(id)) {
+      return res.status(400).send({ message: "Invalid ID format" });
+    }
+    // Prevent updating _id accidentally
+    if (req.body._id) delete req.body._id;
+
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).send({ message: "No fields provided to update" });
+    }
+
+    const result = await latestWorkCollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: req.body }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).send({ message: "Work not found" });
+    }
+
+    res.send(result);
+  } catch (error) {
+    console.error("Update latest work error:", error);
+    res.status(500).send({ message: "Failed to update latest work", error: error.message });
+  }
+});
 
     //delete single work
     app.delete("/latestwork/:id", verifyJWT, verifyAdmin, async (req, res) => {
@@ -229,7 +244,6 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       }
     });
     //--------------Latest work API end ---------------
-
 
     //------------------banner API start -------------
     //all banner for admin page
@@ -256,6 +270,17 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       }
     });
 
+    //get single banner
+    app.get("/allbanner/:id",async(req,res)=>{
+      try {
+        const banner = await bannerCollection.findOne({ _id: new ObjectId(req.params.id) });
+        if (!banner) return res.status(404).send({ message: "banner not found" });
+        res.send(banner);
+      } catch (err) {
+        res.status(400).send({ message: "Invalid banner ID", error: err.message });
+      }
+    })
+
     // POST: Add a single banner
     app.post("/allbanner", verifyJWT, verifyAdmin, async (req, res) => {
       try {
@@ -266,30 +291,42 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       }
     });
 
-    //get single banner
-    app.get("/allbanner/:id",async(req,res)=>{
-       try {
-        const banner = await bannerCollection.findOne({ _id: new ObjectId(req.params.id) });
-        if (!banner) return res.status(404).send({ message: "banner not found" });
-        res.send(banner);
-      } catch (err) {
-        res.status(400).send({ message: "Invalid banner ID", error: err.message });
-      }
-    })
+  // PATCH: Update a single banner by _id
+app.patch("/allbanner/:id", verifyJWT, verifyAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
 
-    // PUT: Update a banner by _id
-    app.put("/allbanner/:id", verifyJWT, verifyAdmin, async (req, res) => {
-      try {
-        const { id } = req.params;
-        const result = await bannerCollection.updateOne(
-          { _id: new ObjectId(id) },
-          { $set: req.body }
-        );
-        res.send(result);
-      } catch (error) {
-        res.status(500).send({ message: "Failed to update banner", error });
-      }
-    });
+    // 1. Check if id is valid MongoDB ObjectId
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).send({ message: "Invalid ID format" });
+    }
+
+    // 2. Prevent accidental update of _id
+    if (req.body._id) delete req.body._id;
+
+    // 3. Check if request body has any fields to update
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).send({ message: "No fields provided to update" });
+    }
+
+    // 4. Perform the update using $set (only updates provided fields)
+    const result = await bannerCollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: req.body }
+    );
+
+    // 5. If no document matched the id, send 404
+    if (result.matchedCount === 0) {
+      return res.status(404).send({ message: "Banner not found" });
+    }
+
+    // 6. Send the update result back
+    res.send(result);
+  } catch (error) {
+    console.error("Update banner error:", error);
+    res.status(500).send({ message: "Failed to update banner", error: error.message });
+  }
+});
 
     // DELETE: Delete a banner by _id
     app.delete("/allbanner/:id", verifyJWT, verifyAdmin, async (req, res) => {
@@ -409,15 +446,44 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       const result = await allTeamMember.insertOne(req.body);
       res.send(result);
     });
-    //update single team member
-    app.put("/team/:id", verifyJWT, verifyAdmin, async (req, res) => {
-      const { id } = req.params;
-      const result = await allTeamMember.updateOne(
-        { _id: new ObjectId(id) },
-        { $set: req.body }
-      );
-      res.send(result);
-    });
+
+   // PATCH: Update a single team member by _id
+app.patch("/team/:id", verifyJWT, verifyAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // 1. Check if id is a valid MongoDB ObjectId
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).send({ message: "Invalid ID format" });
+    }
+
+    // 2. Prevent accidental update of _id
+    if (req.body._id) delete req.body._id;
+
+    // 3. Check if request body has fields to update
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).send({ message: "No fields provided to update" });
+    }
+
+    // 4. Update only the fields provided using $set
+    const result = await allTeamMember.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: req.body }
+    );
+
+    // 5. If no document matched the id, return 404
+    if (result.matchedCount === 0) {
+      return res.status(404).send({ message: "Team member not found" });
+    }
+
+    // 6. Send update result back
+    res.send(result);
+  } catch (error) {
+    console.error("Update team member error:", error);
+    res.status(500).send({ message: "Failed to update team member", error: error.message });
+  }
+});
+
     //delete team member
     app.delete("/team/:id", verifyJWT, verifyAdmin, async (req, res) => {
       const { id } = req.params;
