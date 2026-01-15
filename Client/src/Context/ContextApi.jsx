@@ -71,8 +71,13 @@ const ContextApi = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const LogOut = () => {
+  const LogOut =async () => {
     setLoading(true);
+      await axios.post(
+    "https://safebangladesh-server.vercel.app/logout",
+    {},
+    { withCredentials: true }
+  );
     return signOut(auth);
   };
 
@@ -94,14 +99,6 @@ useEffect(() => {
     }
 
     setLoading(false);
-
-    // Manually set auto logout (e.g., 6 hours)
-    const timeout = 6 * 60 * 60 * 1000; // 6 hours in ms
-    const logoutTimer = setTimeout(async () => {
-      await LogOut(); // firebase logout
-      await axios.post("https://safebangladesh-server.vercel.app/logout", {}, { withCredentials: true }); // clear cookie
-      setUser(null);
-    }, timeout);
 
     // Clear timeout if component unmounts or user changes
     return () => clearTimeout(logoutTimer);
