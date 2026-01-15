@@ -133,6 +133,42 @@ const Admin = () => {
 //   }
 // };
 
+const handleBlogUpdate = async (id, originalData) => {
+  const updatedData = {
+    ...originalData,
+    ...newItem[id], // only changed fields override original
+  };
+
+  try {
+    const res = await fetch(`${baseURL}/blogs/${id}`, {
+      method: "PATCH",
+      withCredentials:true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      alert("Blog updated successfully");
+
+      // optional: clear edited state
+      setNewItem(prev => {
+        const copy = { ...prev };
+        delete copy[id];
+        return copy;
+      });
+    } else {
+      alert(result.message || "Update failed");
+    }
+  } catch (error) {
+    console.error("Update error:", error);
+    alert("Something went wrong");
+  }
+};
+
 
   // ================= DELETE =================
   const handleDelete = async (idOrCategory, category = null) => {
@@ -424,7 +460,13 @@ const Admin = () => {
           />
         </div>
         {/* Buttons */}
-        <div className="flex  mt-3">
+        <div className="flex gap-3 mt-3">
+          <button
+            onClick={() => handleBlogUpdate(item._id, item)}
+            className="bg-green-600 hover:bg-green-700 text-white px-5 py-1.5 rounded"
+          >
+            Update
+          </button>
         <button
                   onClick={() => handleDelete(item._id, "blogs")}
                   className="bg-red-600 hover:bg-red-700 text-white px-5 py-1.5 rounded"
