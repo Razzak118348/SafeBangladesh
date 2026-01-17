@@ -79,11 +79,12 @@ const {user,LogOut}=useAuth();
 
       <div className="flex justify-start">
          {/* Logo */}
+        <Link to={"https://www.nirapodbangladesh.org/NBSLogo.png"}>
         <img
   src="/favicon.ico"
   alt="logo"
   className="w-8 md:w-12 h-12 object-contain"
-/>
+/></Link>
 
         <NavLink
           to="/"
