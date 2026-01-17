@@ -13,15 +13,15 @@ const Contact = () => {
 
           </MotionH2>
           <MotionP className="text-gray-600 dark:text-white max-w-2xl mx-auto">
-            Simple Action For the Environment (SAFE) – working for people,
+            Simple Action For the Environment Nirapod Bangladesh Songstha – working for people,
             safety, and sustainability.
           </MotionP>
         </MotionDiv>
 
         {/* Organization Info */}
-       <MotionDiv className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-10">
-         <MotionDiv className="bg-white p-4 rounded-2xl shadow-lg MotionP-8 mb-12">
-          <MotionH2 className=" text-green-800 mb-4 text-start" text="Simple Action For the Environment (SAFE)">
+      <MotionDiv className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-10">
+        <MotionDiv className="bg-white p-4 rounded-2xl shadow-lg MotionP-8 mb-12">
+          <MotionH2 className=" text-green-800 mb-4 text-start" text="Simple Action For the Environment Nirapod Bangladesh Songstha">
 
           </MotionH2>
           <MotionP className="text-gray-700 mb-2">
@@ -42,7 +42,7 @@ const Contact = () => {
         <MotionDiv>
           <SafeBangladeshMap></SafeBangladeshMap>
         </MotionDiv>
-       </MotionDiv>
+      </MotionDiv>
 
         {/* Contact Grid */}
         <MotionDiv className="grid md:grid-cols-2 gap-10">
@@ -61,12 +61,12 @@ const Contact = () => {
 
               <MotionDiv className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-green-700" />
-                <span>safebangladeshorg@gmail.com</span>
+                <span>info@nirapodbangladesh.org</span>
               </MotionDiv>
             </MotionDiv>
 
             <MotionDiv className="mt-6 border-t pt-4 text-sm text-gray-600">
-              <MotionP>Social Welfare Registration No: <strong>DINAJ/2133/10</strong></MotionP>
+              <MotionP>Registered by NGO Affairs Bureau, Ministry of Social Welfare of Social Welfare and Department of Youth Development.</MotionP>
               <MotionP>NGO Registration No: <strong>3067</strong></MotionP>
             </MotionDiv>
           </MotionDiv>

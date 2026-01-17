@@ -46,8 +46,8 @@ const Workshops = () => {
                     The best way of learning: learning by doing. Our workshops involve a strong practical focus that give participants
                     the chance to practice the improved building techniques that we promote. All the workshops include the use of traditional song
                     to reinforce the messages we promote.
-                    Workshops will often cover two days and involve up to 20 people: men and women from the local community, local builders and students.
-                    During the building season we are running approximately 1-2 workshops per month.
+                    Workshops will often cover two days and involve up to 20 to 30 people: men and women from the local community, local builders and students.
+                    Each year to try to held at least 35 to 40 workshops.
                 </MotionP>
             </MotionDiv>
 

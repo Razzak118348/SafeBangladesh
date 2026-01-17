@@ -25,7 +25,7 @@ const TechnicalSupport = () => {
             Free Technical Consultation
           </h3>
           <MotionP className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify">
-            SAFE provides a free technical consultation service for individuals
+            Nirapod Bangladesh Songstha provides a free technical consultation service for individuals
             and families interested in using our improved and sustainable
             building techniques. Our team offers guidance on material selection,
             construction methods, and climate-resilient design to ensure safer
@@ -39,7 +39,7 @@ const TechnicalSupport = () => {
             Housing Subsidy Support
           </h3>
           <MotionP className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify">
-            For low-income households who have participated in SAFE workshops and
+            For low-income households who have participated in Nirapod Bangladesh Songstha workshops and
             wish to apply our construction techniques, we offer limited financial
             support through a small subsidy fund. This assistance helps cover
             additional material costs, such as cement used in mud stabilization,
@@ -55,7 +55,7 @@ const TechnicalSupport = () => {
           Ongoing Support & Community Capacity Building
         </h3>
         <MotionP className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify">
-          Beyond initial consultation and material support, SAFE remains engaged
+          Beyond initial consultation and material support, Nirapod Bangladesh Songstha remains engaged
           with communities throughout the construction process. Our team
           provides follow-up visits, practical advice, and problem-solving
           support to ensure that building techniques are correctly applied.
@@ -70,7 +70,7 @@ const TechnicalSupport = () => {
       {/* FOOTER NOTE */}
       <MotionDiv className="max-w-4xl mx-auto mt-12 bg-green-50 dark:bg-gray-800 p-6 rounded-xl border border-green-200 dark:border-gray-700">
         <MotionP className="text-gray-700 dark:text-gray-300 text-center">
-          Participation in SAFE workshops is required to access technical
+          Participation in Nirapod Bangladesh Songstha workshops is required to access technical
           support and housing subsidy programs. Our services are designed to
           ensure transparency, sustainability, and community empowerment.
         </MotionP>

@@ -34,10 +34,10 @@ const HomeContent = () => {
     {/* Paragraph */}
     <MotionDiv className="space-y-6 max-w-4xl mx-auto text-justify">
       <MotionP className="text-gray-700 text-sm md:text-base dark:text-gray-300">
-        Nirapod Bangladesh(SAFE BD) is a non-government organization dedicated to helping vulnerable communities build safer homes and stronger futures.
+        Nirapod Bangladesh Songstha is a non-government organization dedicated to helping vulnerable communities build safer homes and stronger futures.
         We promote <b><i> safe, affordable, and locally appropriate housing solutions</i></b> by strengthening traditional building practices.
         <br />
-        We believe real change happens within communities. Through practical learning, local craftsmanship, and environmental initiatives such as tree planting, SAFE supports people in protecting their homes, livelihoods, and surroundings.
+        We believe real change happens within communities. Through practical learning, local craftsmanship, and environmental initiatives such as tree planting, Nirapod Bangladesh Songstha supports people in protecting their homes, livelihoods, and surroundings.
       </MotionP>
     </MotionDiv>
 

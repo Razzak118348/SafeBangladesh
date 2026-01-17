@@ -22,13 +22,13 @@ const {user,LogOut}=useAuth();
       name: "Activities",
       subItems: [
         { name: "Informal Settlement", path: "/activities/informal-satelment" },
-        { name: "SAFE Materials", path: "/activities/safe-materials" },
+        { name: "Materials", path: "/activities/safe-materials" },
         { name: "Workshops", path: "/activities/workshops" },
         { name: "Demonstration House", path: "/activities/demo-house" },
         { name: "Technical Support", path: "/activities/technical-support" },
         { name: "Tree Planting", path: "/activities/tree-planting" },
         { name: "Savings Groups", path: "/activities/savings-groups" },
-        {name:"Prototype & Design",path:"/activities/prototype"},
+        {name:"Design & Prototype",path:"/activities/prototype"},
       ],
     },
     {
@@ -38,7 +38,7 @@ const {user,LogOut}=useAuth();
         { name: "People", path: "/aboutus/people" },
         { name: "Team", path: "/aboutus/team" },
         { name: "Goals & Vision", path: "/aboutus/goals-vision" },
-        { name: "Supporters", path: "/aboutus/supporters" },
+        { name: "Supporters & Partners", path: "/aboutus/supporters" },
       ],
     },
     {

@@ -9,7 +9,7 @@ const SafeBangladeshMap = () => {
         allowFullScreen=""
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        title="SAFE Bangladesh Location"
+        title="Nirapod Bangladesh Songstha Location"
       ></iframe>
     </div>
   );

@@ -21,7 +21,7 @@ const SafeMaterials = () => {
         {/* Title */}
         <MotionH2
           className="underline text-green-700 dark:text-white my-10"
-          text="SAFE Materials – Sustainable Building Solutions"
+          text="Materials – Sustainable Building Solutions"
         />
 
         {/* Banner */}
@@ -58,14 +58,14 @@ const SafeMaterials = () => {
           <div className="lg:col-span-7 space-y-8">
             <MotionDiv className="p-6 md:p-8 bg-white dark:bg-gray-800 shadow-lg rounded-xl">
               <MotionH2
-                text="The SAFE Materials Initiative"
+                text="The Materials Initiative"
                 className="text-green-700 dark:text-green-400 mb-4"
               />
               <MotionP className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify">
                 In order to create a sustainable business enterprise that helps fund
-          the work of SAFE NGO, while also providing affordable and eco-friendly
+          the work of Nirapod Bangladesh Songstha (NGO), while also providing affordable and eco-friendly
           building materials, we have established{" "}
-          <strong>SAFE Materials</strong>. This initiative enables residents of
+          <strong>Nirapod Bangladesh Songstha Materials</strong>. This initiative enables residents of
           the Sundarbon Union to access durable construction materials that
           strengthen homes and extend their lifespan.
               </MotionP>
@@ -77,7 +77,7 @@ const SafeMaterials = () => {
                 className="text-green-700 dark:text-green-400 mb-4"
               />
               <MotionP className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify">
-               Currently, SAFE Materials offers:
+               Currently, Nirapod Bangladesh Songstha Materials offers:
                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2 my-4">
           <li><strong>Treated Bamboo</strong></li>
           <li><strong>Bondachula</strong></li>
@@ -91,7 +91,7 @@ const SafeMaterials = () => {
          </MotionP>
 
           <MotionP className="text-gray-700 dark:text-gray-300 text-justify mb-10 leading-relaxed">
-          International volunteers are welcome to collaborate with SAFE by
+          International volunteers are welcome to collaborate with Nirapod Bangladesh Songstha by
           participating in small research projects to develop new materials or
           by sharing ideas and suggestions remotely.
         </MotionP>
