@@ -50,7 +50,6 @@ const Footer = () => {
   </nav>
   <aside className='grid grid-cols-1'>
     <p>Copyright © {new Date().getFullYear()} - All right reserved by Nirapod Bangladesh Songstha</p>
-    <p>Developed by : Abdur Razzak (Full stack Engineer)</p>
   </aside>
 </footer>
     );
