@@ -8,12 +8,6 @@ import useGalleryData from "../../../hooks/useGalleryData";
 const InformalSettlement = () => {
   const { gallery, loading} = useGalleryData("informal_settlement")
 
-  // const galleryImages = [
-  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05039.JPG",
-  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05036.JPG",
-  //   "https://raw.githubusercontent.com/MD-Meheraf-Hossan-Nishat/Image_SafeBD/main/Activities/Informal_Setelment/DSC05567.JPG",
-  // ];
-
 if(loading){
   return <Loading></Loading>
 }
