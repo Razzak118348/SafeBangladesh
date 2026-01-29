@@ -32,9 +32,11 @@ if(loading){
   />
 
   <MotionP className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify space-y-4">
-    The creation of women’s savings groups are a key element to encouraging households to build stronger houses. They empower households to plan for the future.
-
-We facilitate the creation of saving groups by providing willing communities with the appropriate structure and accountancy training.
+   Women and young people are central to Nirapod Bangladesh Songstha’s work. We support
+women’s leadership, savings groups, and skills development, while engaging youth through
+practical training, environmental activities, and community action.
+By strengthening the role of women and youth in housing, sanitation, and local initiatives, we
+help build safer homes, stronger communities, and more resilient futures.
   </MotionP>
 </MotionDiv>
 
