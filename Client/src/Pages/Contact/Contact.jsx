@@ -34,8 +34,11 @@ const Contact = () => {
           <MotionDiv className="flex items-start gap-3 text-gray-700">
             <MapPin className="w-5 h-5 text-green-700 mt-1" />
             <MotionP>
-              Sundarban Village, PO: Ramdubihat <br />
-              Upazila: Sadar, Dinajpur
+              Bangkali Bazar, Sundorbon Village <br />
+              PO: Ramdubihat <br />
+              Upazila: Sadar<br />
+    District: Dinajpur 5200<br />
+    Bangladesh
             </MotionP>
           </MotionDiv>
         </MotionDiv>
@@ -54,20 +57,24 @@ const Contact = () => {
             </h3>
 
             <MotionDiv className="space-y-4 text-gray-700">
+
               <MotionDiv className="flex items-center gap-3">
+
                 <Phone className="w-5 h-5 text-green-700" />
-                <span>+88 (0)1730 720328</span>
+          <span> Mobile: <a href="tel:+8801730720328" className="hover:text-primary transition">+8801730720328</a><br /></span>
               </MotionDiv>
 
               <MotionDiv className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-green-700" />
-                <span>info@nirapodbangladesh.org</span>
+                Email: <a href="mailto:info@nirapodbangladesh.org" className="hover:text-primary transition">info@nirapodbangladesh.org</a>
               </MotionDiv>
             </MotionDiv>
 
             <MotionDiv className="mt-6 border-t pt-4 text-sm text-gray-600">
-              <MotionP>Registered by NGO Affairs Bureau, Ministry of Social Welfare of Social Welfare and Department of Youth Development.</MotionP>
-              <MotionP>NGO Registration No: <strong>3067</strong></MotionP>
+              <MotionP className="text-gray-700 mb-2">
+          Nirapod Bangladesh Songstha is a registered non-government organization in
+Bangladesh. <br /> Registration number: 3067
+          </MotionP>
             </MotionDiv>
           </MotionDiv>
 

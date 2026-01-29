@@ -53,9 +53,6 @@ poverty alleviation.
       </Link>
     </div>
   </nav>
-  <aside className='grid grid-cols-1'>
-    <p>Copyright © {new Date().getFullYear()} - All right reserved by Nirapod Bangladesh Songstha</p>
-  </aside>
 </footer>
     );
 };
