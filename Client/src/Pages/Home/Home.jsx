@@ -44,6 +44,10 @@ const Home = () => {
 <HomeContent></HomeContent>
 <LatestWork></LatestWork>
 <Gallery></Gallery>
+
+<div className="text-center my-10 text-gray-600 dark:text-gray-300">
+  Website is under development...
+</div>
 </div>
 
     </div>

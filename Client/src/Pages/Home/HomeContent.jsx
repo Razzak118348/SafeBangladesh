@@ -8,17 +8,17 @@ const cards = [
   {
     icon: <Users className="h-6 w-6 text-[#55835b]" />,
     title: "Community Empowerment",
-    desc: "We believe real change begins within communities through shared knowledge and local skills.",
+    desc: "We believe real change begins within communities by strengthening local knowledge, skills, and leadership, especially among women and youth.",
   },
   {
     icon: <HomeIcon className="h-6 w-6 text-[#55835b]" />,
     title: "Resilient Housing",
-    desc: "Our approach builds safer homes using proven techniques that people already trust.",
+    desc: "Our approach builds safer and more resilient homes using locally trusted techniques and materials, adapted to climate risks and community needs.",
   },
   {
     icon: <Leaf className="h-6 w-6 text-[#55835b]" />,
     title: "Environmental Care",
-    desc: "Through tree planting and awareness programs, we protect nature alongside people.",
+    desc: "Through tree planting and environmental awareness, we support communities to protect nature while improving everyday living conditions.",
   },
 ];
 const HomeContent = () => {
@@ -29,15 +29,19 @@ const HomeContent = () => {
   <div className="">
 
     {/* Heading */}
-<h1 className="text-lg md:text-2xl lg:text-3xl text-green-600 dark:text-white text-center mb-5 text-wrap">Building Safer House By Nirapod Bangladesh Songstha</h1>
+<h1 className="text-lg md:text-2xl lg:text-3xl text-green-600 dark:text-white text-center mb-5 text-wrap">Building Safer Homes with Nirapod Bangladesh Songstha</h1>
 
     {/* Paragraph */}
     <MotionDiv className="space-y-6 max-w-4xl mx-auto text-justify">
       <MotionP className="text-gray-700 text-sm md:text-base dark:text-gray-300">
-        Nirapod Bangladesh Songstha is a non-government organization dedicated to helping vulnerable communities build safer homes and stronger futures.
-        We promote <b><i> safe, affordable, and locally appropriate housing solutions</i></b> by strengthening traditional building practices.
-        <br />
-        We believe real change happens within communities. Through practical learning, local craftsmanship, and environmental initiatives such as tree planting, Nirapod Bangladesh Songstha supports people in protecting their homes, livelihoods, and surroundings.
+      Nirapod Bangladesh Songstha is a community-led non-government organization working in
+Bangladesh to support vulnerable communities in building safe, affordable, and climate-resilient
+homes. We strengthen traditional building practices by combining local knowledge, practical
+training, and locally available materials.
+<br /><br />
+We believe real change begins within communities. Through hands-on learning, local
+craftsmanship, and environmental initiatives such as tree planting, we support people to protect
+their homes, livelihoods, and surrounding environment with dignity and confidence.
       </MotionP>
     </MotionDiv>
 

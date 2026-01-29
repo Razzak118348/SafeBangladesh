@@ -8,7 +8,7 @@ import PageBanner from "../../../Components/PageBanner/PageBanner";
 const Blog = () => {
   const { blogs, totalPages, currentPage, totalBlogs } = useLoaderData();
   const navigate = useNavigate();
-console.log(blogs)
+  console.log(blogs)
   // Show loading if needed
   if (!blogs) return <Loading />;
 
@@ -20,7 +20,7 @@ console.log(blogs)
 
   return (
     <section className="px-4 py-6 ">
-<PageBanner></PageBanner>
+      <PageBanner></PageBanner>
       {/* HEADER */}
       <MotionDiv className="mt-6 lg:mt-16 text-center">
         <MotionH1
@@ -43,11 +43,13 @@ console.log(blogs)
               key={blog._id}
               className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
             >
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="h-56 w-full object-cover"
-              />
+              <div className="aspect-[16/9] w-full overflow-hidden">
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <MotionDiv className="p-6 flex flex-col flex-1">
                 <h1 className="text-lg font-semibold">{blog.title}</h1>
                 <MotionP className="text-sm text-gray-600 line-clamp-3 mt-2">
@@ -68,56 +70,53 @@ console.log(blogs)
       </motion.div>
 
 
-     {/* PAGINATION */}
-{totalPages > 1 && (
-  <div className="flex justify-center mt-12 gap-2 items-center">
+      {/* PAGINATION */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-12 gap-2 items-center">
 
-    {/* Previous Button */}
-    <button
-      onClick={() => handlePageChange(currentPage - 1)}
-      disabled={currentPage === 1}
-      className={`px-4 py-2 rounded-md border ${
-        currentPage === 1
-          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-          : "bg-white text-green-700 hover:bg-green-100"
-      }`}
-    >
-      Previous
-    </button>
+          {/* Previous Button */}
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 rounded-md border ${currentPage === 1
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-white text-green-700 hover:bg-green-100"
+              }`}
+          >
+            Previous
+          </button>
 
-    {/* Numbered Pages */}
-    {[...Array(totalPages).keys()].map((number) => {
-      const pageNum = number + 1;
-      return (
-        <button
-          key={pageNum}
-          onClick={() => handlePageChange(pageNum)}
-          className={`px-4 py-2 rounded-md border ${
-            currentPage === pageNum
-              ? "bg-green-700 text-white"
-              : "bg-white text-green-700 hover:bg-green-100"
-          }`}
-        >
-          {pageNum}
-        </button>
-      );
-    })}
+          {/* Numbered Pages */}
+          {[...Array(totalPages).keys()].map((number) => {
+            const pageNum = number + 1;
+            return (
+              <button
+                key={pageNum}
+                onClick={() => handlePageChange(pageNum)}
+                className={`px-4 py-2 rounded-md border ${currentPage === pageNum
+                    ? "bg-green-700 text-white"
+                    : "bg-white text-green-700 hover:bg-green-100"
+                  }`}
+              >
+                {pageNum}
+              </button>
+            );
+          })}
 
-    {/* Next Button */}
-    <button
-      onClick={() => handlePageChange(currentPage + 1)}
-      disabled={currentPage === totalPages}
-      className={`px-4 py-2 rounded-md border ${
-        currentPage === totalPages
-          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-          : "bg-white text-green-700 hover:bg-green-100"
-      }`}
-    >
-      Next
-    </button>
+          {/* Next Button */}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 rounded-md border ${currentPage === totalPages
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-white text-green-700 hover:bg-green-100"
+              }`}
+          >
+            Next
+          </button>
 
-  </div>
-)}
+        </div>
+      )}
 
     </section>
   );

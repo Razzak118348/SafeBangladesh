@@ -1,10 +1,15 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { MotionP } from '../../utils/MotionElements';
 
 const Footer = () => {
     return (
-      <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10 dark:bg-gray-900 dark:text-white ">
-
+      <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10 dark:bg-gray-900 dark:text-white">
+<MotionP className="text-gray-700 text-sm md:text-base dark:text-gray-300 max-w-5xl text-wrap">
+Nirapod Bangladesh Songstha is a non-government organization working in
+Bangladesh with vulnerable and marginalized communities through education,
+youth development, women’s empowerment, climate resilience, governance, and
+poverty alleviation.
+      </MotionP>
   <nav className="grid grid-flow-col gap-4">
     <Link to={'/'}> <img src="/NBSLogo.svg" alt="" className='w-16 h-16 rounded-full' /></Link>
     <Link to={'/aboutus/background'} className="link link-hover">About us</Link>
