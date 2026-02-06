@@ -90,7 +90,8 @@ const Team = () => {
                             : "/default-avatar.png"
                         }
                         alt={member.name}
-className="w-full aspect-square object-cover object-center"
+className="w-full aspect-square object-cover object-center group-hover:scale-105 transition duration-500"
+
 
                       />
                     </MotionDiv>
