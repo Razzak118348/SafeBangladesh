@@ -449,7 +449,7 @@ app.patch("/allbanner/:id", verifyJWT, verifyAdmin, async (req, res) => {
     });
 
    // PATCH: Update a single team member by _id
-app.patch("/team/:id", verifyJWT, verifyAdmin, async (req, res) => {
+app.patch("/team/:id", verifyJWT, verifyAdmin, async (req, res) =>{
   try {
     const { id } = req.params;
 
