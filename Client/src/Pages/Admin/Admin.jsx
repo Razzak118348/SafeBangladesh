@@ -334,11 +334,20 @@ const handleUpdate = async ({ id, originalData, section }) => {
         <div className="border-2 border-gray-400 p-4 mb-6 rounded-lg dark:bg-white dark:text-black">
           <h2 className="font-bold mb-2 text-green-600">Add Team Member</h2>
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Image URL"
-            onChange={(e) => setNewItem({ ...newItem, img: e.target.value })} />
-          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Alt Text"
-            onChange={(e) => setNewItem({ ...newItem, alt: e.target.value })} />
+            onChange={(e) => setNewItem({ ...newItem,
+image: e.target.value })} />
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Name"
+            onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} />
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Designation"
             onChange={(e) => setNewItem({ ...newItem, designation: e.target.value })} />
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Category"
+            onChange={(e) => setNewItem({ ...newItem, category: e.target.value })} />
+
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Email"
+            onChange={(e) => setNewItem({ ...newItem, email: e.target.value })} />
+          <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Message"
+            onChange={(e) => setNewItem({ ...newItem,
+message: e.target.value })} />
           <button onClick={handleCreate} className="bg-green-600 button rounded-md text-white px-4 py-1">
             Add Member
           </button>
@@ -536,77 +545,113 @@ const handleUpdate = async ({ id, originalData, section }) => {
     </div>
 ))}
 
-     {/* Team Section */}
+{/* ================= TEAM SECTION ================= */}
 {section === "team" &&
   data.map((member) => (
     <div
       key={member._id}
-      className="border-2 border-green-700 shadow-xl p-4 mb-4 rounded-md flex flex-col md:flex-row gap-5 dark:border-green-500 dark:shadow-gray-700"
+      className="border-2 border-green-700 shadow-lg p-5 mb-6 rounded-xl flex flex-col md:flex-row gap-6 dark:border-green-500"
     >
-      {/* Image Preview */}
-      <div className="w-full md:w-32 flex-shrink-0 flex justify-center items-center">
+      {/* Image */}
+      <div className="w-full md:w-40 flex-shrink-0">
         <img
-          src={member.img}
-          alt={member.alt}
-          className="w-full md:w-32 h-32 object-cover rounded-md border dark:border-gray-600"
+          src={newItem[member._id]?.image || member.image}
+          alt={member.name}
+          className="w-full h-40 object-cover rounded-lg border"
         />
       </div>
 
-      {/* Form Fields */}
-      <div className="flex-1 flex flex-col gap-3">
-        {/* Image URL */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Image URL:</p>
-          <input
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
-            defaultValue={member.img}
-            onChange={(e) =>
-              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], img: e.target.value } }))
-            }
-          />
-        </div>
+      {/* Form */}
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
 
-        {/* Alt Text */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Alt Text:</p>
-          <input
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
-            defaultValue={member.alt}
-            onChange={(e) =>
-              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], alt: e.target.value } }))
-            }
-          />
-        </div>
+        {/* Name */}
+        <input
+          className="input-style"
+          placeholder="Name"
+          defaultValue={member.name}
+          onChange={(e) =>
+            setNewItem(prev => ({
+              ...prev,
+              [member._id]: { ...prev[member._id], name: e.target.value }
+            }))
+          }
+        />
 
         {/* Designation */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-          <p className="w-full sm:w-32 font-semibold text-gray-800 dark:text-white">Designation:</p>
-          <input
-            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
-            defaultValue={member.designation}
-            onChange={(e) =>
-              setNewItem(prev => ({ ...prev, [member._id]: { ...prev[member._id], designation: e.target.value } }))
-            }
-          />
-        </div>
+        <input
+          className="input-style"
+          placeholder="Designation"
+          defaultValue={member.designation}
+          onChange={(e) =>
+            setNewItem(prev => ({
+              ...prev,
+              [member._id]: { ...prev[member._id], designation: e.target.value }
+            }))
+          }
+        />
+
+        {/* Email */}
+        <input
+          className="input-style"
+          placeholder="Email"
+          defaultValue={member.email}
+          onChange={(e) =>
+            setNewItem(prev => ({
+              ...prev,
+              [member._id]: { ...prev[member._id], email: e.target.value }
+            }))
+          }
+        />
+
+        {/* Category (DISABLED) */}
+        <input
+          disabled
+          className="input-style bg-gray-200 cursor-not-allowed"
+          value={member.category}
+        />
+
+        {/* Image URL */}
+        <input
+          className="input-style md:col-span-2"
+          placeholder="Image URL"
+          defaultValue={member.image}
+          onChange={(e) =>
+            setNewItem(prev => ({
+              ...prev,
+              [member._id]: { ...prev[member._id], image: e.target.value }
+            }))
+          }
+        />
+
+        {/* Message */}
+        <textarea
+          className="input-style md:col-span-2 min-h-[80px]"
+          placeholder="Message"
+          defaultValue={member.message}
+          onChange={(e) =>
+            setNewItem(prev => ({
+              ...prev,
+              [member._id]: { ...prev[member._id], message: e.target.value }
+            }))
+          }
+        />
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 mt-3">
+        <div className="md:col-span-2 flex gap-3 mt-2">
           <button
-            onClick={() =>
-              handleUpdate({
-                id: member._id,
-                originalData: member,
-                section: "team",
-              })
-            }
-            className="bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+            onClick={() => handleUpdate({
+              id: member._id,
+              originalData: member,
+              section: "team",
+            })}
+            className="bg-green-600 text-white px-5 py-2 rounded-lg"
           >
             Update
           </button>
+
           <button
-            onClick={() => handleDelete(member._id)}
-            className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+            onClick={() => handleDelete(member._id,"team")}
+            className="bg-red-600 text-white px-5 py-2 rounded-lg"
           >
             Delete
           </button>
@@ -614,6 +659,7 @@ const handleUpdate = async ({ id, originalData, section }) => {
       </div>
     </div>
 ))}
+
 
 
 {/* All Banner Section */}
