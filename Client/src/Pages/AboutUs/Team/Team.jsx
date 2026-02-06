@@ -86,7 +86,7 @@ const Team = () => {
                       <img
                         src={
                           member.image
-                            ? `/team/${member.image}` // adjust your path
+                            ? member.image
                             : "/default-avatar.png"
                         }
                         alt={member.name}
