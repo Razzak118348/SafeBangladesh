@@ -25,8 +25,8 @@ const client = new MongoClient(uri);
 
 const cookieOption = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production" ? true : false, //if production then true otherwise false
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+  secure: true, // Always true for modern browsers/Vercel
+  sameSite: "none", // Required for cross-domain cookies
   maxAge: 6 * 60 * 60 * 1000,
 };
 
