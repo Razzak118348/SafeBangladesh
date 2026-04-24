@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import app from "../Firebase/firebase.config.js";
 import { useEffect, useState, createContext } from "react";
+axios.defaults.withCredentials = true;
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 //this is auth context for export auth context api
@@ -82,31 +83,58 @@ const ContextApi = ({ children }) => {
   };
 
   // observer
+// useEffect(() => {
+//   const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+//     setUser(currentUser);
+
+//     if (currentUser?.email) {
+//       // POST to backend to generate JWT and set it as HTTP-only cookie
+//       await axios.post(
+//         "https://safebangladesh-server.vercel.app/jwt",
+//         { email: currentUser.email },
+//         { withCredentials: true }
+//       );
+//     } else {
+//       // Optional: clear cookie if logged out
+//       await axios.post("https://safebangladesh-server.vercel.app/logout", {}, { withCredentials: true });
+//     }
+
+//     setLoading(false);
+
+//     // Clear timeout if component unmounts or user changes
+//     return () => clearTimeout(logoutTimer);
+//   });
+
+//   return () => unSubscribe();
+// }, []);
+
+
+// context.jsx
 useEffect(() => {
   const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
     setUser(currentUser);
 
-    if (currentUser?.email) {
-      // POST to backend to generate JWT and set it as HTTP-only cookie
-      await axios.post(
-        "https://safebangladesh-server.vercel.app/jwt",
-        { email: currentUser.email },
-        { withCredentials: true }
-      );
-    } else {
-      // Optional: clear cookie if logged out
+    if (currentUser) {
+      // Only call /jwt if we actually have a user
+      try {
+        await axios.post(
+          "https://safebangladesh-server.vercel.app/jwt",
+          { email: currentUser.email },
+          { withCredentials: true }
+        );
+      } catch (err) {
+        console.error("JWT setting error:", err);
+      }
+    }
+    else {
+      // If no user, clear the cookie
       await axios.post("https://safebangladesh-server.vercel.app/logout", {}, { withCredentials: true });
     }
-
     setLoading(false);
-
-    // Clear timeout if component unmounts or user changes
-    return () => clearTimeout(logoutTimer);
   });
 
   return () => unSubscribe();
-}, []);
-
+}, [auth]); // Add auth to dependency array
 
   const authInfo = {
     user,
