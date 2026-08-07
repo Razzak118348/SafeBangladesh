@@ -4,7 +4,7 @@ import "../../utils/color.css"
 import Loading from "../Loading/Loading";
 
 const Slider = () => {
-  // const [slides, setSlides] = useState([]);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animate, setAnimate] = useState(true);
   const intervalRef = useRef(null);
