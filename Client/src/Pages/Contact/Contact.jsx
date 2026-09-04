@@ -12,10 +12,10 @@ const Contact = () => {
           <MotionH2 className=" font-bold text-green-600 mb-4" text="Contact Us">
 
           </MotionH2>
-          <MotionP className="text-gray-600 dark:text-white max-w-2xl mx-auto">
+          {/* <MotionP className="text-gray-600 dark:text-white max-w-2xl mx-auto">
             Simple Action For the Environment Nirapod Bangladesh Songstha – working for people,
             safety, and sustainability.
-          </MotionP>
+          </MotionP> */}
         </MotionDiv>
 
         {/* Organization Info */}

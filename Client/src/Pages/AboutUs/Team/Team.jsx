@@ -25,7 +25,7 @@ const Team = () => {
 
     fetchTeam();
   }, []);
-
+console.log(allMember);
   if (loading) return <Loading />;
 
   /* -------------------------
@@ -61,7 +61,7 @@ const Team = () => {
 
       <div className="px-4 md:px-10 lg:px-20 py-12 space-y-20">
         <MotionH2
-          text="Meet Our Team"
+          text="All Team Members"
           className="text-center text-green-700 dark:text-green-400"
         />
 
@@ -98,9 +98,10 @@ className="w-full aspect-square object-cover object-center group-hover:scale-105
 
                     {/* Info */}
                     <MotionDiv className="p-5 text-center space-y-2">
-                      <MotionH2 className="font-semibold text-lg text-gray-900 dark:text-white">
-                        {member.name}
-                      </MotionH2>
+<h1 className="text-lg font-bold text-gray-800 dark:text-white">
+                          {member.name}
+                        </h1>
+
 
                       <p className="text-green-600 text-sm font-medium">
                         {member.designation}
