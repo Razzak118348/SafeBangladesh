@@ -10,18 +10,13 @@ const Contact = () => {
         {/* Page Header */}
         <MotionDiv className="text-center mb-14">
           <MotionH2 className=" font-bold text-green-600 mb-4" text="Contact Us">
-
           </MotionH2>
-          {/* <MotionP className="text-gray-600 dark:text-white max-w-2xl mx-auto">
-            Simple Action For the Environment Nirapod Bangladesh Songstha – working for people,
-            safety, and sustainability.
-          </MotionP> */}
         </MotionDiv>
 
         {/* Organization Info */}
       <MotionDiv className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-10">
         <MotionDiv className="bg-white p-4 rounded-2xl shadow-lg MotionP-8 mb-12">
-          <MotionH2 className=" text-green-800 mb-4 text-start" text="Simple Action For the Environment Nirapod Bangladesh Songstha">
+          <MotionH2 className=" text-green-800 mb-4 text-start" text="Nirapod Bangladesh Songstha">
 
           </MotionH2>
           <MotionP className="text-gray-700 mb-2">

@@ -35,7 +35,7 @@ const LatestWork = () => {
       />
 
       <MotionDiv className='p-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 lg:gap-6 text-center justify-items-center'>
-        {latestWork.map((work) => (
+        {[...latestWork].reverse().map((work) => (
           <Link key={work._id} to={`/latestwork/${work._id}`} className='transition-transform duration-700 hover:scale-110'>
             <MotionDiv className="card bg-base-100 dark:bg-gray-800 w-full md:w-52 lg:w-96 shadow-lg">
               <figure>

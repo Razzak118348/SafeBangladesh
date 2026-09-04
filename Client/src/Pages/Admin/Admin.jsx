@@ -267,7 +267,7 @@ const Admin = () => {
       {loading && <Loading></Loading>}
 
       {/* add blog  */}
-      {section === "blogs" && (
+      {/* {section === "blogs" && (
         <div className="border-2 border-gray-400 rounded-lg p-4 mb-6">
           <h2 className="font-bold mb-2 text-green-600">Add Blog</h2>
 
@@ -284,15 +284,14 @@ const Admin = () => {
           />
 
           {/* Image preview */}
-          {newItem.image && (
+          {/* {newItem.image && (
             <img
               src={newItem.image}
               alt={newItem.title || "Preview"}
               className="w-full h-48 object-cover mb-2"
             />
-          )}
-
-          <textarea
+          )} */}
+          {/* <textarea
             className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
             placeholder="Description"
             onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
@@ -311,7 +310,142 @@ const Admin = () => {
             Create Blog
           </button>
         </div>
-      )}
+      )}  */}
+
+{/* add blog */}
+{section === "blogs" && (
+  <div className="border-2 border-gray-400 rounded-lg p-4 mb-6">
+    <h2 className="font-bold mb-2 text-green-600">Add Blog</h2>
+
+    {/* Title */}
+    <input
+      className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
+      placeholder="Title"
+      onChange={(e) =>
+        setNewItem({
+          ...newItem,
+          title: e.target.value,
+        })
+      }
+    />
+
+    {/* Main Image */}
+    <input
+      className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
+      placeholder="Main Image URL"
+      onChange={(e) =>
+        setNewItem({
+          ...newItem,
+          image: e.target.value,
+        })
+      }
+    />
+
+    {/* Main Image Preview */}
+    {newItem.image && (
+      <img
+        src={newItem.image}
+        alt={newItem.title || "Main Image Preview"}
+        className="w-full h-48 object-cover mb-4 rounded-md"
+      />
+    )}
+
+    {/* Image 1 */}
+    <input
+      className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
+      placeholder="Image 1 URL (Optional)"
+      onChange={(e) =>
+        setNewItem({
+          ...newItem,
+          image1: e.target.value,
+        })
+      }
+    />
+
+    {/* Image 1 Preview */}
+    {newItem.image1 && (
+      <img
+        src={newItem.image1}
+        alt="Image 1 Preview"
+        className="w-full h-40 object-cover mb-2 rounded-md"
+      />
+    )}
+
+    {/* Image 2 */}
+    <input
+      className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
+      placeholder="Image 2 URL (Optional)"
+      onChange={(e) =>
+        setNewItem({
+          ...newItem,
+          image2: e.target.value,
+        })
+      }
+    />
+
+    {/* Image 2 Preview */}
+    {newItem.image2 && (
+      <img
+        src={newItem.image2}
+        alt="Image 2 Preview"
+        className="w-full h-40 object-cover mb-2 rounded-md"
+      />
+    )}
+
+    {/* Image 3 */}
+    <input
+      className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
+      placeholder="Image 3 URL (Optional)"
+      onChange={(e) =>
+        setNewItem({
+          ...newItem,
+          image3: e.target.value,
+        })
+      }
+    />
+
+    {/* Image 3 Preview */}
+    {newItem.image3 && (
+      <img
+        src={newItem.image3}
+        alt="Image 3 Preview"
+        className="w-full h-40 object-cover mb-2 rounded-md"
+      />
+    )}
+
+    {/* Description */}
+    <textarea
+      className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
+      placeholder="Description"
+      onChange={(e) =>
+        setNewItem({
+          ...newItem,
+          description: e.target.value,
+        })
+      }
+    />
+
+    {/* Content */}
+    <textarea
+      className="border-2 border-gray-400 p-1 w-full mb-2 dark:bg-white dark:text-black"
+      placeholder="Content"
+      onChange={(e) =>
+        setNewItem({
+          ...newItem,
+          content: e.target.value,
+        })
+      }
+    />
+
+    {/* Create */}
+    <button
+      onClick={handleCreate}
+      className="bg-green-600 button rounded-md text-white px-4 py-1"
+    >
+      Create Blog
+    </button>
+  </div>
+)}
 
       {/* add latest work */}
       {section === "latestwork" && (
@@ -378,14 +512,14 @@ const Admin = () => {
       {/* ================= READ / UPDATE / DELETE ================= */}
 
       {/* Blogs Section */}
-      {section === "blogs" &&
+      {/* {section === "blogs" &&
         data.map((item) => (
           <div
             key={item._id}
             className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-5 dark:border-green-500 dark:shadow-gray-700"
           >
             {/* Image Preview */}
-            <div className="w-full md:w-auto md:col-span-1 flex justify-center items-center">
+            {/* <div className="w-full md:w-auto md:col-span-1 flex justify-center items-center">
               <img
                 src={newItem[item._id]?.image || item.image || item.img}
                 alt={item.title}
@@ -394,9 +528,9 @@ const Admin = () => {
             </div>
 
             {/* Form Area */}
-            <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
+            {/* <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
               {/* Title */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              {/* <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Title:</p>
                 <input
                   className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
@@ -405,10 +539,10 @@ const Admin = () => {
                     setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], title: e.target.value } }))
                   }
                 />
-              </div>
+              </div> */}
 
               {/* Image URL */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              {/* <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">Image URL:</p>
                 <input
                   className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black "
@@ -417,10 +551,10 @@ const Admin = () => {
                     setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], image: e.target.value } }))
                   }
                 />
-              </div>
+              </div> */}
 
               {/* Description */}
-              <div className="flex flex-col sm:flex-row sm:items-start gap-2">
+              {/* <div className="flex flex-col sm:flex-row sm:items-start gap-2">
                 <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">Description:</p>
                 <textarea
                   className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[80px] bg-white dark:bg-white dark:text-black text-black "
@@ -429,10 +563,10 @@ const Admin = () => {
                     setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], description: e.target.value } }))
                   }
                 />
-              </div>
+              </div> */}
 
               {/* Content */}
-              <div className="flex flex-col sm:flex-row sm:items-start gap-2">
+              {/* <div className="flex flex-col sm:flex-row sm:items-start gap-2">
                 <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">Content:</p>
                 <textarea
                   className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[120px] bg-white dark:bg-white dark:text-black text-black "
@@ -441,10 +575,10 @@ const Admin = () => {
                     setNewItem(prev => ({ ...prev, [item._id]: { ...prev[item._id], content: e.target.value } }))
                   }
                 />
-              </div>
+              </div> */}
 
               {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 mt-3">
+              {/* <div className="flex flex-col sm:flex-row gap-3 mt-3">
                 <button
                   onClick={() =>
                     handleUpdate({
@@ -466,7 +600,203 @@ const Admin = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))} */}
+
+      {/*updated code -> Blogs Section */}
+{section === "blogs" &&
+  data.map((item) => (
+    <div
+      key={item._id}
+      className="border-2 border-green-700 shadow-xl p-4 mb-6 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-5 dark:border-green-500 dark:shadow-gray-700"
+    >
+      {/* Image Preview */}
+      <div className="w-full md:w-auto md:col-span-1 flex justify-center items-center">
+        <img
+          src={newItem[item._id]?.image || item.image || item.img}
+          alt={item.title}
+          className="w-full md:w-48 h-48 md:h-48 object-cover rounded-md border dark:border-gray-600"
+        />
+      </div>
+
+      {/* Form Area */}
+      <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
+
+        {/* Title */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">
+            Title:
+          </p>
+
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
+            defaultValue={item.title}
+            onChange={(e) =>
+              setNewItem((prev) => ({
+                ...prev,
+                [item._id]: {
+                  ...prev[item._id],
+                  title: e.target.value,
+                },
+              }))
+            }
+          />
+        </div>
+
+        {/* Main Image URL */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">
+            Main Image:
+          </p>
+
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
+            defaultValue={item.image || item.img}
+            placeholder="Main image URL"
+            onChange={(e) =>
+              setNewItem((prev) => ({
+                ...prev,
+                [item._id]: {
+                  ...prev[item._id],
+                  image: e.target.value,
+                },
+              }))
+            }
+          />
+        </div>
+
+        {/* Image 1 */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">
+            Image 1:
+          </p>
+
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
+            defaultValue={item.image1 || ""}
+            placeholder="Image 1 URL (optional)"
+            onChange={(e) =>
+              setNewItem((prev) => ({
+                ...prev,
+                [item._id]: {
+                  ...prev[item._id],
+                  image1: e.target.value,
+                },
+              }))
+            }
+          />
+        </div>
+
+        {/* Image 2 */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">
+            Image 2:
+          </p>
+
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
+            defaultValue={item.image2 || ""}
+            placeholder="Image 2 URL (optional)"
+            onChange={(e) =>
+              setNewItem((prev) => ({
+                ...prev,
+                [item._id]: {
+                  ...prev[item._id],
+                  image2: e.target.value,
+                },
+              }))
+            }
+          />
+        </div>
+
+        {/* Image 3 */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <p className="w-full sm:w-28 font-semibold text-gray-800 dark:text-white">
+            Image 3:
+          </p>
+
+          <input
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded bg-white dark:bg-white dark:text-black text-black"
+            defaultValue={item.image3 || ""}
+            placeholder="Image 3 URL (optional)"
+            onChange={(e) =>
+              setNewItem((prev) => ({
+                ...prev,
+                [item._id]: {
+                  ...prev[item._id],
+                  image3: e.target.value,
+                },
+              }))
+            }
+          />
+        </div>
+
+        {/* Description */}
+        <div className="flex flex-col sm:flex-row sm:items-start gap-2">
+          <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">
+            Description:
+          </p>
+
+          <textarea
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[80px] bg-white dark:bg-white dark:text-black text-black"
+            defaultValue={item.description}
+            onChange={(e) =>
+              setNewItem((prev) => ({
+                ...prev,
+                [item._id]: {
+                  ...prev[item._id],
+                  description: e.target.value,
+                },
+              }))
+            }
+          />
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col sm:flex-row sm:items-start gap-2">
+          <p className="w-full sm:w-28 font-semibold pt-1 text-gray-800 dark:text-white">
+            Content:
+          </p>
+
+          <textarea
+            className="border-2 border-gray-400 dark:border-gray-600 p-2 flex-1 rounded min-h-[120px] bg-white dark:bg-white dark:text-black text-black"
+            defaultValue={item.content}
+            onChange={(e) =>
+              setNewItem((prev) => ({
+                ...prev,
+                [item._id]: {
+                  ...prev[item._id],
+                  content: e.target.value,
+                },
+              }))
+            }
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-3">
+          <button
+            onClick={() =>
+              handleUpdate({
+                id: item._id,
+                originalData: item,
+                section: "blogs",
+              })
+            }
+            className="bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+          >
+            Update
+          </button>
+
+          <button
+            onClick={() => handleDelete(item._id, "blogs")}
+            className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white px-5 py-1.5 rounded w-full sm:w-auto"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
 
 
       {/* Latest Work Section */}
