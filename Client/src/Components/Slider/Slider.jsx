@@ -158,7 +158,7 @@ const Slider = () => {
   const { title, desc, img, path } = slides[currentIndex];
 
   return (
-    <section className="relative w-full overflow-hidden rounded-lg mt-0 md:mt-3
+    <section className="relative w-full overflow-hidden rounded-lg mt-0 lg:mt-8
       h-[400px]
       sm:h-[440px]
       md:h-[500px]
@@ -181,7 +181,7 @@ const Slider = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 w-full h-full flex items-center">
+      <div className="relative z-10 mt-10 lg:mt-24 w-full h-full flex items-center">
         <div
           className={`
             w-full
@@ -199,11 +199,6 @@ const Slider = () => {
           `}
         >
           <div className="max-w-[350px] sm:max-w-[500px] md:max-w-[650px] lg:max-w-[750px]">
-
-            {/* Small Heading */}
-            <p className="mb-3 sm:mb-4 text-xs sm:text-sm md:text-base font-medium tracking-wide text-green-300 uppercase">
-              Safe Bangladesh
-            </p>
 
             {/* Main Title */}
             <h2
@@ -258,8 +253,6 @@ const Slider = () => {
                   duration-300
                   shadow-lg
                   text-sm
-                  sm:text-base
-                  font-medium
                   text-white
                 "
               >
