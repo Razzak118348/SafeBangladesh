@@ -81,14 +81,14 @@ const {user,LogOut}=useAuth();
          {/* Logo */}
         <Link to={"https://www.nirapodbangladesh.org/NBSLogo.png"}>
         <img
-  src="/logo.svg"
+  src="/NBSLogo.svg"
   alt="logo"
-  className="w-12  h-14 object-contain"
+  className="w-10 md:w-16 h-12 md:h-16 object-contain rounded-full"
 /></Link>
 
         <NavLink
           to="/"
-          className="text-lg md:text-xl pt-4 font-bold bg-gradient-to-r from-[#3e5a41] via-[#428576] to-[#223d26]
+          className="text-md md:text-xl pt-4 font-bold bg-gradient-to-r from-[#3e5a41] via-[#428576] to-[#223d26]
           text-transparent bg-clip-text dark:text-white"
         >
           Nirapod Bangladesh Songstha
