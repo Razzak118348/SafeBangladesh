@@ -81,7 +81,7 @@ const {user,LogOut}=useAuth();
          {/* Logo */}
         <Link to={"https://www.nirapodbangladesh.org/NBSLogo.png"}>
         <img
-  src="/NBSLogo.svg"
+  src="/logo.svg"
   alt="logo"
   className="w-12  h-14 object-contain"
 /></Link>

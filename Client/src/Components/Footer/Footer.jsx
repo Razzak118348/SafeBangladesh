@@ -10,11 +10,23 @@ Bangladesh with vulnerable and marginalized communities through education,
 youth development, women’s empowerment, climate resilience, governance, and
 poverty alleviation.
       </MotionP>
-  <nav className="grid grid-flow-col gap-4">
-    <Link to={'/'}> <img src="/NBSLogo.svg" alt="" className='w-16 md:w-20  h-20 md:h-24 rounded-full' /></Link>
-    <Link to={'/aboutus/background'} className="link link-hover">About us</Link>
+  <nav className="grid grid-cols-1 md:grid-cols-2 gap-1 md:max-w-4xl mx-auto text-center ">
+    <div className="flex justify-between items-center gap-5">
+      <Link to={'/'}>
+    <img src="/logo.svg" alt="" className='w-20 h-24 rounded-full' /></Link>
+    <Link to={'https://azuko.org/'} >
+      <img src="/azuko.svg" alt="Azuko Logo" className="w-14 h-16 rounded-full" />
+    </Link>
+    <Link to={'https://bangladesh.gov.bd/'} >
+      <img src="/bangladesh.svg" alt="Bangladesh Government Logo" className="w-16 h-16 rounded-full" />
+    </Link>
+
+    </div>
+    <div className="flex justify-between items-center gap-5">
+      <Link to={'/aboutus/background'} className="link link-hover">About us</Link>
     <Link to={"/contact"} className="link link-hover">Contact</Link>
     <Link to={'/aboutus/goals-vision'} className="link link-hover">Goal</Link>
+    </div>
   </nav>
   <nav>
     <div className="grid grid-flow-col gap-4">
