@@ -65,9 +65,7 @@ async function run() {
       res.send({ message: "JWT set in cookie" });
     });
 
-app.get("/test-reports", (req, res) => {
-  res.send("Reports route is working");
-});
+
     //-------------------blog API start-----------
     // GET blogs with pagination
     app.get("/blogs", async (req, res) => {
