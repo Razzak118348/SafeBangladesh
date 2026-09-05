@@ -58,20 +58,18 @@ const Report = () => {
                 </MotionP>
 
                 {/* BUTTON */}
-                <a
-                  href={report.fileLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center justify-center w-full px-4 py-2.5 rounded-md bg-green-700 text-white font-medium hover:bg-green-800 transition-colors duration-300"
+                <Link
+                  to={`/reports/${report._id}`}
+                  className="mt-4 text-green-700 font-medium hover:underline"
                 >
                   View Report →
-                </a>
+                </Link>
               </MotionDiv>
             </MotionDiv>
           ))
         ) : (
           <p className="text-center col-span-full text-gray-500 py-10">
-            No reports found
+            No reports found here
           </p>
         )}
       </motion.div>
