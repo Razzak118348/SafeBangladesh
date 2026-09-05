@@ -172,7 +172,10 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
 
     // ==================== REPORTS ====================
 
-// Get all reports
+app.get("/test-reports", (req, res) => {
+  res.send("Reports route is working");
+});
+
 app.get("/allreports", async (req, res) => {
   try {
     const reports = await reportsCollection
@@ -189,7 +192,6 @@ app.get("/allreports", async (req, res) => {
     });
   }
 });
-
 
 // Get single report
 app.get("/reports/:id", async (req, res) => {
