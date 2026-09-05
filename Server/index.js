@@ -41,7 +41,8 @@ async function run() {
     const latestWorkCollection = db.collection("latestwork");
     const bannerCollection = db.collection("banner")
     const galleryCollection = db.collection("galleries");
-    const allTeamMember = db.collection("team")
+    const allTeamMember = db.collection("team");
+    const reportsCollection = db.collection("reports");
 
 
     app.post("/jwt", (req, res) => {
@@ -55,7 +56,7 @@ async function run() {
       const token = jwt.sign(
         { email },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "6h" } // token valid for 6 hour
+        { expiresIn: "60000" } // token valid for 6 hour
       );
 
       // send token as HTTP-only cookie
@@ -167,6 +168,128 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
       }
     });
     //-------------------blog API end-----------
+
+
+    // ==================== REPORTS ====================
+
+// Get all reports
+app.get("/reports", async (req, res) => {
+  try {
+    const reports = await reportsCollection
+      .find()
+      .sort({ createdAt: -1 })
+      .toArray();
+
+    res.send(reports);
+  } catch (error) {
+    console.error("Get reports error:", error);
+
+    res.status(500).send({
+      message: "Failed to fetch reports",
+    });
+  }
+});
+
+
+// Get single report
+app.get("/reports/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const report = await reportsCollection.findOne({
+      _id: new ObjectId(id),
+    });
+
+    if (!report) {
+      return res.status(404).send({
+        message: "Report not found",
+      });
+    }
+
+    res.send(report);
+  } catch (error) {
+    console.error("Get single report error:", error);
+
+    res.status(500).send({
+      message: "Failed to fetch report",
+    });
+  }
+});
+
+
+// Create report
+app.post("/reports", verifyJWT, verifyAdmin, async (req, res) => {
+  try {
+    const report = req.body;
+
+    const newReport = {
+      title: report.title,
+      coverPhoto: report.coverPhoto,
+      description: report.description,
+      fileLink: report.fileLink,
+      createdAt: new Date(),
+    };
+
+    const result = await reportsCollection.insertOne(newReport);
+
+    res.send(result);
+  } catch (error) {
+    console.error("Create report error:", error);
+
+    res.status(500).send({
+      message: "Failed to create report",
+    });
+  }
+});
+
+
+// Update report
+app.patch("/reports/:id", verifyJWT, verifyAdmin, async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const updatedData = req.body;
+
+    const result = await reportsCollection.updateOne(
+      {
+        _id: new ObjectId(id),
+      },
+      {
+        $set: updatedData,
+      }
+    );
+
+    res.send(result);
+  } catch (error) {
+    console.error("Update report error:", error);
+
+    res.status(500).send({
+      message: "Failed to update report",
+    });
+  }
+});
+
+
+// Delete report
+app.delete("/reports/:id", verifyJWT, verifyAdmin, async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const result = await reportsCollection.deleteOne({
+      _id: new ObjectId(id),
+    });
+
+    res.send(result);
+  } catch (error) {
+    console.error("Delete report error:", error);
+
+    res.status(500).send({
+      message: "Failed to delete report",
+    });
+  }
+});
+
+// ==================== REPORTS END ====================//
 
 
     //--------------Latest work API start---------------

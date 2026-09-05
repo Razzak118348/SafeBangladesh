@@ -499,7 +499,7 @@ const Admin = () => {
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Page Path"
             onChange={(e) => setNewItem({ ...newItem, pagePath: e.target.value })} />
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Banner Image URL"
-            onChange={(e) => setNewItem({ ...newItem, image: e.target.value })} />
+            onChange={(e) => setNewItem({ ...newItem, backgroundImage: e.target.value })} />
           <input className="border-2 border-gray-400 p-1 w-full mb-2" placeholder="Title"
             onChange={(e) => setNewItem({ ...newItem, title: e.target.value })} />
           <button onClick={handleCreate} className="bg-green-600 button rounded-md text-white px-4 py-1">
