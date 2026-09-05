@@ -1,6 +1,6 @@
 // src/pages/Report/Report.jsx
 
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MotionDiv, MotionH1, MotionP } from "../../../utils/MotionElements";
 import PageBanner from "../../../Components/PageBanner/PageBanner";
