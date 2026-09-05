@@ -53,7 +53,7 @@ export const blogDetailsLoader = async ({ params }) => {
 /* Load all reports */
 export const reportsLoader = async () => {
   try {
-    const response = await axios.get("https://safebangladesh-server.vercel.app/reports",{withCredentials:true});
+    const response = await axios.get("https://safebangladesh-server.vercel.app/allreports",{withCredentials:true});
     return response.data;
   } catch (error) {
     console.error("Error fetching reports:", error);

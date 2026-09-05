@@ -173,7 +173,7 @@ app.patch("/blogs/:id", verifyJWT, verifyAdmin, async (req, res) => {
     // ==================== REPORTS ====================
 
 // Get all reports
-app.get("/reports", async (req, res) => {
+app.get("/allreports", async (req, res) => {
   try {
     const reports = await reportsCollection
       .find()
